@@ -1,2 +1,3 @@
 An architecture a day keeps procrastination away!
-- [ ] Simple ViT
+- [X] Simple ViT
+- [ ] Simple ViT 1D
