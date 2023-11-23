@@ -35,8 +35,8 @@ def FeedForward(dim, hidden_dim):
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x):
         for _ in range(depth):
-            x = x + layers.MultiHeadAttention(heads, dim_head)(x, x)
-            x = x + FeedForward(dim, mlp_dim)(x)
+            x += layers.MultiHeadAttention(heads, dim_head)(x, x)
+            x += FeedForward(dim, mlp_dim)(x)
         return layers.LayerNormalization(epsilon=1e-6)(x)
 
     return _apply
