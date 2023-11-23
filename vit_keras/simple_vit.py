@@ -6,20 +6,19 @@ from keras_core import ops
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
-def posemb_sincos_1d(patches, temperature = 10000, dtype = "float32"):
-    n, dim = ops.shape(patches)[1], ops.shape(patches)[2]
+def posemb_sincos_2d(h, w, dim, temperature: int = 10000, dtype = "float32"):
+    y, x = ops.meshgrid(ops.arange(h), ops.arange(w), indexing="xy")
 
-    n = ops.arange(n)
-    assert (dim % 2) == 0, 'feature dimension must be multiple of 2 for sincos emb'
-    omega = ops.arange(dim // 2) / (dim // 2 - 1)
-    omega = ops.cast(omega, patches.dtype)
-    omega = 1. / (temperature ** omega)
-    n = ops.expand_dims(ops.reshape(n, [-1]), 1)
-    n = ops.cast(n, patches.dtype)
-    n = n * ops.expand_dims(omega, 0)
-    pe = ops.concatenate((ops.sin(n), ops.cos(n)), 1)
+    assert (dim % 4) == 0, "feature dimension must be multiple of 4 for sincos emb"
+    omega = ops.arange(dim // 4) / (dim // 4 - 1)
+    omega = 1.0 / (temperature ** omega)
+    x = ops.cast(x, dtype)
+    y = ops.cast(y, dtype)
+    omega = ops.cast(omega, dtype)
+    y = ops.expand_dims(ops.reshape(y, [-1]), 1) * ops.expand_dims(omega, 0)
+    x = ops.expand_dims(ops.reshape(x, [-1]), 1) * ops.expand_dims(omega, 0)
+    pe = ops.concatenate((ops.sin(x), ops.cos(x), ops.sin(y), ops.cos(y)), 1)
     return ops.cast(pe, dtype)
-
 
 def FeedForward(dim, hidden_dim):
     return keras.Sequential([ layers.LayerNormalization(epsilon=1e-6),
@@ -28,6 +27,8 @@ def FeedForward(dim, hidden_dim):
 
 def Attention(dim, heads = 8, dim_head = 64):
     inner_dim = dim_head * heads
+    scale = dim_head ** -0.5
+
     def _apply(x):
         x = layers.LayerNormalization(epsilon=1e-6)(x)
         x_qkv = layers.Dense(inner_dim*3, use_bias=False)(x)
@@ -35,7 +36,8 @@ def Attention(dim, heads = 8, dim_head = 64):
         b, n, d = ops.shape(q)[0], ops.shape(q)[1], ops.shape(q)[2]
         q, k, v = ops.reshape(q, (b, n, heads,  -1)), ops.reshape(k, (b, n, heads,  -1)), ops.reshape(v, (b, n, heads,  -1))
         dots = ops.matmul(q, ops.transpose(k, axes=[0, 1, 3, 2]))
-        attn = layers.Softmax()(dots)
+        attn = layers.Softmax()(dots * scale)  
+       
         out = ops.matmul(attn, v)
         out = ops.reshape(out, (b, n, d))
         return layers.Dense(dim, use_bias=False)(out)
@@ -66,7 +68,9 @@ def SimpleViT(image_size, patch_size, num_classes, dim, depth, heads, mlp_dim, c
         patches = layers.LayerNormalization()(patches)
         patches = layers.Dense(dim)(patches)
         patches = layers.LayerNormalization()(patches)
-        pos_embedding = posemb_sincos_1d(patches,
+        pos_embedding = posemb_sincos_2d(h = image_height // patch_height,
+            w = image_width // patch_width,
+            dim = dim,
         ) 
         patches += pos_embedding
         patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
