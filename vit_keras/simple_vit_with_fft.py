@@ -41,6 +41,7 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
 
     return _apply
 
+
 def get_fft(x):
     zeros = ops.zeros((ops.shape(x)))
     ffts = ops.fft((x, zeros))
@@ -48,7 +49,16 @@ def get_fft(x):
 
 
 def SimpleViT(
-    image_size, patch_size, freq_patch_size, num_classes, dim, depth, heads, mlp_dim, channels = 3, dim_head = 64
+    image_size,
+    patch_size,
+    freq_patch_size,
+    num_classes,
+    dim,
+    depth,
+    heads,
+    mlp_dim,
+    channels=3,
+    dim_head=64,
 ):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
@@ -58,13 +68,15 @@ def SimpleViT(
         image_height % patch_height == 0 and image_width % patch_width == 0
     ), "Image dimensions must be divisible by the patch size."
 
-    assert image_height % freq_patch_height == 0 and image_width % freq_patch_width == 0, 'Image dimensions must be divisible by the freq patch size.'
+    assert (
+        image_height % freq_patch_height == 0 and image_width % freq_patch_width == 0
+    ), "Image dimensions must be divisible by the freq patch size."
 
     patch_dim = channels * patch_height * patch_width
     freq_patch_dim = channels * 2 * freq_patch_height * freq_patch_width
 
     i_p = layers.Input((image_height, image_width, channels))
-    
+
     patches = ops.image.extract_patches(i_p, (patch_height, patch_width))
     patches = layers.Reshape((-1, patch_dim))(patches)
     patches = layers.LayerNormalization()(patches)
@@ -76,7 +88,6 @@ def SimpleViT(
         dim=dim,
     )
     patches += pos_embedding
-
 
     fft = layers.Lambda(get_fft)(i_p)
 
@@ -91,7 +102,7 @@ def SimpleViT(
         dim=dim,
     )
     patches_f += pos_embedding_f
-    
+
     patches = ops.concatenate((patches, patches_f), axis=-2)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
 
