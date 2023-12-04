@@ -109,7 +109,6 @@ def EANet(input_shape, patch_size, embedding_dim, num_transformer_blocks, mlp_di
     inputs = layers.Input(shape=input_shape)
     num_patches = (input_shape[0] // patch_size) ** 2  # Number of patch
 
-    # Image augment
     # Extract patches.
     x = PatchExtract(patch_size)(inputs)
     # Create patch embedding.
