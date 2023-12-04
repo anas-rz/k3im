@@ -7,9 +7,11 @@ class ClassTokenPositionEmb(layers.Layer):
     def __init__(self, sequence_length, output_dim, **kwargs):
         super().__init__(**kwargs)
         self.position_embeddings = layers.Embedding(
-            input_dim=(sequence_length+1), output_dim=output_dim
+            input_dim=(sequence_length + 1), output_dim=output_dim
         )
-        self.class_token = self.add_weight(shape=[1, 1, output_dim], initializer='random_normal')
+        self.class_token = self.add_weight(
+            shape=[1, 1, output_dim], initializer="random_normal"
+        )
         self.sequence_length = sequence_length
         self.output_dim = output_dim
 
@@ -18,7 +20,7 @@ class ClassTokenPositionEmb(layers.Layer):
 
         cls_token = ops.repeat(self.class_token, batch, axis=0)
         patches = ops.concatenate([inputs, cls_token], axis=1)
-        positions = ops.arange(start=0, stop=(length+1), step=1)
+        positions = ops.arange(start=0, stop=(length + 1), step=1)
         embedded_positions = self.position_embeddings(positions)
         return patches + embedded_positions
 
@@ -70,9 +72,11 @@ def ViT3D(
     assert (
         frames % frame_patch_size == 0
     ), "Frames must be divisible by the frame patch size"
-    
-    assert pool in {'cls', 'mean'}, 'pool type must be either cls (cls token) or mean (mean pooling)'
 
+    assert pool in {
+        "cls",
+        "mean",
+    }, "pool type must be either cls (cls token) or mean (mean pooling)"
 
     nf, nh, nw = (
         frames // frame_patch_size,
@@ -94,7 +98,7 @@ def ViT3D(
     num_patches = ops.shape(tubelets)[1]
     tubelets = ClassTokenPositionEmb(num_patches, dim)(tubelets)
     tubelets = Transformer(dim, depth, heads, dim_head, mlp_dim)(tubelets)
-    if pool == 'mean':
+    if pool == "mean":
         tubelets = layers.GlobalAveragePooling1D(name="avg_pool")(tubelets)
     else:
         tubelets = tubelets[:, -1]

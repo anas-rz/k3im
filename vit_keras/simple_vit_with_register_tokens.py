@@ -2,12 +2,16 @@ import keras_core as keras
 from keras_core import layers
 from keras_core import ops
 
+
 class RegisterTokens(layers.Layer):
     def __init__(self, num_register_tokens, dim, fn):
         super().__init__()
-        self.register_tokens = self.add_weight([1, num_register_tokens, dim], 
-                                               initializer='random_normal' , dtype="float32", 
-                                               trainable=True)
+        self.register_tokens = self.add_weight(
+            [1, num_register_tokens, dim],
+            initializer="random_normal",
+            dtype="float32",
+            trainable=True,
+        )
         self.fn = fn
 
     def call(self, x):
@@ -16,8 +20,10 @@ class RegisterTokens(layers.Layer):
         patches = ops.concatenate([x, tokens], axis=1)
         return patches
 
+
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
+
 
 def posemb_sincos_2d(h, w, dim, temperature: int = 10000, dtype="float32"):
     y, x = ops.meshgrid(ops.arange(h), ops.arange(w), indexing="xy")
@@ -62,7 +68,7 @@ def SimpleViT(
     depth,
     heads,
     mlp_dim,
-    num_register_tokens = 4,
+    num_register_tokens=4,
     channels=3,
     dim_head=64,
     pool="mean",

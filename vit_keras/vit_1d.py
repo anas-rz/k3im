@@ -11,9 +11,11 @@ class ClassTokenPositionEmb(layers.Layer):
     def __init__(self, sequence_length, output_dim, **kwargs):
         super().__init__(**kwargs)
         self.position_embeddings = layers.Embedding(
-            input_dim=(sequence_length+1), output_dim=output_dim
+            input_dim=(sequence_length + 1), output_dim=output_dim
         )
-        self.class_token = self.add_weight(shape=[1, 1, output_dim], initializer='random_normal')
+        self.class_token = self.add_weight(
+            shape=[1, 1, output_dim], initializer="random_normal"
+        )
         self.sequence_length = sequence_length
         self.output_dim = output_dim
 
@@ -22,10 +24,9 @@ class ClassTokenPositionEmb(layers.Layer):
 
         cls_token = ops.repeat(self.class_token, batch, axis=0)
         patches = ops.concatenate([inputs, cls_token], axis=1)
-        positions = ops.arange(start=0, stop=(length+1), step=1)
+        positions = ops.arange(start=0, stop=(length + 1), step=1)
         embedded_positions = self.position_embeddings(positions)
         return patches + embedded_positions
-
 
 
 def FeedForward(dim, hidden_dim):

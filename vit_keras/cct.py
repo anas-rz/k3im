@@ -2,16 +2,20 @@ from keras_core import layers
 import keras_core as keras
 import numpy as np
 
+
 class CCTTokenizer(layers.Layer):
     def __init__(
         self,
-        kernel_size, stride, padding,
-                 pooling_kernel_size=3, pooling_stride=2,
-                 n_conv_layers=1,
-                 n_output_channels=[64],
-                 max_pool=True,
-                 activation='relu',
-                 conv_bias=False,
+        kernel_size,
+        stride,
+        padding,
+        pooling_kernel_size=3,
+        pooling_stride=2,
+        n_conv_layers=1,
+        n_output_channels=[64],
+        max_pool=True,
+        activation="relu",
+        conv_bias=False,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -37,7 +41,6 @@ class CCTTokenizer(layers.Layer):
                     layers.MaxPooling2D(pooling_kernel_size, pooling_stride, "same")
                 )
 
-
     def call(self, images):
         outputs = self.conv_model(images)
         # After passing the images through our mini-network the spatial dimensions
@@ -52,6 +55,7 @@ class CCTTokenizer(layers.Layer):
         )
         return reshaped
 
+
 class PositionEmbedding(keras.layers.Layer):
     def __init__(
         self,
@@ -61,9 +65,7 @@ class PositionEmbedding(keras.layers.Layer):
     ):
         super().__init__(**kwargs)
         if sequence_length is None:
-            raise ValueError(
-                "`sequence_length` must be an Integer, received `None`."
-            )
+            raise ValueError("`sequence_length` must be an Integer, received `None`.")
         self.sequence_length = int(sequence_length)
         self.initializer = keras.initializers.get(initializer)
 
@@ -94,9 +96,7 @@ class PositionEmbedding(keras.layers.Layer):
         sequence_length = shape[-2]
         # trim to match the length of the input sequence, which might be less
         # than the sequence_length of the layer.
-        position_embeddings = keras.ops.convert_to_tensor(
-            self.position_embeddings
-        )
+        position_embeddings = keras.ops.convert_to_tensor(self.position_embeddings)
         position_embeddings = keras.ops.slice(
             position_embeddings,
             (start_index, 0),
@@ -115,12 +115,11 @@ class SequencePooling(layers.Layer):
 
     def call(self, x):
         attention_weights = keras.ops.softmax(self.attention(x), axis=1)
-        attention_weights = keras.ops.transpose(
-            attention_weights, axes=(0, 2, 1)
-        )
+        attention_weights = keras.ops.transpose(attention_weights, axes=(0, 2, 1))
         weighted_representation = keras.ops.matmul(attention_weights, x)
         return keras.ops.squeeze(weighted_representation, -2)
-    
+
+
 class StochasticDepth(layers.Layer):
     def __init__(self, drop_prop, **kwargs):
         super().__init__(**kwargs)
@@ -142,24 +141,31 @@ def mlp(x, hidden_units, dropout_rate):
         x = layers.Dropout(dropout_rate)(x)
     return x
 
+
 def create_cct_model(
     input_shape,
     num_heads,
     projection_dim,
-    kernel_size, stride, padding,
+    kernel_size,
+    stride,
+    padding,
     transformer_units,
     stochastic_depth_rate,
     transformer_layers,
     num_classes,
     positional_emb=False,
-    
-    
 ):
     inputs = layers.Input(input_shape)
 
     # Encode patches.
-    
-    cct_tokenizer = CCTTokenizer(kernel_size, stride, padding, n_output_channels=[64, projection_dim], n_conv_layers=2)
+
+    cct_tokenizer = CCTTokenizer(
+        kernel_size,
+        stride,
+        padding,
+        n_output_channels=[64, projection_dim],
+        n_conv_layers=2,
+    )
     encoded_patches = cct_tokenizer(inputs)
 
     # Apply positional embedding.
