@@ -8,3 +8,4 @@ An architecture a day keeps procrastination away!
 - [X] ViT
 - [X] ViT1D
 - [X] ViT3D
+- [X] Video Vision Transformer
