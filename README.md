@@ -7,5 +7,4 @@ An architecture a day keeps procrastination away!
 - [X] Compact Convolution Transformer
 - [X] ViT
 - [X] ViT1D
-- [X] ViT2D
 - [X] ViT3D
