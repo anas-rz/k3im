@@ -25,13 +25,16 @@ def ExternalAttention(
     projection_dropout=0,
 ):
     assert dim % num_heads == 0
+
     def _apply(x):
         nonlocal num_heads
         _, num_patch, channel = x.shape
         num_heads = num_heads * dim_coefficient
         x = layers.Dense(int(dim * dim_coefficient))(x)
         # create tensor [batch_size, num_patches, num_heads, dim*dim_coefficient//num_heads]
-        x = ops.reshape(x, (-1, num_patch, num_heads, dim * dim_coefficient // num_heads))
+        x = ops.reshape(
+            x, (-1, num_patch, num_heads, dim * dim_coefficient // num_heads)
+        )
         x = ops.transpose(x, axes=[0, 2, 1, 3])
         # a linear layer M_k
         attn = layers.Dense(dim // dim_coefficient)(x)
@@ -53,15 +56,28 @@ def ExternalAttention(
         x = layers.Dense(dim)(x)
         x = layers.Dropout(projection_dropout)(x)
         return x
+
     return _apply
 
-def Transformer(dim, depth, heads, mlp_dim, dim_coefficient=4, projection_dropout=0., attention_dropout=0):
+
+def Transformer(
+    dim,
+    depth,
+    heads,
+    mlp_dim,
+    dim_coefficient=4,
+    projection_dropout=0.0,
+    attention_dropout=0,
+):
     def _apply(x):
         for _ in range(depth):
-            x += ExternalAttention(dim, heads,
+            x += ExternalAttention(
+                dim,
+                heads,
                 dim_coefficient=dim_coefficient,
                 attention_dropout=attention_dropout,
-                projection_dropout=projection_dropout,)(x)
+                projection_dropout=projection_dropout,
+            )(x)
             x += FeedForward(dim, mlp_dim)(x)
         return layers.LayerNormalization(epsilon=1e-6)(x)
 
@@ -79,7 +95,9 @@ def EANet3D(
     heads,
     mlp_dim,
     channels=3,
-    dim_coefficient=4, projection_dropout=0., attention_dropout=0
+    dim_coefficient=4,
+    projection_dropout=0.0,
+    attention_dropout=0,
 ):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(image_patch_size)
@@ -108,8 +126,15 @@ def EANet3D(
     tubelets = layers.Dense(dim)(tubelets)
     tubelets = layers.LayerNormalization()(tubelets)
     tubelets = layers.Reshape((-1, dim))(tubelets)
-    tubelets = Transformer(dim, depth, heads, mlp_dim, dim_coefficient=dim_coefficient, 
-                           projection_dropout=projection_dropout, attention_dropout=attention_dropout)(tubelets)
+    tubelets = Transformer(
+        dim,
+        depth,
+        heads,
+        mlp_dim,
+        dim_coefficient=dim_coefficient,
+        projection_dropout=projection_dropout,
+        attention_dropout=attention_dropout,
+    )(tubelets)
 
     tubelets = layers.GlobalAveragePooling1D(name="avg_pool")(tubelets)
     o_p = layers.Dense(num_classes)(tubelets)

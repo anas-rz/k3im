@@ -1,8 +1,10 @@
 import keras_core as keras
 from keras_core import layers
 from keras_core import ops
+
 # https://keras.io/examples/vision/eanet/
 # Add class token and position embedding
+
 
 class PatchExtract(layers.Layer):
     def __init__(self, patch_size, **kwargs):
@@ -26,7 +28,7 @@ class PatchEmbedding(layers.Layer):
     def call(self, patch):
         pos = ops.arange(start=0, stop=self.num_patch, step=1)
         return self.proj(patch) + self.pos_embed(pos)
-    
+
 
 def external_attention(
     x,
@@ -101,11 +103,18 @@ def transformer_encoder(
     return x
 
 
-def EANet(input_shape, patch_size, embedding_dim, num_transformer_blocks, mlp_dim,
-              num_heads, dim_coefficient,
-              attention_dropout,
-              projection_dropout,
-              num_classes):
+def EANet(
+    input_shape,
+    patch_size,
+    embedding_dim,
+    num_transformer_blocks,
+    mlp_dim,
+    num_heads,
+    dim_coefficient,
+    attention_dropout,
+    projection_dropout,
+    num_classes,
+):
     inputs = layers.Input(shape=input_shape)
     num_patches = (input_shape[0] // patch_size) ** 2  # Number of patch
 

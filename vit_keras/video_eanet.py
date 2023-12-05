@@ -4,7 +4,7 @@ from keras_core import ops
 
 
 class ClassTokenSpatial(layers.Layer):
-    def __init__(self, sequence_length, output_dim, num_frames,**kwargs):
+    def __init__(self, sequence_length, output_dim, num_frames, **kwargs):
         super().__init__(**kwargs)
         self.num_frames = num_frames
         self.class_token = self.add_weight(
@@ -20,6 +20,7 @@ class ClassTokenSpatial(layers.Layer):
         cls_token = ops.repeat(cls_token, self.num_frames, axis=1)
         patches = ops.concatenate([inputs, cls_token], axis=2)
         return patches
+
 
 class ClassTokenTemporal(layers.Layer):
     def __init__(self, output_dim, **kwargs):
@@ -37,11 +38,8 @@ class ClassTokenTemporal(layers.Layer):
         return patches
 
 
-
-
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
-
 
 
 def FeedForward(dim, hidden_dim):
@@ -62,13 +60,16 @@ def ExternalAttention(
     projection_dropout=0,
 ):
     assert dim % num_heads == 0
+
     def _apply(x):
         nonlocal num_heads
         _, num_patch, channel = x.shape
         num_heads = num_heads * dim_coefficient
         x = layers.Dense(int(dim * dim_coefficient))(x)
         # create tensor [batch_size, num_patches, num_heads, dim*dim_coefficient//num_heads]
-        x = ops.reshape(x, (-1, num_patch, num_heads, dim * dim_coefficient // num_heads))
+        x = ops.reshape(
+            x, (-1, num_patch, num_heads, dim * dim_coefficient // num_heads)
+        )
         x = ops.transpose(x, axes=[0, 2, 1, 3])
         # a linear layer M_k
         attn = layers.Dense(dim // dim_coefficient)(x)
@@ -90,36 +91,52 @@ def ExternalAttention(
         x = layers.Dense(dim)(x)
         x = layers.Dropout(projection_dropout)(x)
         return x
+
     return _apply
 
-def Transformer(dim, depth, heads, mlp_dim, dim_coefficient=4, projection_dropout=0., attention_dropout=0):
+
+def Transformer(
+    dim,
+    depth,
+    heads,
+    mlp_dim,
+    dim_coefficient=4,
+    projection_dropout=0.0,
+    attention_dropout=0,
+):
     def _apply(x):
         for _ in range(depth):
-            x += ExternalAttention(dim, heads,
+            x += ExternalAttention(
+                dim,
+                heads,
                 dim_coefficient=dim_coefficient,
                 attention_dropout=attention_dropout,
-                projection_dropout=projection_dropout,)(x)
+                projection_dropout=projection_dropout,
+            )(x)
             x += FeedForward(dim, mlp_dim)(x)
         return layers.LayerNormalization(epsilon=1e-6)(x)
 
     return _apply
 
+
 def VideoEANet(
     image_size,
-        image_patch_size,
-        frames,
-        frame_patch_size,
-        num_classes,
-        dim,
-        spatial_depth,
-        temporal_depth,
-        heads,
-        mlp_dim,
-        pool = 'cls',
-        channels = 3,
-        dim_head = 64,
-        dim_coefficient=4, projection_dropout=0., attention_dropout=0,
-        emb_dropout = 0.
+    image_patch_size,
+    frames,
+    frame_patch_size,
+    num_classes,
+    dim,
+    spatial_depth,
+    temporal_depth,
+    heads,
+    mlp_dim,
+    pool="cls",
+    channels=3,
+    dim_head=64,
+    dim_coefficient=4,
+    projection_dropout=0.0,
+    attention_dropout=0,
+    emb_dropout=0.0,
 ):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(image_patch_size)
@@ -149,21 +166,37 @@ def VideoEANet(
     tubelets = layers.Dense(dim)(tubelets)
     tubelets = layers.LayerNormalization()(tubelets)
     seq_len, num_frames = ops.shape(tubelets)[2], ops.shape(tubelets)[1]
-    tubelets = ClassTokenSpatial(sequence_length=seq_len, output_dim=dim, num_frames=num_frames)(tubelets)
+    tubelets = ClassTokenSpatial(
+        sequence_length=seq_len, output_dim=dim, num_frames=num_frames
+    )(tubelets)
     tubelets = layers.Dropout(emb_dropout)(tubelets)
     seq_len = ops.shape(tubelets)[2]
-    tubelets = ops.reshape(tubelets, (-1, seq_len, dim)) ######### ERRRRRRR
-    tubelets = Transformer(dim, spatial_depth, heads, mlp_dim, dim_coefficient=dim_coefficient, 
-                           projection_dropout=projection_dropout, attention_dropout=attention_dropout)(tubelets)
-    tubelets = ops.reshape(tubelets, (-1, num_frames, seq_len, dim)) ######### ERRRRRRR
-    if pool == 'mean':
+    tubelets = ops.reshape(tubelets, (-1, seq_len, dim))  ######### ERRRRRRR
+    tubelets = Transformer(
+        dim,
+        spatial_depth,
+        heads,
+        mlp_dim,
+        dim_coefficient=dim_coefficient,
+        projection_dropout=projection_dropout,
+        attention_dropout=attention_dropout,
+    )(tubelets)
+    tubelets = ops.reshape(tubelets, (-1, num_frames, seq_len, dim))  ######### ERRRRRRR
+    if pool == "mean":
         tubelets = ops.mean(tubelets, axis=2)
     else:
         tubelets = tubelets[:, :, -1]
     tubelets = ClassTokenTemporal(dim)(tubelets)
-    tubelets = Transformer(dim, temporal_depth, heads, mlp_dim, dim_coefficient=dim_coefficient, 
-                           projection_dropout=projection_dropout, attention_dropout=attention_dropout)(tubelets)
-    if pool == 'mean':
+    tubelets = Transformer(
+        dim,
+        temporal_depth,
+        heads,
+        mlp_dim,
+        dim_coefficient=dim_coefficient,
+        projection_dropout=projection_dropout,
+        attention_dropout=attention_dropout,
+    )(tubelets)
+    if pool == "mean":
         tubelets = ops.mean(tubelets, axis=1)
     else:
         tubelets = tubelets[:, -1]

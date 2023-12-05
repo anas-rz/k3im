@@ -26,7 +26,13 @@ def conv_mixer_block(x, filters: int, kernel_size: int):
 
 
 def get_conv_mixer_1d(
-    seq_len=32, n_features=3, filters=256, depth=8, kernel_size=5, patch_size=2, num_classes=10
+    seq_len=32,
+    n_features=3,
+    filters=256,
+    depth=8,
+    kernel_size=5,
+    patch_size=2,
+    num_classes=10,
 ):
     """ConvMixer-256/8: https://openreview.net/pdf?id=TVHS5Y4dNvM.
     The hyperparameter values are taken from the paper.

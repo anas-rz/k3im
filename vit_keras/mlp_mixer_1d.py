@@ -72,7 +72,7 @@ def Mixer1D(
     depth,
     channels=3,
     hidden_units=64,
-    dropout_rate=0.
+    dropout_rate=0.0,
 ):
     assert seq_len % patch_size == 0
     num_patches = seq_len // patch_size

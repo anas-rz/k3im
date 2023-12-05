@@ -4,7 +4,7 @@ from keras_core import ops
 
 
 class ClassTokenSpatial(layers.Layer):
-    def __init__(self, sequence_length, output_dim, num_frames,**kwargs):
+    def __init__(self, sequence_length, output_dim, num_frames, **kwargs):
         super().__init__(**kwargs)
         self.num_frames = num_frames
         self.class_token = self.add_weight(
@@ -20,6 +20,7 @@ class ClassTokenSpatial(layers.Layer):
         cls_token = ops.repeat(cls_token, self.num_frames, axis=1)
         patches = ops.concatenate([inputs, cls_token], axis=2)
         return patches
+
 
 class ClassTokenTemporal(layers.Layer):
     def __init__(self, output_dim, **kwargs):
@@ -37,11 +38,8 @@ class ClassTokenTemporal(layers.Layer):
         return patches
 
 
-
-
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
-
 
 
 class MLPMixerLayer(layers.Layer):
@@ -87,21 +85,20 @@ class MLPMixerLayer(layers.Layer):
         return x
 
 
-
 def VideoMixer(
     image_size,
-        image_patch_size,
-        frames,
-        frame_patch_size,
-        num_classes,
-        dim,
-        spatial_depth,
-        temporal_depth,
-        mlp_dim,
-        channels = 3,
-        dim_head = 64,
-        spatial_dropout = 0.,
-        emb_dropout = 0.
+    image_patch_size,
+    frames,
+    frame_patch_size,
+    num_classes,
+    dim,
+    spatial_depth,
+    temporal_depth,
+    mlp_dim,
+    channels=3,
+    dim_head=64,
+    spatial_dropout=0.0,
+    emb_dropout=0.0,
 ):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(image_patch_size)
@@ -135,7 +132,7 @@ def VideoMixer(
     tubelets = ops.reshape(tubelets, (-1, seq_len, dim))
     for _ in range(spatial_depth):
         tubelets = MLPMixerLayer(seq_len, mlp_dim, spatial_dropout)(tubelets)
-    tubelets = ops.reshape(tubelets, (-1, num_frames, seq_len, dim)) 
+    tubelets = ops.reshape(tubelets, (-1, num_frames, seq_len, dim))
     tubelets = ops.mean(tubelets, axis=2)
     seq_len = ops.shape(tubelets)[1]
     for _ in range(temporal_depth):

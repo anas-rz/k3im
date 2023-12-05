@@ -3,8 +3,10 @@ from keras_core import layers
 from keras_core import ops
 import numpy as np
 
+
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
+
 
 def window_partition(x, window_size):
     _, height, width, channels = x.shape
@@ -311,11 +313,27 @@ class PatchMerging(keras.layers.Layer):
         x = ops.reshape(x, (-1, (height // 2) * (width // 2), 4 * C))
         return self.linear_trans(x)
 
-def SwinT(img_size, patch_size, embed_dim, num_heads, window_size, num_mlp, qkv_bias, dropout_rate, shift_size, num_classes, in_channels=3):
+
+def SwinT(
+    img_size,
+    patch_size,
+    embed_dim,
+    num_heads,
+    window_size,
+    num_mlp,
+    qkv_bias,
+    dropout_rate,
+    shift_size,
+    num_classes,
+    in_channels=3,
+):
     img_size = pair(img_size)
     patch_size = pair(patch_size)
-    assert img_size[0]%patch_size[0] == img_size[1]%patch_size[1] == 0
-    num_patch_x, num_patch_y = img_size[0] // patch_size[0] ,  img_size[1] // patch_size[1]
+    assert img_size[0] % patch_size[0] == img_size[1] % patch_size[1] == 0
+    num_patch_x, num_patch_y = (
+        img_size[0] // patch_size[0],
+        img_size[1] // patch_size[1],
+    )
     inputs = layers.Input(shape=(img_size[0], img_size[1], in_channels))
     x = patch_extract(inputs, patch_size)
 

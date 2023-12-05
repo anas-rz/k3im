@@ -4,7 +4,7 @@ from keras_core import ops
 
 
 class ClassTokenSpatial(layers.Layer):
-    def __init__(self, sequence_length, output_dim, num_frames,**kwargs):
+    def __init__(self, sequence_length, output_dim, num_frames, **kwargs):
         super().__init__(**kwargs)
         self.num_frames = num_frames
         self.class_token = self.add_weight(
@@ -20,6 +20,7 @@ class ClassTokenSpatial(layers.Layer):
         cls_token = ops.repeat(cls_token, self.num_frames, axis=1)
         patches = ops.concatenate([inputs, cls_token], axis=2)
         return patches
+
 
 class ClassTokenTemporal(layers.Layer):
     def __init__(self, output_dim, **kwargs):
@@ -37,11 +38,8 @@ class ClassTokenTemporal(layers.Layer):
         return patches
 
 
-
-
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
-
 
 
 def FeedForward(dim, hidden_dim):
@@ -66,20 +64,20 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
 
 def ViViT(
     image_size,
-        image_patch_size,
-        frames,
-        frame_patch_size,
-        num_classes,
-        dim,
-        spatial_depth,
-        temporal_depth,
-        heads,
-        mlp_dim,
-        pool = 'cls',
-        channels = 3,
-        dim_head = 64,
-        dropout = 0.,
-        emb_dropout = 0.
+    image_patch_size,
+    frames,
+    frame_patch_size,
+    num_classes,
+    dim,
+    spatial_depth,
+    temporal_depth,
+    heads,
+    mlp_dim,
+    pool="cls",
+    channels=3,
+    dim_head=64,
+    dropout=0.0,
+    emb_dropout=0.0,
 ):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(image_patch_size)
@@ -109,19 +107,27 @@ def ViViT(
     tubelets = layers.Dense(dim)(tubelets)
     tubelets = layers.LayerNormalization()(tubelets)
     seq_len, num_frames = ops.shape(tubelets)[2], ops.shape(tubelets)[1]
-    tubelets = ClassTokenSpatial(sequence_length=seq_len, output_dim=dim, num_frames=num_frames)(tubelets)
+    tubelets = ClassTokenSpatial(
+        sequence_length=seq_len, output_dim=dim, num_frames=num_frames
+    )(tubelets)
     tubelets = layers.Dropout(emb_dropout)(tubelets)
     seq_len = ops.shape(tubelets)[2]
-    tubelets = ops.reshape(tubelets, (-1, seq_len, dim)) ######### ERRRRRRR
-    tubelets = Transformer(dim, spatial_depth, heads, dim_head, mlp_dim,)(tubelets)
-    tubelets = ops.reshape(tubelets, (-1, num_frames, seq_len, dim)) ######### ERRRRRRR
-    if pool == 'mean':
+    tubelets = ops.reshape(tubelets, (-1, seq_len, dim))  ######### ERRRRRRR
+    tubelets = Transformer(
+        dim,
+        spatial_depth,
+        heads,
+        dim_head,
+        mlp_dim,
+    )(tubelets)
+    tubelets = ops.reshape(tubelets, (-1, num_frames, seq_len, dim))  ######### ERRRRRRR
+    if pool == "mean":
         tubelets = ops.mean(tubelets, axis=2)
     else:
         tubelets = tubelets[:, :, -1]
     tubelets = ClassTokenTemporal(dim)(tubelets)
     tubelets = Transformer(dim, temporal_depth, heads, dim_head, mlp_dim)(tubelets)
-    if pool == 'mean':
+    if pool == "mean":
         tubelets = ops.mean(tubelets, axis=1)
     else:
         tubelets = tubelets[:, -1]

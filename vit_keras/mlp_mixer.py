@@ -3,7 +3,6 @@ from keras_core import layers
 from keras_core import ops
 
 
-
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
@@ -20,7 +19,8 @@ class Patches(layers.Layer):
         patch_dim = keras.ops.shape(patches)[3]
         out = keras.ops.reshape(patches, (batch_size, num_patches, patch_dim))
         return out
-    
+
+
 class PositionEmbedding(keras.layers.Layer):
     def __init__(
         self,
@@ -71,7 +71,7 @@ class PositionEmbedding(keras.layers.Layer):
 
     def compute_output_shape(self, input_shape):
         return input_shape
-    
+
 
 class MLPMixerLayer(layers.Layer):
     def __init__(self, num_patches, hidden_units, dropout_rate, *args, **kwargs):
@@ -115,13 +115,24 @@ class MLPMixerLayer(layers.Layer):
         x = x + mlp2_outputs
         return x
 
-def MixerModel(image_size, patch_size, embedding_dim, num_blocks, dropout_rate, num_classes, 
-                     positional_encoding=False, num_channels=3):
+
+def MixerModel(
+    image_size,
+    patch_size,
+    embedding_dim,
+    num_blocks,
+    dropout_rate,
+    num_classes,
+    positional_encoding=False,
+    num_channels=3,
+):
     image_size = pair(image_size)
     patch_size = pair(patch_size)
     input_shape = (image_size[0], image_size[1], num_channels)
     inputs = layers.Input(shape=input_shape)
-    num_patches = (image_size[0] // patch_size[0]) * (image_size[1] // patch_size[1])  # Size of the data array.
+    num_patches = (image_size[0] // patch_size[0]) * (
+        image_size[1] // patch_size[1]
+    )  # Size of the data array.
 
     # Augment data.
     # Create patches.

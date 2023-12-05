@@ -67,15 +67,7 @@ class gMLPLayer(layers.Layer):
         return x + x_projected
 
 
-def gMLP1D(
-    seq_len,
-    patch_size,
-    num_classes,
-    dim,
-    depth,
-    channels=3,
-    dropout_rate=0.
-):
+def gMLP1D(seq_len, patch_size, num_classes, dim, depth, channels=3, dropout_rate=0.0):
     assert seq_len % patch_size == 0
     num_patches = seq_len // patch_size
     patch_dim = channels * patch_size
