@@ -49,7 +49,9 @@ class CCTTokenizer3D(layers.Layer):
             outputs,
             (
                 -1,
-                keras.ops.shape(outputs)[1] * keras.ops.shape(outputs)[2] * keras.ops.shape(outputs)[3],
+                keras.ops.shape(outputs)[1]
+                * keras.ops.shape(outputs)[2]
+                * keras.ops.shape(outputs)[3],
                 keras.ops.shape(outputs)[-1],
             ),
         )

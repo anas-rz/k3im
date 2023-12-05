@@ -43,7 +43,7 @@ class CCTTokenizer1D(layers.Layer):
 
     def call(self, images):
         outputs = self.conv_model(images)
-        
+
         return outputs
 
 
