@@ -1,4 +1,5 @@
-An architecture a day keeps procrastination away!
+K3IM: Keras 3 Image Models
+
 - [X] Simple ViT
 - [X] Simple ViT 1D
 - [X] Simple ViT 3D

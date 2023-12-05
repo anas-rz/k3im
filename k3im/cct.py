@@ -1,5 +1,5 @@
-from keras_core import layers
-import keras_core as keras
+from keras import layers
+import keras as keras
 import numpy as np
 
 

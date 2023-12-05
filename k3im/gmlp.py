@@ -1,5 +1,5 @@
-import keras_core as keras
-from keras_core import layers
+import keras
+from keras import layers
 
 
 def pair(t):

@@ -1,6 +1,6 @@
-import keras_core as keras
-from keras_core import layers
-from keras_core import ops
+import keras 
+from keras import layers
+from keras import ops
 
 
 def pair(t):
