@@ -1,5 +1,5 @@
 # K3IM: Keras 3 Image Models
-![Logo](assets/k3im-logos.jpeg)
+![Logo](assets/Banner.png)
 - [X] Simple ViT
 - [X] Simple ViT 1D
 - [X] Simple ViT 3D
