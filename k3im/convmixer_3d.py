@@ -55,7 +55,7 @@ def conv_mixer_block(x, filters: int, kernel_size: int):
     return x
 
 
-def get_conv_mixer_3d_256_8(
+def ConvMixer3DModel(
     image_size=28,
     num_frames=28,
     filters=256,
@@ -65,12 +65,13 @@ def get_conv_mixer_3d_256_8(
     patch_size=2,
     patch_depth=2,
     num_classes=10,
+    num_channels=3
 ):
     """ConvMixer-256/8: https://openreview.net/pdf?id=TVHS5Y4dNvM.
     The hyperparameter values are taken from the paper.
     """
 
-    inputs = keras.Input((num_frames, image_size, image_size, 3))
+    inputs = keras.Input((num_frames, image_size, image_size, num_channels))
     x = layers.Rescaling(scale=1.0 / 255)(inputs)
 
     kernel_size = (kernel_depth,) + pair(kernel_size)
@@ -84,6 +85,6 @@ def get_conv_mixer_3d_256_8(
 
     # Classification block.
     x = layers.GlobalAvgPool3D()(x)
-    outputs = layers.Dense(num_classes, activation="softmax")(x)
+    outputs = layers.Dense(num_classes)(x)
 
     return keras.Model(inputs, outputs)

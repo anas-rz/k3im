@@ -98,7 +98,7 @@ def Transformer(
     return _apply
 
 
-def EANet1D(
+def EANet1DModel(
     seq_len,
     patch_size,
     num_classes,
@@ -107,10 +107,8 @@ def EANet1D(
     heads,
     mlp_dim,
     dim_coefficient=4,
-    projection_dropout=0,
     attention_dropout=0.0,
     channels=3,
-    dim_head=64,
 ):
     assert seq_len % patch_size == 0
     patch_dim = channels * patch_size
@@ -123,7 +121,7 @@ def EANet1D(
     patches += pos_embedding
     patches = Transformer(
         dim=dim,
-        depth=dim,
+        depth=depth,
         heads=heads,
         mlp_dim=mlp_dim,
         dim_coefficient=dim_coefficient,

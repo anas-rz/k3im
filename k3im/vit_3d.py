@@ -49,7 +49,7 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
     return _apply
 
 
-def ViT3D(
+def ViT3DModel(
     image_size,
     image_patch_size,
     frames,

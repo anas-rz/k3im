@@ -53,7 +53,7 @@ class gMLPLayer(layers.Layer):
         return x + x_projected
 
 
-def gMLP3D(
+def gMLP3DModel(
     image_size,
     image_patch_size,
     frames,

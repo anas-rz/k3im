@@ -25,7 +25,7 @@ def conv_mixer_block(x, filters: int, kernel_size: int):
     return x
 
 
-def get_conv_mixer_1d(
+def ConvMixer1DModel(
     seq_len=32,
     n_features=3,
     filters=256,
@@ -48,6 +48,6 @@ def get_conv_mixer_1d(
 
     # Classification block.
     x = layers.GlobalAvgPool1D()(x)
-    outputs = layers.Dense(num_classes, activation="softmax")(x)
+    outputs = layers.Dense(num_classes)(x)
 
     return keras.Model(inputs, outputs)

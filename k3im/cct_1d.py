@@ -2,6 +2,7 @@ from keras import layers
 import keras as keras
 import numpy as np
 
+seed_gen = keras.random.SeedGenerator(42)
 
 class CCTTokenizer1D(layers.Layer):
     def __init__(
@@ -120,7 +121,7 @@ class StochasticDepth(layers.Layer):
         if training:
             keep_prob = 1 - self.drop_prob
             shape = (keras.ops.shape(x)[0],) + (1,) * (len(x.shape) - 1)
-            random_tensor = keep_prob + keras.random.uniform(shape, 0, 1)
+            random_tensor = keep_prob + keras.random.uniform(shape, 0, 1, seed=seed_gen)
             random_tensor = keras.ops.floor(random_tensor)
             return (x / keep_prob) * random_tensor
         return x
@@ -133,7 +134,7 @@ def mlp(x, hidden_units, dropout_rate):
     return x
 
 
-def create_cct_model(
+def CCT_1DModel(
     input_shape,
     num_heads,
     projection_dim,

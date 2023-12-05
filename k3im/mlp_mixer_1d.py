@@ -64,7 +64,7 @@ class MLPMixerLayer(layers.Layer):
         return x
 
 
-def Mixer1D(
+def Mixer1DModel(
     seq_len,
     patch_size,
     num_classes,

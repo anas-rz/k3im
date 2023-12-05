@@ -41,7 +41,7 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
     return _apply
 
 
-def SimpleViT1D(
+def SimpleViT1DModel(
     seq_len,
     patch_size,
     num_classes,

@@ -49,7 +49,7 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
     return _apply
 
 
-def ViT1D(
+def ViT1DModel(
     seq_len,
     patch_size,
     num_classes,

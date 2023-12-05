@@ -84,7 +84,7 @@ def Transformer(
     return _apply
 
 
-def EANet3D(
+def EANet3DModel(
     image_size,
     image_patch_size,
     frames,

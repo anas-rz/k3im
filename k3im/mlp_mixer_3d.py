@@ -50,7 +50,7 @@ class MLPMixerLayer(layers.Layer):
         return x
 
 
-def MLPMixer3D(
+def MLPMixer3DModel(
     image_size,
     image_patch_size,
     frames,
