@@ -48,7 +48,7 @@ def get_fft(x):
     return ops.concatenate(ffts, axis=-1)
 
 
-def SimpleViT(
+def SimpleViTFFT(
     image_size,
     patch_size,
     freq_patch_size,

@@ -135,6 +135,6 @@ def EANet(
         )
 
     x = layers.GlobalAveragePooling1D()(x)
-    outputs = layers.Dense(num_classes, activation="softmax")(x)
+    outputs = layers.Dense(num_classes)(x)
     model = keras.Model(inputs=inputs, outputs=outputs)
     return model

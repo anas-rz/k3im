@@ -314,7 +314,7 @@ class PatchMerging(keras.layers.Layer):
         return self.linear_trans(x)
 
 
-def SwinT(
+def SwinTModel(
     img_size,
     patch_size,
     embed_dim,

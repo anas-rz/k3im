@@ -60,7 +60,7 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
     return _apply
 
 
-def SimpleViT(
+def SimpleViT_RT(
     image_size,
     patch_size,
     num_classes,
@@ -71,7 +71,6 @@ def SimpleViT(
     num_register_tokens=4,
     channels=3,
     dim_head=64,
-    pool="mean",
 ):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)

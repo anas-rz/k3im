@@ -142,7 +142,7 @@ def mlp(x, hidden_units, dropout_rate):
     return x
 
 
-def create_cct_model(
+def CCT(
     input_shape,
     num_heads,
     projection_dim,

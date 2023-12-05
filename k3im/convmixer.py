@@ -25,13 +25,13 @@ def conv_mixer_block(x, filters: int, kernel_size: int):
     return x
 
 
-def get_conv_mixer_256_8(
-    image_size=32, filters=256, depth=8, kernel_size=5, patch_size=2, num_classes=10
+def ConvMixer(
+    image_size=32, filters=256, depth=8, kernel_size=5, patch_size=2, num_classes=10, num_channels=3
 ):
     """ConvMixer-256/8: https://openreview.net/pdf?id=TVHS5Y4dNvM.
     The hyperparameter values are taken from the paper.
     """
-    inputs = keras.Input((image_size, image_size, 3))
+    inputs = keras.Input((image_size, image_size, num_channels))
     x = layers.Rescaling(scale=1.0 / 255)(inputs)
 
     # Extract patch embeddings.
@@ -43,6 +43,6 @@ def get_conv_mixer_256_8(
 
     # Classification block.
     x = layers.GlobalAvgPool2D()(x)
-    outputs = layers.Dense(num_classes, activation="softmax")(x)
+    outputs = layers.Dense(num_classes)(x)
 
     return keras.Model(inputs, outputs)
