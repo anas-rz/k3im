@@ -4,6 +4,7 @@ import numpy as np
 
 seed_gen = keras.random.SeedGenerator(42)
 
+
 class CCTTokenizer3D(layers.Layer):
     def __init__(
         self,

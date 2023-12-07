@@ -141,6 +141,7 @@ def FNetModel(
     # Create the Keras model.
     return keras.Model(inputs=inputs, outputs=logits)
 
+
 # model = FNetModel(
 #     image_size=28,
 #     patch_size=7,

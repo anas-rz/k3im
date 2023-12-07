@@ -65,7 +65,7 @@ def ConvMixer3DModel(
     patch_size=2,
     patch_depth=2,
     num_classes=10,
-    num_channels=3
+    num_channels=3,
 ):
     """ConvMixer-256/8: https://openreview.net/pdf?id=TVHS5Y4dNvM.
     The hyperparameter values are taken from the paper.
