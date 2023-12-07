@@ -1,4 +1,4 @@
-# K3IM: Keras 3 Image Models
+# \[beta\]K3IM: Keras 3 Image Models
 ![Logo](assets/Banner.png)
 ## Compact Convolution Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
@@ -27,7 +27,7 @@ One applied independently to image patches, which mixes the per-location feature
 The other applied across patches (along channels), which mixes spatial information.
 This is similar to a depthwise separable convolution based model such as the Xception model, but with two chained dense transforms, no max pooling, and layer normalization instead of batch normalization.
 ## Simple Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D
-## Simple Vision Transformer with FFT :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D
+## Simple Vision Transformer with FFT  :white_check_mark: Image/2D
 ## Simple Vision Transformer with Register Tokens :white_check_mark: Image/2D
 ## Swin Transformer :white_check_mark: Image/2D
 
