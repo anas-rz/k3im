@@ -20,6 +20,7 @@ For usage, check out spin up notebooks.
 
 CCT proposes compact transformers by using convolutions instead of patching and performing sequence pooling. This allows for CCT to have high accuracy and a low number of parameters.
 
+1D
 ```
 from k3im.cct_1d import CCT_1DModel
 model = CCT_1DModel(
@@ -36,12 +37,88 @@ model = CCT_1DModel(
     positional_emb=False,
 )
 ```
+3D
+```
+from k3im.cct_3d import CCT3DModel
+model = CCT3DModel(input_shape=(28, 28, 28, 1),
+    num_heads=4,
+    projection_dim=64,
+    kernel_size=4,
+    stride=4,
+    padding=2,
+    transformer_units=[16, 64],
+    stochastic_depth_rate=0.6,
+    transformer_layers=2,
+    num_classes=num_classes,
+    positional_emb=False,)
+```
 ### ConvMixer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 ConvMixer uses recipes from the recent isotrophic architectures like ViT, MLP-Mixer (Tolstikhin et al.), such as using the same depth and resolution across different layers in the network, residual connections, and so on.
+
+```
+from k3im.convmixer_1d import ConvMixer1DModel
+model = ConvMixer1DModel(seq_len=500,
+    n_features=1,
+    filters=128,
+    depth=4,
+    kernel_size=15,
+    patch_size=4,
+    num_classes=n_classes,)
+```
+3D
+```
+from k3im.convmixer_3d import ConvMixer3DModel
+model = ConvMixer3DModel(image_size=28,
+    num_frames=28,
+    filters=32,
+    depth=2,
+    kernel_size=4,
+    kernel_depth=3,
+    patch_size=3,
+    patch_depth=3,
+    num_classes=10,
+    num_channels=1)
+```
+
 ### External Attention Network :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 based on two external, small, learnable, and shared memories, which can be implemented easily by simply using two cascaded linear layers and two normalization layers. It conveniently replaces self-attention as used in existing architectures. External attention has linear complexity, as it only implicitly considers the correlations between all samples.
+
+```
+from k3im.eanet_1d import EANet1DModel
+model = EANet1DModel(
+    seq_len=500,
+    patch_size=20,
+    num_classes=n_classes,
+    dim=96,
+    depth=3,
+    heads=32,
+    mlp_dim=64,
+    dim_coefficient=2,
+    attention_dropout=0.0,
+    channels=1,
+)
+```
+3D
+```
+from k3im.eanet3d import EANet3DModel
+model = EANet3DModel(
+    image_size=28,
+    image_patch_size=7,
+    frames=28,
+    frame_patch_size=7,
+    num_classes=num_classes,
+    dim=64,
+    depth=2,
+    heads=4,
+    mlp_dim=32,
+    channels=1,
+    dim_coefficient=4,
+    projection_dropout=0.0,
+    attention_dropout=0,
+)
+```
 ### Fourier Net :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 The FNet uses a similar block to the Transformer block. However, FNet replaces the self-attention layer in the Transformer block with a parameter-free 2D Fourier transformation layer:
@@ -51,18 +128,107 @@ One 1D Fourier Transform is applied along the channels.
 
 The gMLP is a MLP architecture that features a Spatial Gating Unit (SGU). The SGU enables cross-patch interactions across the spatial (channel) dimension, by:
 
-Transforming the input spatially by applying linear projection across patches (along channels).
-Applying element-wise multiplication of the input and its spatial transformation.
+1. Transforming the input spatially by applying linear projection across patches (along channels).
+
+2. Applying element-wise multiplication of the input and its spatial transformation.
+
+```
+from k3im.gmlp_1d import gMLP1DModel
+model = gMLP1DModel(seq_len=500, patch_size=20, num_classes=n_classes, dim=64, depth=4, channels=1, dropout_rate=0.0)
+```
+3D
+```
+from k3im.gmlp_3d import gMLP3DModel
+model = gMLP3DModel(
+    image_size=28,
+    image_patch_size=7,
+    frames=28,
+    frame_patch_size=7,
+    num_classes=num_classes,
+    dim=32,
+    depth=4,
+    hidden_units=32,
+    dropout_rate=0.4,
+    channels=1,
+)
+```
 ### MLP Mixer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 MLP-Mixer is an architecture based exclusively on multi-layer perceptrons (MLPs), that contains two types of MLP layers: 
 One applied independently to image patches, which mixes the per-location features.
 The other applied across patches (along channels), which mixes spatial information.
 This is similar to a depthwise separable convolution based model such as the Xception model, but with two chained dense transforms, no max pooling, and layer normalization instead of batch normalization.
+
+```
+from k3im.mlp_mixer_1d import Mixer1DModel
+model = Mixer1DModel(seq_len=500, patch_size=20, num_classes=n_classes, dim=64, depth=4, channels=1, dropout_rate=0.0)
+```
+3D
+```
+from k3im.mlp_mixer_3d import MLPMixer3DModel
+
+model = MLPMixer3DModel(
+    image_size=28,
+    image_patch_size=7,
+    frames=28,
+    frame_patch_size=7,
+    num_classes=num_classes,
+    dim=32,
+    depth=4,
+    hidden_units=32,
+    dropout_rate=0.4,
+    channels=1,
+)
+```
 ### Simple Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D
+
+```
+from k3im.simple_vit_1d import SimpleViT1DModel
+model = SimpleViT1DModel(seq_len=500,
+    patch_size=20,
+    num_classes=n_classes,
+    dim=32,
+    depth=3,
+    heads=8,
+    mlp_dim=64,
+    channels=1,
+    dim_head=64)
+```
+3D
+
+```
+from k3im.simple_vit_3d import SimpleViT3DModel
+
+model = SimpleViT3DModel(
+    image_size=28,
+    image_patch_size=7,
+    frames=28,
+    frame_patch_size=7,
+    num_classes=num_classes,
+    dim=32,
+    depth=2,
+    heads=4,
+    mlp_dim=32,
+    channels=1,
+    dim_head=64,
+)
+```
 ### Simple Vision Transformer with FFT  :white_check_mark: Image/2D
+
 ### Simple Vision Transformer with Register Tokens :white_check_mark: Image/2D
 ### Swin Transformer :white_check_mark: Image/2D
 
 Swin Transformer is a hierarchical Transformer whose representations are computed with shifted windows. The shifted window scheme brings greater efficiency by limiting self-attention computation to non-overlapping local windows while also allowing for cross-window connections. 
 ### Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
+```
+from k3im.vit_1d import ViT1DModel
+model = ViT1DModel(seq_len=500,
+    patch_size=20,
+    num_classes=n_classes,
+    dim=32,
+    depth=3,
+    heads=8,
+    mlp_dim=64,
+    channels=1,
+    dim_head=64)
+```
