@@ -3,7 +3,11 @@
 
 ## Installation
 
-`pip install k3im`
+```
+pip install k3im
+
+
+```
 
 ## Usage
 
@@ -15,6 +19,23 @@ For usage, check out spin up notebooks.
 ### Compact Convolution Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 CCT proposes compact transformers by using convolutions instead of patching and performing sequence pooling. This allows for CCT to have high accuracy and a low number of parameters.
+
+```
+from k3im.cct_1d import CCT_1DModel
+model = CCT_1DModel(
+    input_shape=(500, 1),
+    num_heads=4,
+    projection_dim=154,
+    kernel_size=10,
+    stride=15,
+    padding=5,
+    transformer_units=[154],
+    stochastic_depth_rate=0.5,
+    transformer_layers=1,
+    num_classes=4,
+    positional_emb=False,
+)
+```
 ### ConvMixer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 ConvMixer uses recipes from the recent isotrophic architectures like ViT, MLP-Mixer (Tolstikhin et al.), such as using the same depth and resolution across different layers in the network, residual connections, and so on.
