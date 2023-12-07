@@ -1,12 +1,5 @@
 # K3IM: Keras 3 Image Models
 ![Logo](assets/Banner.png)
-- [X] Simple ViT
-- [X] Simple ViT 1D
-- [X] Simple ViT 3D
-- [X] Simple ViT FFT
-- [X] Simple ViT with Register Tokens
-- [X] Compact Convolution Transformer
-- [X] ViT
-- [X] ViT1D
-- [X] ViT3D
-- [X] Video Vision Transformer
+- [X] Compact Convolution Transformer [ ] 1D, [ ] Image/2D, [ ] 3D, [ ] Spatiotemporal
+- [ ] ConvMixer [ ] 1D, [ ] Image/2D, [ ] 3D, [ ] Spatiotemporal
+- [ ] External Attention Network [ ] 1D, [ ] Image/2D, [ ] 3D, [ ] Spatiotemporal
