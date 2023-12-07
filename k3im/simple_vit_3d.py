@@ -7,34 +7,6 @@ def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
 
-def posemb_sincos_3d(patches, temperature: int = 10000, dtype="float32"):
-    f, h, w, dim = (
-        ops.shape(patches)[1],
-        ops.shape(patches)[2],
-        ops.shape(patches)[3],
-        ops.shape(patches)[4],
-    )
-    z, y, x = ops.meshgrid(ops.arange(f), ops.arange(h), ops.arange(w), indexing="xy")
-    fourier_dim = dim // 6
-    omega = ops.arange(fourier_dim) / (fourier_dim - 1)
-    omega = 1.0 / (temperature**omega)
-    z = ops.cast(z, dtype)
-    x = ops.cast(x, dtype)
-    y = ops.cast(y, dtype)
-    omega = ops.cast(omega, dtype)
-    z = ops.expand_dims(ops.reshape(z, [-1]), 1) * ops.expand_dims(omega, 0)
-    y = ops.expand_dims(ops.reshape(y, [-1]), 1) * ops.expand_dims(omega, 0)
-    x = ops.expand_dims(ops.reshape(x, [-1]), 1) * ops.expand_dims(omega, 0)
-    pe = ops.concatenate(
-        (ops.sin(x), ops.cos(x), ops.sin(y), ops.cos(y), ops.sin(z), ops.cos(z)), 1
-    )
-    to_pad = dim - (fourier_dim * 6)
-    pe = ops.pad(
-        pe, ((0, 0), (0, 0), (0, 0), (0, to_pad))
-    )  # pad if feature dimension not cleanly divisible by 6
-    return ops.cast(pe, dtype)
-
-
 def FeedForward(dim, hidden_dim):
     return keras.Sequential(
         [
@@ -94,9 +66,9 @@ def SimpleViT3DModel(
     tubelets = layers.LayerNormalization()(tubelets)
     tubelets = layers.Dense(dim)(tubelets)
     tubelets = layers.LayerNormalization()(tubelets)
-    pos_embedding = posemb_sincos_3d(tubelets)
+    # pos_embedding = posemb_sincos_3d(tubelets)
     tubelets = layers.Reshape((-1, dim))(tubelets)
-    tubelets += pos_embedding
+    # tubelets += pos_embedding
     tubelets = Transformer(dim, depth, heads, dim_head, mlp_dim)(tubelets)
 
     tubelets = layers.GlobalAveragePooling1D(name="avg_pool")(tubelets)
