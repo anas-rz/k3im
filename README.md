@@ -1,7 +1,12 @@
 # \[beta\] K3IM: Keras 3 Image Models
 ![Logo](assets/Banner.png)
 
-#
+## Usage
+For usage, check out spin up notebooks.
+<a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
 ### Compact Convolution Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 CCT proposes compact transformers by using convolutions instead of patching and performing sequence pooling. This allows for CCT to have high accuracy and a low number of parameters.
