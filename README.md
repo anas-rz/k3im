@@ -5,8 +5,6 @@
 
 ```
 pip install k3im
-
-
 ```
 
 ## Usage
@@ -34,6 +32,24 @@ model = CCT_1DModel(
     stochastic_depth_rate=0.5,
     transformer_layers=1,
     num_classes=4,
+    positional_emb=False,
+)
+```
+2D
+```
+from k3im.cct import CCT
+
+model = CCT(
+    input_shape=input_shape,
+    num_heads=8,
+    projection_dim=32,
+    kernel_size=3,
+    stride=3,
+    padding=2,
+    transformer_units=[16, 32],
+    stochastic_depth_rate=0.6,
+    transformer_layers=2,
+    num_classes=num_classes,
     positional_emb=False,
 )
 ```
@@ -65,6 +81,14 @@ model = ConvMixer1DModel(seq_len=500,
     kernel_size=15,
     patch_size=4,
     num_classes=n_classes,)
+```
+2D
+```
+from k3im.convmixer import ConvMixer # Check convmixer
+
+model = ConvMixer(
+    image_size=28, filters=64, depth=8, kernel_size=3, patch_size=2, num_classes=10, num_channels=1
+)
 ```
 3D
 ```
@@ -100,6 +124,22 @@ model = EANet1DModel(
     channels=1,
 )
 ```
+2D
+```
+from k3im.eanet import EANet
+model = EANet(
+    input_shape=input_shape,
+    patch_size=7,
+    embedding_dim=64,
+    num_transformer_blocks=2,
+    mlp_dim=32,
+    num_heads=16,
+    dim_coefficient=2,
+    attention_dropout=0.5,
+    projection_dropout=0.5,
+    num_classes=10,
+)
+```
 3D
 ```
 from k3im.eanet3d import EANet3DModel
@@ -132,9 +172,24 @@ The gMLP is a MLP architecture that features a Spatial Gating Unit (SGU). The SG
 
 2. Applying element-wise multiplication of the input and its spatial transformation.
 
+1D
 ```
 from k3im.gmlp_1d import gMLP1DModel
 model = gMLP1DModel(seq_len=500, patch_size=20, num_classes=n_classes, dim=64, depth=4, channels=1, dropout_rate=0.0)
+```
+2D
+```
+from k3im.gmlp import gMLPModel
+model = gMLPModel(
+    image_size=28,
+    patch_size=7,
+    embedding_dim=32,
+    num_blocks=4,
+    dropout_rate=0.5,
+    num_classes=num_classes,
+    positional_encoding=False,
+    num_channels=1,
+)
 ```
 3D
 ```
@@ -152,6 +207,7 @@ model = gMLP3DModel(
     channels=1,
 )
 ```
+
 ### MLP Mixer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 MLP-Mixer is an architecture based exclusively on multi-layer perceptrons (MLPs), that contains two types of MLP layers: 
@@ -162,6 +218,21 @@ This is similar to a depthwise separable convolution based model such as the Xce
 ```
 from k3im.mlp_mixer_1d import Mixer1DModel
 model = Mixer1DModel(seq_len=500, patch_size=20, num_classes=n_classes, dim=64, depth=4, channels=1, dropout_rate=0.0)
+```
+2D
+```
+from k3im.mlp_mixer import MixerModel
+model = MixerModel(
+    image_size=28,
+    patch_size=7,
+    embedding_dim=32,
+    num_blocks=4,
+    dropout_rate=0.5,
+    num_classes=num_classes,
+    positional_encoding=True,
+    num_channels=1,
+)
+
 ```
 3D
 ```
@@ -214,8 +285,29 @@ model = SimpleViT3DModel(
 )
 ```
 ### Simple Vision Transformer with FFT  :white_check_mark: Image/2D
-
+2D
+```
+from k3im.simple_vit_with_fft import SimpleViTFFT
+model = SimpleViTFFT(image_size=28, patch_size=7, freq_patch_size=7, num_classes=num_classes, dim=32, depth=2, 
+                     heads=8, mlp_dim=64, channels=1, 
+                     dim_head = 16)
+```
 ### Simple Vision Transformer with Register Tokens :white_check_mark: Image/2D
+
+Image/2D
+```
+from k3im.simple_vit_with_register_tokens import SimpleViT_RT
+model = SimpleViT_RT(image_size=28,
+    patch_size=7,
+    num_classes=num_classes,
+    dim=32,
+    depth=2,
+    heads=4,
+    mlp_dim=64,
+    num_register_tokens=4,
+    channels=1,
+    dim_head=64,)
+```
 ### Swin Transformer :white_check_mark: Image/2D
 
 Swin Transformer is a hierarchical Transformer whose representations are computed with shifted windows. The shifted window scheme brings greater efficiency by limiting self-attention computation to non-overlapping local windows while also allowing for cross-window connections. 
