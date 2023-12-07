@@ -1,7 +1,12 @@
 # \[beta\] K3IM: Keras 3 Image Models
 ![Logo](assets/Banner.png)
 
+## Installation
+
+`pip install k3im`
+
 ## Usage
+
 For usage, check out spin up notebooks.
 <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
