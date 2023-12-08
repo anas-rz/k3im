@@ -351,3 +351,12 @@ model = ViT1DModel(seq_len=500,
 ```
 
 ### Focal Modulation Network :white_check_mark: Image/2D
+Released by Microsoft in 2022, FocalNet or Focal Modulation Network is an attention-free architecture achieving superior performance than SoTA self-attention (SA) methods across various vision benchmarks. 
+```python
+from k3im.focalnet import Model
+def focalnet_kid(img_size=224, **kwargs):
+    model = Model(img_size, depths=[1], embed_dim=96, **kwargs)
+    return model
+model = focalnet_kid(img_size=28, in_channels=1, num_classes=10)
+model.summary()
+```
