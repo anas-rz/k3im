@@ -3,7 +3,7 @@
 
 ## Installation
 
-```
+```shell
 pip install k3im
 ```
 
