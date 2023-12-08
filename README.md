@@ -27,7 +27,7 @@ For usage, check out spin up notebooks.
 CCT proposes compact transformers by using convolutions instead of patching and performing sequence pooling. This allows for CCT to have high accuracy and a low number of parameters.
 
 1D
-```
+```python
 from k3im.cct_1d import CCT_1DModel
 model = CCT_1DModel(
     input_shape=(500, 1),
@@ -44,7 +44,7 @@ model = CCT_1DModel(
 )
 ```
 2D
-```
+```python
 from k3im.cct import CCT
 
 model = CCT(
@@ -62,7 +62,7 @@ model = CCT(
 )
 ```
 3D
-```
+```python
 from k3im.cct_3d import CCT3DModel
 model = CCT3DModel(input_shape=(28, 28, 28, 1),
     num_heads=4,
@@ -80,7 +80,7 @@ model = CCT3DModel(input_shape=(28, 28, 28, 1),
 
 ConvMixer uses recipes from the recent isotrophic architectures like ViT, MLP-Mixer (Tolstikhin et al.), such as using the same depth and resolution across different layers in the network, residual connections, and so on.
 
-```
+```python
 from k3im.convmixer_1d import ConvMixer1DModel
 model = ConvMixer1DModel(seq_len=500,
     n_features=1,
@@ -91,7 +91,7 @@ model = ConvMixer1DModel(seq_len=500,
     num_classes=n_classes,)
 ```
 2D
-```
+```python
 from k3im.convmixer import ConvMixer # Check convmixer
 
 model = ConvMixer(
@@ -99,7 +99,7 @@ model = ConvMixer(
 )
 ```
 3D
-```
+```python
 from k3im.convmixer_3d import ConvMixer3DModel
 model = ConvMixer3DModel(image_size=28,
     num_frames=28,
@@ -115,9 +115,9 @@ model = ConvMixer3DModel(image_size=28,
 
 ### External Attention Network :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
-based on two external, small, learnable, and shared memories, which can be implemented easily by simply using two cascaded linear layers and two normalization layers. It conveniently replaces self-attention as used in existing architectures. External attention has linear complexity, as it only implicitly considers the correlations between all samples.
+Based on two external, small, learnable, and shared memories, which can be implemented easily by simply using two cascaded linear layers and two normalization layers. It conveniently replaces self-attention as used in existing architectures. External attention has linear complexity, as it only implicitly considers the correlations between all samples.
 
-```
+```python
 from k3im.eanet_1d import EANet1DModel
 model = EANet1DModel(
     seq_len=500,
@@ -133,7 +133,7 @@ model = EANet1DModel(
 )
 ```
 2D
-```
+```python
 from k3im.eanet import EANet
 model = EANet(
     input_shape=input_shape,
@@ -149,7 +149,7 @@ model = EANet(
 )
 ```
 3D
-```
+```python
 from k3im.eanet3d import EANet3DModel
 model = EANet3DModel(
     image_size=28,
@@ -181,12 +181,12 @@ The gMLP is a MLP architecture that features a Spatial Gating Unit (SGU). The SG
 2. Applying element-wise multiplication of the input and its spatial transformation.
 
 1D
-```
+```python
 from k3im.gmlp_1d import gMLP1DModel
 model = gMLP1DModel(seq_len=500, patch_size=20, num_classes=n_classes, dim=64, depth=4, channels=1, dropout_rate=0.0)
 ```
 2D
-```
+```python
 from k3im.gmlp import gMLPModel
 model = gMLPModel(
     image_size=28,
@@ -200,7 +200,7 @@ model = gMLPModel(
 )
 ```
 3D
-```
+```python
 from k3im.gmlp_3d import gMLP3DModel
 model = gMLP3DModel(
     image_size=28,
@@ -223,12 +223,12 @@ One applied independently to image patches, which mixes the per-location feature
 The other applied across patches (along channels), which mixes spatial information.
 This is similar to a depthwise separable convolution based model such as the Xception model, but with two chained dense transforms, no max pooling, and layer normalization instead of batch normalization.
 
-```
+```python
 from k3im.mlp_mixer_1d import Mixer1DModel
 model = Mixer1DModel(seq_len=500, patch_size=20, num_classes=n_classes, dim=64, depth=4, channels=1, dropout_rate=0.0)
 ```
 2D
-```
+```python
 from k3im.mlp_mixer import MixerModel
 model = MixerModel(
     image_size=28,
@@ -243,7 +243,7 @@ model = MixerModel(
 
 ```
 3D
-```
+```python
 from k3im.mlp_mixer_3d import MLPMixer3DModel
 
 model = MLPMixer3DModel(
@@ -261,7 +261,7 @@ model = MLPMixer3DModel(
 ```
 ### Simple Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D
 
-```
+```python
 from k3im.simple_vit_1d import SimpleViT1DModel
 model = SimpleViT1DModel(seq_len=500,
     patch_size=20,
@@ -275,7 +275,7 @@ model = SimpleViT1DModel(seq_len=500,
 ```
 3D
 
-```
+```python
 from k3im.simple_vit_3d import SimpleViT3DModel
 
 model = SimpleViT3DModel(
@@ -294,7 +294,7 @@ model = SimpleViT3DModel(
 ```
 ### Simple Vision Transformer with FFT  :white_check_mark: Image/2D
 2D
-```
+```python
 from k3im.simple_vit_with_fft import SimpleViTFFT
 model = SimpleViTFFT(image_size=28, patch_size=7, freq_patch_size=7, num_classes=num_classes, dim=32, depth=2, 
                      heads=8, mlp_dim=64, channels=1, 
@@ -303,7 +303,7 @@ model = SimpleViTFFT(image_size=28, patch_size=7, freq_patch_size=7, num_classes
 ### Simple Vision Transformer with Register Tokens :white_check_mark: Image/2D
 
 Image/2D
-```
+```python
 from k3im.simple_vit_with_register_tokens import SimpleViT_RT
 model = SimpleViT_RT(image_size=28,
     patch_size=7,
@@ -320,7 +320,7 @@ model = SimpleViT_RT(image_size=28,
 
 Swin Transformer is a hierarchical Transformer whose representations are computed with shifted windows. The shifted window scheme brings greater efficiency by limiting self-attention computation to non-overlapping local windows while also allowing for cross-window connections. 
 ### Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
-```
+```python
 from k3im.vit_1d import ViT1DModel
 model = ViT1DModel(seq_len=500,
     patch_size=20,
