@@ -324,3 +324,5 @@ model = ViT1DModel(seq_len=500,
     channels=1,
     dim_head=64)
 ```
+
+### Focal Modulation Network :white_check_mark: Image/2D
