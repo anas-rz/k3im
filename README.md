@@ -319,6 +319,23 @@ model = SimpleViT_RT(image_size=28,
 ### Swin Transformer :white_check_mark: Image/2D
 
 Swin Transformer is a hierarchical Transformer whose representations are computed with shifted windows. The shifted window scheme brings greater efficiency by limiting self-attention computation to non-overlapping local windows while also allowing for cross-window connections. 
+```python
+from k3im.swint import SwinTModel
+model = SwinTModel(
+    img_size=28,
+    patch_size=7,
+    embed_dim=32,
+    num_heads=4,
+    window_size=4,
+    num_mlp=4,
+    qkv_bias=True,
+    dropout_rate=0.2,
+    shift_size=2,
+    num_classes=num_classes,
+    in_channels=1,
+)
+
+```
 ### Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 ```python
 from k3im.vit_1d import ViT1DModel

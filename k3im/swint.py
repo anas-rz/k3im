@@ -1,4 +1,4 @@
-import keras 
+import keras
 from keras import layers
 from keras import ops
 import numpy as np
@@ -6,6 +6,7 @@ import numpy as np
 
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
+
 
 def window_partition(x, window_size):
     _, height, width, channels = x.shape
