@@ -14,7 +14,7 @@ pip install k3im
 You can set up any backend using following commands:
 ```python
 import os
-os.environ['KERAS_BACKEND'] = 'jax' #or tensorflow or 'torch' 
+os.environ['KERAS_BACKEND'] = 'jax' #or 'tensorflow' or 'torch' 
 ```
 
 For usage, check out spin up notebooks.
