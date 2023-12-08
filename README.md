@@ -7,7 +7,15 @@
 pip install k3im
 ```
 
+
+
 ## Usage
+
+You can set up any backend using following commands:
+```python
+import os
+os.environ['KERAS_BACKEND'] = 'jax' #or tensorflow or 'torch' 
+```
 
 For usage, check out spin up notebooks.
 <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im">
