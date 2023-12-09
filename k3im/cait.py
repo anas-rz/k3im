@@ -48,10 +48,10 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x, context=None):
         for _ in range(depth):
             if not exists(context):
-                context = x
+                kv = x
             else:
-                context = ops.concatenate([x, context], axis=1)
-            x += layers.MultiHeadAttention(heads, dim_head)(x, context)
+                kv = ops.concatenate([x, context], axis=1)
+            x += layers.MultiHeadAttention(heads, dim_head)(x, kv)
             x += FeedForward(dim, mlp_dim)(x)
         return layers.LayerNormalization(epsilon=1e-6)(x)
     return _apply
@@ -86,7 +86,7 @@ def CaiTModel(
     num_patches = ops.shape(patches)[1]
     patches = PositionEmb(num_patches, dim)(patches)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
-    patches, cls_token = CLS_Token(dim)(patches)
+    _, cls_token = CLS_Token(dim)(patches)
     cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim)(cls_token, context=patches)
     cls_token = ops.squeeze(cls_token, axis=1)
     o_p = layers.Dense(num_classes)(cls_token)
