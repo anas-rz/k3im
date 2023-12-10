@@ -5,6 +5,7 @@ import keras
 from keras import layers
 from keras import ops
 
+
 def PatchDropout(prob):
     """
     SpatialDropout1D behaves the same way as PatchDropout in
@@ -12,6 +13,7 @@ def PatchDropout(prob):
     https://github.com/keras-team/keras-core/blob/main/keras_core/layers/regularization/spatial_dropout.py
     """
     return layers.SpatialDropout1D(prob)
+
 
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
@@ -60,7 +62,7 @@ def SimpleViTPD(
     depth,
     heads,
     mlp_dim,
-    patch_dropout = 0.25,
+    patch_dropout=0.25,
     channels=3,
     dim_head=64,
     pool="mean",
