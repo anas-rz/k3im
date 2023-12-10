@@ -6,6 +6,7 @@ from keras import ops
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
+
 def exists(val):
     return val is not None
 
@@ -27,7 +28,8 @@ def posemb_sincos_1d(patches, temperature=10000, dtype="float32"):
 class CLS_Token(layers.Layer):
     def __init__(self, dim):
         super().__init__()
-        self.cls_token = self.add_weight([1, 1, dim], 'random_normal')
+        self.cls_token = self.add_weight([1, 1, dim], "random_normal")
+
     def call(self, x):
         b = ops.shape(x)[0]
         cls_token = ops.repeat(self.cls_token, b, axis=0)
@@ -54,11 +56,22 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
             x += layers.MultiHeadAttention(heads, dim_head)(x, kv)
             x += FeedForward(dim, mlp_dim)(x)
         return layers.LayerNormalization(epsilon=1e-6)(x)
+
     return _apply
 
 
 def CAiT_1DModel(
-    seq_len, patch_size, num_classes, dim, dim_head, mlp_dim, depth,cls_depth, heads, channels=3, dropout_rate=0.0
+    seq_len,
+    patch_size,
+    num_classes,
+    dim,
+    dim_head,
+    mlp_dim,
+    depth,
+    cls_depth,
+    heads,
+    channels=3,
+    dropout_rate=0.0,
 ):
     assert seq_len % patch_size == 0
     num_patches = seq_len // patch_size
@@ -73,7 +86,9 @@ def CAiT_1DModel(
     dim = ops.shape(patches)[-1]
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
     _, cls_token = CLS_Token(dim)(patches)
-    cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim)(cls_token, patches)
+    cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim)(
+        cls_token, patches
+    )
     cls_token = ops.squeeze(cls_token, axis=1)
     o_p = layers.Dense(num_classes)(cls_token)
     return keras.Model(inputs=i_p, outputs=o_p)

@@ -10,7 +10,8 @@ def pair(t):
 class CLS_Token(layers.Layer):
     def __init__(self, dim):
         super().__init__()
-        self.cls_token = self.add_weight([1, 1, dim], 'random_normal')
+        self.cls_token = self.add_weight([1, 1, dim], "random_normal")
+
     def call(self, x):
         b = ops.shape(x)[0]
         cls_token = ops.repeat(self.cls_token, b, axis=0)
@@ -37,7 +38,9 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
             x += layers.MultiHeadAttention(heads, dim_head)(x, kv)
             x += FeedForward(dim, mlp_dim)(x)
         return layers.LayerNormalization(epsilon=1e-6)(x)
+
     return _apply
+
 
 def CAiT3DModel(
     image_size,
@@ -83,7 +86,9 @@ def CAiT3DModel(
     tubelets = Transformer(dim, depth, heads, dim_head, mlp_dim)(tubelets)
 
     _, cls_token = CLS_Token(dim)(tubelets)
-    cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim)(cls_token, context=tubelets)
+    cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim)(
+        cls_token, context=tubelets
+    )
     cls_token = ops.squeeze(cls_token, axis=1)
     o_p = layers.Dense(num_classes)(cls_token)
 

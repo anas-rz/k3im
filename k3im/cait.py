@@ -5,8 +5,11 @@ from keras import ops
 
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
+
+
 def exists(val):
     return val is not None
+
 
 class PositionEmb(layers.Layer):
     def __init__(self, sequence_length, output_dim, **kwargs):
@@ -27,7 +30,8 @@ class PositionEmb(layers.Layer):
 class CLS_Token(layers.Layer):
     def __init__(self, dim):
         super().__init__()
-        self.cls_token = self.add_weight([1, 1, dim], 'random_normal')
+        self.cls_token = self.add_weight([1, 1, dim], "random_normal")
+
     def call(self, x):
         b = ops.shape(x)[0]
         cls_token = ops.repeat(self.cls_token, b, axis=0)
@@ -54,6 +58,7 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim):
             x += layers.MultiHeadAttention(heads, dim_head)(x, kv)
             x += FeedForward(dim, mlp_dim)(x)
         return layers.LayerNormalization(epsilon=1e-6)(x)
+
     return _apply
 
 
@@ -87,7 +92,9 @@ def CaiTModel(
     patches = PositionEmb(num_patches, dim)(patches)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
     _, cls_token = CLS_Token(dim)(patches)
-    cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim)(cls_token, context=patches)
+    cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim)(
+        cls_token, context=patches
+    )
     cls_token = ops.squeeze(cls_token, axis=1)
     o_p = layers.Dense(num_classes)(cls_token)
 
