@@ -4,7 +4,7 @@ from keras import ops
 
 
 class RegisterTokens(layers.Layer):
-    def __init__(self, num_register_tokens, dim, fn):
+    def __init__(self, num_register_tokens, dim):
         super().__init__()
         self.register_tokens = self.add_weight(
             [1, num_register_tokens, dim],
@@ -12,7 +12,6 @@ class RegisterTokens(layers.Layer):
             dtype="float32",
             trainable=True,
         )
-        self.fn = fn
 
     def call(self, x):
         b = ops.shape(x)[0]
@@ -96,7 +95,7 @@ def SimpleViT_RT(
 
     transformer = Transformer(dim, depth, heads, dim_head, mlp_dim)
     n = ops.shape(patches)[1]
-    patches = RegisterTokens(num_register_tokens, dim, transformer)(patches)
+    patches = RegisterTokens(num_register_tokens, dim)(patches)
     patches = transformer(patches)
     patches, _ = ops.split(patches, [n], axis=1)
     patches = layers.GlobalAveragePooling1D(name="avg_pool")(patches)
