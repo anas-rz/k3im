@@ -1,6 +1,6 @@
 # \[beta\] K3IM: Keras 3 Image Models
 
-Note: K3IM is under heavy development with many fascinating feature on the way. A stable/tested release is expected by the end of 2023.
+Note: K3IM is under heavy development with many fascinating features on the way. A stable/tested release is expected by the end of 2023.
 ![Logo](assets/Banner.png)
 
 ## Installation
