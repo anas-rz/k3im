@@ -28,9 +28,6 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout=0.0):
 
     return _apply
 
-
-
-
     return _apply
 
 

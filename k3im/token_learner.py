@@ -3,8 +3,10 @@ from keras import layers
 from keras import ops
 import math
 
+
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
+
 
 class PatchEncoder(layers.Layer):
     def __init__(self, num_patches, projection_dim):
@@ -34,7 +36,7 @@ def FeedForward(dim, hidden_dim, dropout_rate):
             layers.Dense(hidden_dim, activation=keras.activations.gelu),
             layers.Dropout(dropout_rate),
             layers.Dense(dim),
-            layers.Dropout(dropout_rate)
+            layers.Dropout(dropout_rate),
         ]
     )
 
@@ -101,7 +103,7 @@ def TokenLearner(inputs, number_of_tokens):
     return outputs
 
 
-def Transformer(dim,num_heads, hidden_dim, dropout_rate):
+def Transformer(dim, num_heads, hidden_dim, dropout_rate):
     def _apply(encoded_patches):
         # Layer normalization 1.
         x1 = layers.LayerNormalization()(encoded_patches)
@@ -122,11 +124,12 @@ def Transformer(dim,num_heads, hidden_dim, dropout_rate):
 
         # Skip connection 2.
         return layers.Add()([x4, x2])
+
     return _apply
 
 
-
-def ViTokenLearner(image_size,
+def ViTokenLearner(
+    image_size,
     patch_size,
     num_classes,
     dim,
@@ -134,11 +137,12 @@ def ViTokenLearner(image_size,
     heads,
     mlp_dim,
     token_learner_units,
-
     channels=3,
     dim_head=64,
-                   dropout_rate=0.,
-    pool="mean", use_token_learner=True):
+    dropout_rate=0.0,
+    pool="mean",
+    use_token_learner=True,
+):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
 
@@ -166,9 +170,7 @@ def ViTokenLearner(image_size,
 
     # Add positional embeddings to the projected patches.
     num_patches = h * w
-    encoded_patches = PatchEncoder(
-        num_patches=num_patches, projection_dim=dim
-    )(
+    encoded_patches = PatchEncoder(num_patches=num_patches, projection_dim=dim)(
         projected_patches
     )  # (B, number_patches, projection_dim)
     encoded_patches = layers.Dropout(0.1)(encoded_patches)
@@ -177,7 +179,9 @@ def ViTokenLearner(image_size,
     # Transformer.
     for i in range(depth):
         # Add a Transformer block.
-        encoded_patches = Transformer(dim, heads, mlp_dim, dropout_rate)(encoded_patches)
+        encoded_patches = Transformer(dim, heads, mlp_dim, dropout_rate)(
+            encoded_patches
+        )
 
         # Add TokenLearner layer in the middle of the
         # architecture. The paper suggests that anywhere
