@@ -21,10 +21,15 @@ def FeedForward(dim, hidden_dim, dropout=0.0):
 
 def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout=0.0):
     def _apply(x):
-        x += layers.MultiHeadAttention(heads, dim_head, dropout=dropout)
-        layers.MultiHeadAttention(heads, dim_head, dropout=dropout)
-        x += FeedForward(dim, mlp_dim, dropout=dropout)
-        return x
+        for _ in range(depth):
+            x += layers.MultiHeadAttention(heads, dim_head, dropout=dropout)(x, x)
+            x += FeedForward(dim, mlp_dim)(x)
+        return layers.LayerNormalization(epsilon=1e-6)(x)
+
+    return _apply
+
+
+
 
     return _apply
 
@@ -33,14 +38,14 @@ class PositionEmb(layers.Layer):
     def __init__(self, sequence_length, output_dim, **kwargs):
         super().__init__(**kwargs)
         self.position_embeddings = layers.Embedding(
-            input_dim=(sequence_length + 1), output_dim=output_dim
+            input_dim=(sequence_length), output_dim=output_dim
         )
         self.sequence_length = sequence_length
         self.output_dim = output_dim
 
     def call(self, inputs):
-        length = ops.shape(inputs)[0]
-        positions = ops.arange(start=0, stop=(length + 1), step=1)
+        length = ops.shape(inputs)[1]
+        positions = ops.arange(start=0, stop=(length), step=1)
         embedded_positions = self.position_embeddings(positions)
         return inputs + embedded_positions
 
@@ -112,7 +117,6 @@ def DeepViT(
         dropout=emb_dropout,
         channels=channels,
     )(i_p)
-    print(patches.shape)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim, dropout)(patches)
     if pool == "mean":
         tokens = layers.GlobalAveragePooling1D()(patches)
