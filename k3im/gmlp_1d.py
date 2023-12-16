@@ -1,3 +1,8 @@
+"""
+gMLP, based on MLPs with gating, and show that it can perform as well as 
+Transformers in key language and vision applications.
+https://arxiv.org/abs/2105.08050
+"""
 import keras as keras
 from keras import layers
 from keras import ops

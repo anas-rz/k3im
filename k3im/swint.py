@@ -1,3 +1,11 @@
+"""
+a hierarchical Transformer whose representation is computed with Shifted windows. 
+The shifted windowing scheme brings greater efficiency by limiting self-attention 
+computation to non-overlapping local windows while also allowing for cross-window connection. 
+This hierarchical architecture has the flexibility to model at various scales and has linear 
+computational complexity with respect to image size.
+https://arxiv.org/abs/2103.14030
+"""
 import keras
 from keras import layers
 from keras import ops

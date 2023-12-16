@@ -1,3 +1,11 @@
+"""
+extracts spatio-temporal tokens from the input video, which are then 
+encoded by a series of transformer layers. In order to handle the long 
+sequences of tokens encountered in video, we propose several, efficient 
+variants of our model which factorise the spatial- and temporal-dimensions 
+of the input.
+https://arxiv.org/abs/2103.15691
+"""
 import keras
 from keras import layers
 from keras import ops

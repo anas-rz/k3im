@@ -1,3 +1,12 @@
+""" Class-Attention in Image Transformers (CaiT)
+
+Paper: 'Going deeper with Image Transformers' - https://arxiv.org/abs/2103.17239
+
+Original code and weights from https://github.com/facebookresearch/deit, copyright below
+
+Modifications and additions for timm hacked together by / Copyright 2021, Ross Wightman
+"""
+
 import keras as keras
 from keras import layers
 from keras import ops

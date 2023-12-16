@@ -1,3 +1,9 @@
+"""
+simple yet effective method, named Re-attention, to re-generate 
+the attention maps to increase their diversity at different layers 
+with negligible computation and memory cost.
+https://arxiv.org/abs/2103.11886
+"""
 import keras
 from keras import ops
 from keras import layers
@@ -25,8 +31,6 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout=0.0):
             x += layers.MultiHeadAttention(heads, dim_head, dropout=dropout)(x, x)
             x += FeedForward(dim, mlp_dim)(x)
         return layers.LayerNormalization(epsilon=1e-6)(x)
-
-    return _apply
 
     return _apply
 

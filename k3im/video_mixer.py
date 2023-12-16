@@ -1,3 +1,12 @@
+"""
+MLP Mixer: an architecture based exclusively on multi-layer perceptrons (MLPs). 
+MLP-Mixer contains two types of layers: one with MLPs applied independently to 
+image patches (i.e. "mixing" the per-location features), and one with MLPs 
+applied across patches (i.e. "mixing" spatial information).
+
+https://arxiv.org/abs/2105.01601
+
+"""
 import keras
 from keras import layers
 from keras import ops

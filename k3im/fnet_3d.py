@@ -1,3 +1,7 @@
+"""
+replacing the self-attention sublayer in a Transformer encoder with a standard, unparameterized Fourier Transform
+https://arxiv.org/abs/2105.03824
+"""
 import keras
 from keras import layers
 from keras import ops

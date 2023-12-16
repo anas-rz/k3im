@@ -1,3 +1,8 @@
+"""
+Improvements in original vit: 2d sinusoidal positional embedding, global average pooling (no CLS token),
+With added register tokens.
+https://arxiv.org/abs/2205.01580
+"""
 import keras
 from keras import layers
 from keras import ops

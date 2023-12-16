@@ -1,3 +1,14 @@
+"""
+relies on a handful of adaptively learned tokens, and which is applicable to 
+both image and video understanding tasks. Instead of relying on hand-designed 
+splitting strategies to obtain visual tokens and processing a large number of 
+densely sampled patches for attention, our approach learns to mine important 
+tokens in visual data. This results in efficiently and effectively finding a 
+few important visual tokens and enables modeling of pairwise attention between 
+such tokens, over a longer temporal horizon for videos, or the spatial content 
+in image frames.
+https://openreview.net/forum?id=z-l1kpDXs88
+"""
 import keras
 from keras import layers
 from keras import ops

@@ -1,3 +1,11 @@
+"""
+Focal modulation comprises three components: (i) hierarchical contextualization, 
+implemented using a stack of depth-wise convolutional layers, to encode visual 
+contexts from short to long ranges, (ii) gated aggregation to selectively gather 
+contexts for each query token based on its content, and (iii) element-wise modulation
+ or affine transformation to inject the aggregated context into the query. 
+ https://arxiv.org/abs/2203.11926
+"""
 import keras
 import keras.backend as K
 from keras import ops
