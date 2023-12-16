@@ -85,7 +85,7 @@ class MLPMixerLayer(layers.Layer):
         return x
 
 
-def VideoMixer(
+def VideoMixerModel(
     image_size,
     image_patch_size,
     frames,
@@ -96,7 +96,6 @@ def VideoMixer(
     temporal_depth,
     mlp_dim,
     channels=3,
-    dim_head=64,
     spatial_dropout=0.0,
     emb_dropout=0.0,
 ):

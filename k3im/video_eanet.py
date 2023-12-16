@@ -132,7 +132,6 @@ def VideoEANet(
     mlp_dim,
     pool="cls",
     channels=3,
-    dim_head=64,
     dim_coefficient=4,
     projection_dropout=0.0,
     attention_dropout=0,
