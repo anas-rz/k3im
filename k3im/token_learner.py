@@ -200,7 +200,7 @@ def ViTokenLearner(image_size,
         representation = layers.GlobalMaxPooling1D(name="max_pool")(representation)
 
     # Classify outputs.
-    outputs = layers.Dense(num_classes, activation="softmax")(representation)
+    outputs = layers.Dense(num_classes)(representation)
 
     # Create the Keras model.
     model = keras.Model(inputs=inputs, outputs=outputs)
