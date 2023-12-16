@@ -604,3 +604,7 @@ def focalnet_huge_fl4(img_size=224, **kwargs):
         **kwargs,
     )
     return model
+
+def focalnet_kid(img_size=28, **kwargs):
+    model = FocalNetModel(img_size, depths=[1], embed_dim=96, **kwargs)
+    return model
