@@ -2,9 +2,11 @@ import keras
 from keras import layers
 from keras import ops
 
-
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
+
+def exists(val):
+    return val is not None
 
 
 class CLS_Token(layers.Layer):
