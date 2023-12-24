@@ -59,7 +59,7 @@ model = CCT(
     transformer_units=[16, 32],
     stochastic_depth_rate=0.6,
     transformer_layers=2,
-    num_classes=num_classes,
+    num_classes=10,
     positional_emb=False,
 )
 ```
@@ -75,7 +75,7 @@ model = CCT3DModel(input_shape=(28, 28, 28, 1),
     transformer_units=[16, 64],
     stochastic_depth_rate=0.6,
     transformer_layers=2,
-    num_classes=num_classes,
+    num_classes=10,
     positional_emb=False,)
 ```
 ### ConvMixer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
@@ -90,7 +90,7 @@ model = ConvMixer1DModel(seq_len=500,
     depth=4,
     kernel_size=15,
     patch_size=4,
-    num_classes=n_classes,)
+    num_classes=10,)
 ```
 2D
 ```python
@@ -124,7 +124,7 @@ from k3im.eanet_1d import EANet1DModel
 model = EANet1DModel(
     seq_len=500,
     patch_size=20,
-    num_classes=n_classes,
+    num_classes=10,
     dim=96,
     depth=3,
     heads=32,
@@ -158,7 +158,7 @@ model = EANet3DModel(
     image_patch_size=7,
     frames=28,
     frame_patch_size=7,
-    num_classes=num_classes,
+    num_classes=10,
     dim=64,
     depth=2,
     heads=4,
@@ -185,7 +185,7 @@ The gMLP is a MLP architecture that features a Spatial Gating Unit (SGU). The SG
 1D
 ```python
 from k3im.gmlp_1d import gMLP1DModel
-model = gMLP1DModel(seq_len=500, patch_size=20, num_classes=n_classes, dim=64, depth=4, channels=1, dropout_rate=0.0)
+model = gMLP1DModel(seq_len=500, patch_size=20, num_classes=10, dim=64, depth=4, channels=1, dropout_rate=0.0)
 ```
 2D
 ```python
@@ -196,7 +196,7 @@ model = gMLPModel(
     embedding_dim=32,
     num_blocks=4,
     dropout_rate=0.5,
-    num_classes=num_classes,
+    num_classes=10,
     positional_encoding=False,
     num_channels=1,
 )
@@ -209,7 +209,7 @@ model = gMLP3DModel(
     image_patch_size=7,
     frames=28,
     frame_patch_size=7,
-    num_classes=num_classes,
+    num_classes=10,
     dim=32,
     depth=4,
     hidden_units=32,
@@ -227,7 +227,7 @@ This is similar to a depthwise separable convolution based model such as the Xce
 
 ```python
 from k3im.mlp_mixer_1d import Mixer1DModel
-model = Mixer1DModel(seq_len=500, patch_size=20, num_classes=n_classes, dim=64, depth=4, channels=1, dropout_rate=0.0)
+model = Mixer1DModel(seq_len=500, patch_size=20, num_classes=10, dim=64, depth=4, channels=1, dropout_rate=0.0)
 ```
 2D
 ```python
@@ -238,7 +238,7 @@ model = MixerModel(
     embedding_dim=32,
     num_blocks=4,
     dropout_rate=0.5,
-    num_classes=num_classes,
+    num_classes=10,
     positional_encoding=True,
     num_channels=1,
 )
@@ -253,7 +253,7 @@ model = MLPMixer3DModel(
     image_patch_size=7,
     frames=28,
     frame_patch_size=7,
-    num_classes=num_classes,
+    num_classes=10,
     dim=32,
     depth=4,
     hidden_units=32,
@@ -267,7 +267,7 @@ model = MLPMixer3DModel(
 from k3im.simple_vit_1d import SimpleViT1DModel
 model = SimpleViT1DModel(seq_len=500,
     patch_size=20,
-    num_classes=n_classes,
+    num_classes=10,
     dim=32,
     depth=3,
     heads=8,
@@ -285,7 +285,7 @@ model = SimpleViT3DModel(
     image_patch_size=7,
     frames=28,
     frame_patch_size=7,
-    num_classes=num_classes,
+    num_classes=10,
     dim=32,
     depth=2,
     heads=4,
@@ -298,7 +298,7 @@ model = SimpleViT3DModel(
 2D
 ```python
 from k3im.simple_vit_with_fft import SimpleViTFFT
-model = SimpleViTFFT(image_size=28, patch_size=7, freq_patch_size=7, num_classes=num_classes, dim=32, depth=2, 
+model = SimpleViTFFT(image_size=28, patch_size=7, freq_patch_size=7, num_classes=10, dim=32, depth=2, 
                      heads=8, mlp_dim=64, channels=1, 
                      dim_head = 16)
 ```
@@ -309,7 +309,7 @@ Image/2D
 from k3im.simple_vit_with_register_tokens import SimpleViT_RT
 model = SimpleViT_RT(image_size=28,
     patch_size=7,
-    num_classes=num_classes,
+    num_classes=10,
     dim=32,
     depth=2,
     heads=4,
@@ -333,7 +333,7 @@ model = SwinTModel(
     qkv_bias=True,
     dropout_rate=0.2,
     shift_size=2,
-    num_classes=num_classes,
+    num_classes=10,
     in_channels=1,
 )
 
@@ -343,7 +343,7 @@ model = SwinTModel(
 from k3im.vit_1d import ViT1DModel
 model = ViT1DModel(seq_len=500,
     patch_size=20,
-    num_classes=n_classes,
+    num_classes=10,
     dim=32,
     depth=3,
     heads=8,
