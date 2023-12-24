@@ -1,4 +1,6 @@
-""" Class-Attention in Image Transformers (CaiT) reimplemented for 3D Data
+""" Class-Attention in Image Transformers (CaiT) reimplemented for 3D Data, The model
+
+creates tubelets from 3D data and feeds them to tubelets transformer then to a class transformer
 
 Paper: 'Going deeper with Image Transformers' - https://arxiv.org/abs/2103.17239
 

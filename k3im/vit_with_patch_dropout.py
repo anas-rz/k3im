@@ -1,4 +1,5 @@
 """
+Adds dropout to the transformer
 https://arxiv.org/abs/2208.07220
 """
 import keras

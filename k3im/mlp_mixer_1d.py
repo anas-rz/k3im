@@ -1,8 +1,10 @@
 """
-MLP Mixer: an architecture based exclusively on multi-layer perceptrons (MLPs). 
+MLP Mixer: Based exclusively on multi-layer perceptrons (MLPs). 
 MLP-Mixer contains two types of layers: one with MLPs applied independently to 
 image patches (i.e. "mixing" the per-location features), and one with MLPs 
 applied across patches (i.e. "mixing" spatial information).
+
+Hacked for 1D data by Muhammad Anas Raza
 
 https://arxiv.org/abs/2105.01601
 
@@ -31,6 +33,9 @@ def posemb_sincos_1d(patches, temperature=10000, dtype="float32"):
 
 
 class MLPMixerLayer(layers.Layer):
+    """
+    https://keras.io/examples/vision/mlp_image_classification/
+    """
     def __init__(self, num_patches, hidden_units, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

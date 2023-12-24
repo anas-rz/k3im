@@ -1,5 +1,5 @@
 """
-replacing the self-attention sublayer in a Transformer encoder with a standard, unparameterized Fourier Transform
+Replacing the self-attention sublayer in a Transformer encoder with a standard, unparameterized Fourier Transform
 https://arxiv.org/abs/2105.03824
 """
 import keras as keras
@@ -26,6 +26,9 @@ def posemb_sincos_1d(patches, temperature=10000, dtype="float32"):
 
 
 class FNetLayer(layers.Layer):
+    """
+    Ported from: https://keras.io/examples/vision/mlp_image_classification/
+    """
     def __init__(self, embedding_dim, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

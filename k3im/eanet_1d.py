@@ -1,8 +1,9 @@
 """
-external attention, based on two external, small, learnable, shared memories, which can be 
-implemented easily by simply using two cascaded linear layers and two normalization layers; 
+External attention, based on two external, small, learnable, shared memories, 
+implemented using two cascaded linear layers and two normalization layers; 
 it conveniently replaces self-attention in existing popular architectures. External attention 
 has linear complexity and implicitly considers the correlations between all data samples.
+Ported for 1D from: https://keras.io/examples/vision/eanet/ with features from vit-pytorch
 https://arxiv.org/abs/2105.02358
 """
 import keras as keras

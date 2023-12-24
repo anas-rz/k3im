@@ -4,6 +4,9 @@ MLP-Mixer contains two types of layers: one with MLPs applied independently to
 image patches (i.e. "mixing" the per-location features), and one with MLPs 
 applied across patches (i.e. "mixing" spatial information).
 
+Hacked for space-time data by Muhammad Anas RAZA
+
+
 https://arxiv.org/abs/2105.01601
 
 """

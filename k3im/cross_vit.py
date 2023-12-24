@@ -1,7 +1,8 @@
 """
-processes small-patch and large-patch tokens with two separate branches of 
+Processes small-patch and large-patch tokens with two separate branches of 
 different computational complexity and these tokens are then fused purely 
 by attention multiple times to complement each other.
+Ported from: https://github.com/lucidrains/vit-pytorch/blob/main/vit_pytorch/cross_vit.py
 https://arxiv.org/abs/2103.14899
 """
 import keras

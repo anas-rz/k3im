@@ -2,7 +2,7 @@
 CCT proposes compact transformers by using convolutions instead 
 of patching and performing sequence pooling. This allows 
 for CCT to have high accuracy and a low number of parameters.
-https://arxiv.org/abs/2104.05704
+Based on Sayak Paul's implementation here: https://keras.io/examples/vision/cct/https://arxiv.org/abs/2104.05704
 """
 
 from keras import layers

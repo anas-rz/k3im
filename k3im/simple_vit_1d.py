@@ -1,5 +1,9 @@
 """
 Improvements in original vit: 2d sinusoidal positional embedding, global average pooling (no CLS token),
+
+Hacked for 1D data by: Muhammad Aans Raza
+
+
 https://arxiv.org/abs/2205.01580
 """
 import keras

@@ -4,6 +4,8 @@ The shifted windowing scheme brings greater efficiency by limiting self-attentio
 computation to non-overlapping local windows while also allowing for cross-window connection. 
 This hierarchical architecture has the flexibility to model at various scales and has linear 
 computational complexity with respect to image size.
+
+Based on: https://keras.io/examples/vision/swin_transformers/
 https://arxiv.org/abs/2103.14030
 """
 import keras

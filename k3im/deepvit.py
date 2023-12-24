@@ -2,6 +2,7 @@
 simple yet effective method, named Re-attention, to re-generate 
 the attention maps to increase their diversity at different layers 
 with negligible computation and memory cost.
+Ported from: https://github.com/lucidrains/vit-pytorch/blob/main/vit_pytorch/deepvit.py
 https://arxiv.org/abs/2103.11886
 """
 import keras

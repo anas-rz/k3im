@@ -1,5 +1,5 @@
 """
-replacing the self-attention sublayer in a Transformer encoder with a standard, unparameterized Fourier Transform
+Replacing the self-attention sublayer in a Transformer encoder with a standard, unparameterized Fourier Transform
 https://arxiv.org/abs/2105.03824
 """
 import keras
@@ -77,6 +77,9 @@ class PositionEmbedding(keras.layers.Layer):
 
 
 class FNetLayer(layers.Layer):
+    """
+    https://keras.io/examples/vision/mlp_image_classification/
+    """
     def __init__(self, embedding_dim, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

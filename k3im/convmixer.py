@@ -2,6 +2,7 @@
 ConvMixer, an extremely simple model that it operates directly on patches as input, 
 separates the mixing of spatial and channel dimensions, and maintains equal size and 
 resolution throughout the networkthe ConvMixer uses only standard convolutions to achieve the mixing steps.
+Taken from https://keras.io/examples/vision/convmixer/
 https://arxiv.org/abs/2201.09792
 """
 import keras

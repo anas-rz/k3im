@@ -4,6 +4,8 @@ MLP-Mixer contains two types of layers: one with MLPs applied independently to
 image patches (i.e. "mixing" the per-location features), and one with MLPs 
 applied across patches (i.e. "mixing" spatial information).
 
+Hacked for 3D data by Muhammad Anas Raza: Simply extracts tubelets instead of patches for 3D images
+
 https://arxiv.org/abs/2105.01601
 
 """

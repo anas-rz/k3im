@@ -2,6 +2,9 @@
 CCT proposes compact transformers by using convolutions instead 
 of patching and performing sequence pooling. This allows 
 for CCT to have high accuracy and a low number of parameters.
+Modified for 1D data. The original structure is the same the tokenizer
+is changed for 1D data. 
+Based on Sayak Paul's implementation here: https://keras.io/examples/vision/cct/
 https://arxiv.org/abs/2104.05704
 """
 

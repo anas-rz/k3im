@@ -1,6 +1,6 @@
 """
-gMLP, based on MLPs with gating, and show that it can perform as well as 
-Transformers in key language and vision applications.
+gMLP, based on MLPs with gating
+Hacked for 1D data by extracting 1D patches by Muhammad Anas Raza
 https://arxiv.org/abs/2105.08050
 """
 import keras as keras
@@ -27,6 +27,9 @@ def posemb_sincos_1d(patches, temperature=10000, dtype="float32"):
 
 
 class gMLPLayer(layers.Layer):
+    """
+    https://keras.io/examples/vision/mlp_image_classification/
+    """
     def __init__(self, num_patches, embedding_dim, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
