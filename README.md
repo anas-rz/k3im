@@ -1,4 +1,4 @@
-# \[beta\] K3IM: Keras 3 Image Models
+# K3IM: Keras 3 Image Models
 
 Note: K3IM is under heavy development with many fascinating features on the way. A stable/tested release is expected by the end of 2023.
 ![Logo](assets/Banner.png)
@@ -6,7 +6,7 @@ Note: K3IM is under heavy development with many fascinating features on the way.
 ## Installation
 
 ```shell
-pip install k3im
+pip install k3im --upgrade
 ```
 
 
