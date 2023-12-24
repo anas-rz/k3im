@@ -19,16 +19,20 @@ import os
 os.environ['KERAS_BACKEND'] = 'jax' #or 'tensorflow' or 'torch' 
 ```
 
-For usage, check out spin up notebooks.
+### Example 1D Models: 
 Test 1D Models: <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_1d.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
+
+### Example 2D Models:
 Test 2D Models: <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-Test 3D/video Models: <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_3d_video.ipynb">
+### Example 2D Models:
+
+ <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_3d_video.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
