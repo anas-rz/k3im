@@ -30,7 +30,7 @@ Test 2D Models: <a target="_blank" href="https://colab.research.google.com/githu
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-### Example 2D Models:
+### Example 3D/Video Models:
 
  <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_3d_video.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
