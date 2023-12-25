@@ -36,6 +36,9 @@ Test 2D Models: <a target="_blank" href="https://colab.research.google.com/githu
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
+### Class-Attention in Image Transformers (CaiT) :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D
+
+
 ### Compact Convolution Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 CCT proposes compact transformers by using convolutions instead of patching and performing sequence pooling. This allows for CCT to have high accuracy and a low number of parameters.
@@ -126,6 +129,9 @@ model = ConvMixer3DModel(image_size=28,
     num_classes=10,
     num_channels=1)
 ```
+### Cross ViT :white_check_mark: Image/2D
+
+### Deep ViT :white_check_mark: Image/2D
 
 ### External Attention Network :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
@@ -186,6 +192,15 @@ model = EANet3DModel(
 The FNet uses a similar block to the Transformer block. However, FNet replaces the self-attention layer in the Transformer block with a parameter-free 2D Fourier transformation layer:
 One 1D Fourier Transform is applied along the patches.
 One 1D Fourier Transform is applied along the channels.
+
+### Focal Modulation Network :white_check_mark: Image/2D
+Released by Microsoft in 2022, FocalNet or Focal Modulation Network is an attention-free architecture achieving superior performance than SoTA self-attention (SA) methods across various vision benchmarks. 
+```python
+from k3im.focalnet import focalnet_kid # jax ✅, tensorflow ✅, torch ✅
+model = focalnet_kid(img_size=28, in_channels=1, num_classes=10)
+model.summary()
+```
+
 ### gMLP :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 The gMLP is a MLP architecture that features a Spatial Gating Unit (SGU). The SGU enables cross-patch interactions across the spatial (channel) dimension, by:
@@ -350,6 +365,9 @@ model = SwinTModel(
 )
 
 ```
+
+### Token Learner :white_check_mark: Image/2D
+
 ### Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 ```python
 from k3im.vit_1d import ViT1DModel
@@ -364,10 +382,6 @@ model = ViT1DModel(seq_len=500,
     dim_head=64)
 ```
 
-### Focal Modulation Network :white_check_mark: Image/2D
-Released by Microsoft in 2022, FocalNet or Focal Modulation Network is an attention-free architecture achieving superior performance than SoTA self-attention (SA) methods across various vision benchmarks. 
-```python
-from k3im.focalnet import focalnet_kid # jax ✅, tensorflow ✅, torch ✅
-model = focalnet_kid(img_size=28, in_channels=1, num_classes=10)
-model.summary()
-```
+
+
+### Vision Transformer with Patch Dropout :white_check_mark: Image/2D
