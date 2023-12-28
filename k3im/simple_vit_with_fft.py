@@ -110,6 +110,9 @@ def SimpleViTFFT(
 
     patches = ops.concatenate((patches, patches_f), axis=-2)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
+    # if num_classes is None return model without classification head       
+    if num_classes is None:
+        return keras.Model(inputs=i_p, outputs=patches)
 
     patches = layers.GlobalAveragePooling1D(name="avg_pool")(patches)
 

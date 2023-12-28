@@ -91,7 +91,9 @@ def SimpleViTPD(
     patches += pos_embedding
     patches = PatchDropout(patch_dropout)(patches)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
-
+    # if num_classes is None return model without classification head
+    if num_classes is None:
+        return keras.Model(inputs=i_p, outputs=patches)
     if pool == "mean":
         patches = layers.GlobalAveragePooling1D(name="avg_pool")(patches)
     elif pool == "max":

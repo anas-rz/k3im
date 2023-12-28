@@ -142,7 +142,9 @@ def EANet(
             attention_dropout,
             projection_dropout,
         )
-
+    # if num_classes is None return model without classification head
+    if num_classes is None:
+        return keras.Model(inputs=inputs, outputs=x)
     x = layers.GlobalAveragePooling1D()(x)
     outputs = layers.Dense(num_classes)(x)
     model = keras.Model(inputs=inputs, outputs=outputs)

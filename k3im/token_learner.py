@@ -200,7 +200,9 @@ def ViTokenLearner(
             encoded_patches = TokenLearner(
                 encoded_patches, token_learner_units
             )  # (B, num_tokens, c)
-
+    # if num_classes is None return model without classification head
+    if num_classes is None:
+        return keras.Model(inputs=inputs, outputs=encoded_patches)
     # Layer normalization and Global average pooling.
     representation = layers.LayerNormalization()(encoded_patches)
     if pool == "mean":

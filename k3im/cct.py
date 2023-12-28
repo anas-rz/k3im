@@ -211,6 +211,9 @@ def CCT(
         # Skip connection 2.
         x3 = StochasticDepth(dpr[i])(x3)
         encoded_patches = layers.Add()([x3, x2])
+    if num_classes is None:
+        model = keras.Model(inputs=inputs, outputs=encoded_patches)
+        return model
 
     # Apply sequence pooling.
     representation = layers.LayerNormalization(epsilon=1e-5)(encoded_patches)

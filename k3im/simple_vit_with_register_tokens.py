@@ -102,6 +102,9 @@ def SimpleViT_RT(
     n = ops.shape(patches)[1]
     patches = RegisterTokens(num_register_tokens, dim)(patches)
     patches = transformer(patches)
+    # if num_classes is None return model without classification head
+    if num_classes is None:
+        return keras.Model(inputs=i_p, outputs=patches)
     patches, _ = ops.split(patches, [n], axis=1)
     patches = layers.GlobalAveragePooling1D(name="avg_pool")(patches)
 

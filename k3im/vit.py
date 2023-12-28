@@ -86,6 +86,9 @@ def ViT(
     num_patches = ops.shape(patches)[1]
     patches = ClassTokenPositionEmb(num_patches, dim)(patches)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
+    # if num_classes is None return model without classification head
+    if num_classes is None:
+        return keras.Model(inputs=i_p, outputs=patches)
 
     if pool == "cls":
         patches = patches[:, -1]

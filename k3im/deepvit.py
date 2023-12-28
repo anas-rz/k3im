@@ -120,6 +120,9 @@ def DeepViT(
         channels=channels,
     )(i_p)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim, dropout)(patches)
+    if num_classes is None:
+        model = keras.Model(inputs=i_p, outputs=patches)
+        return model
     if pool == "mean":
         tokens = layers.GlobalAveragePooling1D()(patches)
     else:

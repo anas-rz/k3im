@@ -103,6 +103,10 @@ def CaiTModel(
     cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim)(
         cls_token, context=patches
     )
+    if num_classes is None:
+        model = keras.Model(inputs=i_p, outputs=cls_token)
+        return model
+
     cls_token = ops.squeeze(cls_token, axis=1)
     o_p = layers.Dense(num_classes)(cls_token)
 

@@ -258,6 +258,9 @@ def CrossViT(
         ),
         dropout=dropout,
     )(sm_tokens, lg_tokens)
+    if num_classes is None:
+        model = keras.Model(inputs=i_p, outputs=(sm_tokens, lg_tokens))
+        return model
     sm_cls, lg_cls = map(lambda t: t[:, -1], (sm_tokens, lg_tokens))
 
     sm_logits = Head(num_classes)(sm_cls)

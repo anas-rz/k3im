@@ -441,6 +441,9 @@ def FocalNet(
                 use_postln_in_modulation=use_postln_in_modulation,
                 normalize_modulator=normalize_modulator,
             )(x, H, W)
+        # if num_classes is None return model without classification head   
+        if num_classes is None:
+            return x
         x = norm_layer(name="norm")(x)  # B L C
         x = keras.layers.GlobalAveragePooling1D()(x)  #
         x = keras.layers.Flatten()(x)

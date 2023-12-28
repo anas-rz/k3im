@@ -152,6 +152,9 @@ def MixerModel(
     # Process x using the module blocks.
     for _ in range(num_blocks):
         x = MLPMixerLayer(num_patches, embedding_dim, dropout_rate)(x)
+    # if num_classes is None return model without classification head   
+    if num_classes is None:
+        return keras.Model(inputs=inputs, outputs=x)
     # Apply global average pooling to generate a [batch_size, embedding_dim] representation tensor.
     representation = layers.GlobalAveragePooling1D()(x)
     # Apply dropout.

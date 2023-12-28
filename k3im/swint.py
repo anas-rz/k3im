@@ -346,6 +346,9 @@ def SwinTModel(
         dropout_rate=dropout_rate,
     )(x)
     x = PatchMerging((num_patch_x, num_patch_y), embed_dim=embed_dim)(x)
+    # if num_classes is None return model without classification head
+    if num_classes is None:
+        return keras.Model(inputs=inputs, outputs=x)
     x = layers.GlobalAveragePooling1D()(x)
     output = layers.Dense(num_classes)(x)
     return keras.Model(inputs=inputs, outputs=output)
