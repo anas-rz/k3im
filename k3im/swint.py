@@ -312,6 +312,7 @@ def SwinTModel(
     shift_size,
     num_classes,
     in_channels=3,
+    aug=None,
 ):
     img_size = pair(img_size)
     patch_size = pair(patch_size)
@@ -321,7 +322,11 @@ def SwinTModel(
         img_size[1] // patch_size[1],
     )
     inputs = layers.Input(shape=(img_size[0], img_size[1], in_channels))
-    x = ops.image.extract_patches(inputs, (patch_size[0], patch_size[1]))
+    if aug is not None:
+        img = aug(inputs)
+    else:
+        img = inputs
+    x = ops.image.extract_patches(img, (patch_size[0], patch_size[1]))
     x = layers.Reshape((num_patch_x * num_patch_y, -1))(x)
     x = layers.LayerNormalization()(x)
     x = layers.Dense(embed_dim)(x)

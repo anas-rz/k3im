@@ -147,6 +147,7 @@ def ViTokenLearner(
     dropout_rate=0.0,
     pool="mean",
     use_token_learner=True,
+    aug=None,
 ):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
@@ -156,8 +157,11 @@ def ViTokenLearner(
     ), "Image dimensions must be divisible by the patch size."
 
     patch_dim = channels * patch_height * patch_width
-
     inputs = layers.Input((image_height, image_width, channels))
+    if aug is not None:
+        img = aug(inputs)
+    else:
+        img = inputs
 
     # Augment data.
 
@@ -167,7 +171,7 @@ def ViTokenLearner(
         kernel_size=(patch_height, patch_width),
         strides=(patch_height, patch_width),
         padding="VALID",
-    )(inputs)
+    )(img)
     _, h, w, c = projected_patches.shape
     projected_patches = layers.Reshape((h * w, c))(
         projected_patches

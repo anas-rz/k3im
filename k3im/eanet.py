@@ -123,12 +123,17 @@ def EANet(
     attention_dropout,
     projection_dropout,
     num_classes,
+    aug=None,
 ):
     inputs = layers.Input(shape=input_shape)
+    if aug is not None:
+        img = aug(inputs)
+    else:
+        img = inputs
     num_patches = (input_shape[0] // patch_size) ** 2  # Number of patch
 
     # Extract patches.
-    x = PatchExtract(patch_size)(inputs)
+    x = PatchExtract(patch_size)(img)
     # Create patch embedding.
     x = PatchEmbedding(num_patches, embedding_dim)(x)
     # Create Transformer block.

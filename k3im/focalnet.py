@@ -380,7 +380,6 @@ def BasicLayer(
 def FocalNet(
     img_size=224,
     patch_size=4,
-    in_chans=3,
     num_classes=1000,
     embed_dim=128,
     depths=[2, 2, 6, 2],
@@ -389,7 +388,6 @@ def FocalNet(
     drop_path_rate=0.1,
     norm_layer=keras.layers.LayerNormalization,
     patch_norm=True,
-    use_checkpoint=False,
     focal_levels=[2, 2, 3, 2],
     focal_windows=[3, 2, 3, 2],
     use_conv_embed=False,
@@ -454,11 +452,15 @@ def FocalNet(
     return _apply
 
 
-def FocalNetModel(img_size, in_channels=3, **kw) -> keras.Model:
+def FocalNetModel(img_size, in_channels=3, aug=None, **kw) -> keras.Model:
     focalnet_model = FocalNet(img_size=img_size, **kw)
 
     inputs = keras.Input((img_size, img_size, in_channels))
-    outputs = focalnet_model(inputs)
+    if aug is not None:
+        img = aug(inputs)
+    else:
+        img = inputs
+    outputs = focalnet_model(img)
     final_model = keras.Model(inputs, outputs)
 
     return final_model

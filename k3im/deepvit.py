@@ -100,7 +100,8 @@ def DeepViT(
     channels=3,
     dim_head=64,
     dropout=0.0,
-    emb_dropout=0.0
+    emb_dropout=0.0,
+    aug=None
 ):
     assert (
         image_size % patch_size == 0
@@ -112,13 +113,14 @@ def DeepViT(
         "mean",
     }, "pool type must be either cls (cls token) or mean (mean pooling)"
     i_p = layers.Input((image_size, image_size, channels))
+    img = aug(i_p) if aug is not None else i_p
     patches = ImageEmbedder(
         dim=dim,
         image_size=image_size,
         patch_size=patch_size,
         dropout=emb_dropout,
         channels=channels,
-    )(i_p)
+    )(img)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim, dropout)(patches)
     if num_classes is None:
         model = keras.Model(inputs=i_p, outputs=patches)

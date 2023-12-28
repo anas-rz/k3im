@@ -120,18 +120,20 @@ def FNetModel(
     num_classes,
     positional_encoding=False,
     num_channels=3,
+    aug=None,
 ):
     image_size = pair(image_size)
     patch_size = pair(patch_size)
     input_shape = (image_size[0], image_size[1], num_channels)
     inputs = layers.Input(shape=input_shape)
+    img = aug(inputs) if aug else inputs
     num_patches = (image_size[0] // patch_size[0]) * (
         image_size[1] // patch_size[1]
     )  # Size of the data array.
 
     # Augment data.
     # Create patches.
-    patches = Patches(patch_size)(inputs)
+    patches = Patches(patch_size)(img)
     # Encode patches to generate a [batch_size, num_patches, embedding_dim] tensor.
     x = layers.Dense(units=embedding_dim)(patches)
     if positional_encoding:

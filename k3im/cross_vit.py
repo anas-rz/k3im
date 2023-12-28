@@ -219,17 +219,19 @@ def CrossViT(
     cross_attn_dim_head=64,
     depth=3,
     dropout=0.1,
-    emb_dropout=0.1
+    emb_dropout=0.1,
+    aug=None
 ):
     image_height, image_width = pair(image_size)
     i_p = layers.Input((image_height, image_width, channels))
+    img = aug(i_p) if aug is not None else i_p
     sm_tokens = ImageEmbedder(
         dim=sm_dim,
         image_size=image_size,
         patch_size=sm_patch_size,
         dropout=emb_dropout,
         channels=channels,
-    )(i_p)
+    )(img)
     lg_tokens = ImageEmbedder(
         dim=lg_dim,
         image_size=image_size,

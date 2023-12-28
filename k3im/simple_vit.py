@@ -57,6 +57,7 @@ def SimpleViT(
     channels=3,
     dim_head=64,
     pool="mean",
+    aug=None,
 ):
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
@@ -68,7 +69,11 @@ def SimpleViT(
     patch_dim = channels * patch_height * patch_width
 
     i_p = layers.Input((image_height, image_width, channels))
-    patches = ops.image.extract_patches(i_p, (patch_height, patch_width))
+    if aug is not None:
+        img = aug(i_p)
+    else:
+        img = i_p
+    patches = ops.image.extract_patches(img, (patch_height, patch_width))
     patches = layers.Reshape((-1, patch_dim))(patches)
     patches = layers.LayerNormalization()(patches)
     patches = layers.Dense(dim)(patches)

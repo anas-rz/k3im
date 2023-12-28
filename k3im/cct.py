@@ -164,9 +164,13 @@ def CCT(
     transformer_layers,
     num_classes,
     positional_emb=False,
+    aug=None
 ):
     inputs = layers.Input(input_shape)
-
+    if aug is not None:
+        img = aug(inputs)
+    else:
+        img = inputs
     # Encode patches.
 
     cct_tokenizer = CCTTokenizer(
@@ -176,7 +180,7 @@ def CCT(
         n_output_channels=[64, projection_dim],
         n_conv_layers=2,
     )
-    encoded_patches = cct_tokenizer(inputs)
+    encoded_patches = cct_tokenizer(img)
 
     # Apply positional embedding.
     if positional_emb:

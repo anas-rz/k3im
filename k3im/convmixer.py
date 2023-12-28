@@ -40,12 +40,17 @@ def ConvMixer(
     patch_size=2,
     num_classes=10,
     num_channels=3,
+    aug=None
 ):
     """ConvMixer-256/8: https://openreview.net/pdf?id=TVHS5Y4dNvM.
     The hyperparameter values are taken from the paper.
     """
     inputs = keras.Input((image_size, image_size, num_channels))
-    x = layers.Rescaling(scale=1.0 / 255)(inputs)
+    if aug is not None:
+        img = aug(inputs)
+    else:
+        img = inputs
+    x = layers.Rescaling(scale=1.0 / 255)(img)
 
     # Extract patch embeddings.
     x = conv_stem(x, filters, patch_size)
