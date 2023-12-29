@@ -97,7 +97,21 @@ Explore various image models interactively: <a target="_blank" href="https://col
 
 ### Class-Attention in Image Transformers (CaiT)
 
-
+```python
+from k3im.cait import CaiTModel # jax ✅, tensorflow ✅, torch ✅
+model = CaiTModel(
+    image_size=(28, 28),
+    patch_size=(7, 7),
+    num_classes=10,
+    dim=32,
+    depth=2,
+    heads=8,
+    mlp_dim=64,
+    cls_depth=2,
+    channels=1,
+    dim_head=64,
+)
+```
 ### Compact Convolution Transformer
 
 CCT proposes compact transformers by using convolutions instead of patching and performing sequence pooling. This allows for CCT to have high accuracy and a low number of parameters.
@@ -234,7 +248,7 @@ model = DeepViT(image_size=28,
     emb_dropout=0.0)
 ```
 
-### External Attention Network :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
+### External Attention Network
 
 Based on two external, small, learnable, and shared memories, which can be implemented easily by simply using two cascaded linear layers and two normalization layers. It conveniently replaces self-attention as used in existing architectures. External attention has linear complexity, as it only implicitly considers the correlations between all samples.
 
@@ -311,7 +325,7 @@ model = FNetModel(
 
 ```
 
-### Focal Modulation Network :white_check_mark: Image/2D
+### Focal Modulation Network
 Released by Microsoft in 2022, FocalNet or Focal Modulation Network is an attention-free architecture achieving superior performance than SoTA self-attention (SA) methods across various vision benchmarks. 
 ```python
 from k3im.focalnet import focalnet_kid # jax ✅, tensorflow ✅, torch ✅
@@ -319,7 +333,7 @@ model = focalnet_kid(img_size=28, in_channels=1, num_classes=10)
 model.summary()
 ```
 
-### gMLP :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
+### gMLP
 
 The gMLP is a MLP architecture that features a Spatial Gating Unit (SGU). The SGU enables cross-patch interactions across the spatial (channel) dimension, by:
 
@@ -363,7 +377,7 @@ model = gMLP3DModel(
 )
 ```
 
-### MLP Mixer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
+### MLP Mixer
 
 MLP-Mixer is an architecture based exclusively on multi-layer perceptrons (MLPs), that contains two types of MLP layers: 
 One applied independently to image patches, which mixes the per-location features.
@@ -406,7 +420,7 @@ model = MLPMixer3DModel(
     channels=1,
 )
 ```
-### Simple Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D
+### Simple Vision Transformer
 
 ```python
 from k3im.simple_vit_1d import SimpleViT1DModel
@@ -439,7 +453,7 @@ model = SimpleViT3DModel(
     dim_head=64,
 )
 ```
-### Simple Vision Transformer with FFT  :white_check_mark: Image/2D
+### Simple Vision Transformer with FFT
 2D
 ```python
 from k3im.simple_vit_with_fft import SimpleViTFFT
@@ -447,7 +461,7 @@ model = SimpleViTFFT(image_size=28, patch_size=7, freq_patch_size=7, num_classes
                      heads=8, mlp_dim=64, channels=1, 
                      dim_head = 16)
 ```
-### Simple Vision Transformer with Register Tokens :white_check_mark: Image/2D
+### Simple Vision Transformer with Register Tokens
 
 Image/2D
 ```python
@@ -463,7 +477,7 @@ model = SimpleViT_RT(image_size=28,
     channels=1,
     dim_head=64,)
 ```
-### Swin Transformer :white_check_mark: Image/2D
+### Swin Transformer
 
 Swin Transformer is a hierarchical Transformer whose representations are computed with shifted windows. The shifted window scheme brings greater efficiency by limiting self-attention computation to non-overlapping local windows while also allowing for cross-window connections. 
 ```python
@@ -518,7 +532,7 @@ model = ViT1DModel(seq_len=500,
 
 
 
-### Vision Transformer with Patch Dropout :white_check_mark: Image/2D
+### Vision Transformer with Patch Dropout
 
 ```python
 from k3im.vit_with_patch_dropout import SimpleViTPD
