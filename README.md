@@ -1,38 +1,43 @@
 # K3IM: Keras 3 Image Models
 
-Note: K3IM is under heavy development with many fascinating features on the way. A stable/tested release is expected by the end of 2023.
+K3IM empowers you with a rich collection of classification models tailored for images, 1D data, 3D structures, and spatiotemporal data. Built upon Keras 3, these models effortlessly work across TensorFlow, PyTorch, or JAX, offering you flexibility across different machine learning frameworks.
+
 ![Logo](assets/Banner.png)
 
 ## Installation
 
-```shell
-pip install k3im --upgrade
-```
+Simply run `pip install k3im --upgrade` in your terminal to unleash the power of K3IM's diverse classification models.
 
 
 
 ## Usage
 
-You can set up any backend using following commands:
+K3IM empowers you to:
+
+1) Leverage pre-built models: Import and fine-tune existing models for seamless adaptation to your specific classification tasks.
+2) Craft custom models: Build unique architectures tailored to your needs by utilizing K3IM's versatile layers.
+
+Choose your preferred  backend:
 ```python
 import os
 os.environ['KERAS_BACKEND'] = 'jax' #or 'tensorflow' or 'torch' 
 ```
 
-### Example 1D Models: 
-Test 1D Models: <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_1d.ipynb">
+### Explore 1D models interactively in Colab: 
+
+Dive into practical examples and witness the capabilities of K3IM's 1D models firsthand: <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_1d.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
 
-### Example 2D Models:
-Test 2D Models: <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest.ipynb">
+### Explore 2D models interactively in Colab:
+Explore various image models interactively: <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-### Example 3D/Video Models:
+### Explore 3D/Video models interactively in Colab:
 
- <a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_3d_video.ipynb">
+ Explore various 3D/space-time factorized models interactively:<a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_3d_video.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
