@@ -95,14 +95,14 @@ Explore various image models interactively: <a target="_blank" href="https://col
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-### Class-Attention in Image Transformers (CaiT) :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D
+### Class-Attention in Image Transformers (CaiT)
 
 
-### Compact Convolution Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
+### Compact Convolution Transformer
 
 CCT proposes compact transformers by using convolutions instead of patching and performing sequence pooling. This allows for CCT to have high accuracy and a low number of parameters.
 
-1D
+#### 1D
 ```python
 from k3im.cct_1d import CCT_1DModel
 model = CCT_1DModel(
@@ -119,7 +119,7 @@ model = CCT_1DModel(
     positional_emb=False,
 )
 ```
-2D
+#### 2D
 ```python
 from k3im.cct import CCT
 
@@ -137,7 +137,7 @@ model = CCT(
     positional_emb=False,
 )
 ```
-3D
+#### 3D
 ```python
 from k3im.cct_3d import CCT3DModel
 model = CCT3DModel(input_shape=(28, 28, 28, 1),
@@ -152,10 +152,11 @@ model = CCT3DModel(input_shape=(28, 28, 28, 1),
     num_classes=10,
     positional_emb=False,)
 ```
-### ConvMixer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
+### ConvMixer
 
 ConvMixer uses recipes from the recent isotrophic architectures like ViT, MLP-Mixer (Tolstikhin et al.), such as using the same depth and resolution across different layers in the network, residual connections, and so on.
 
+#### 1D
 ```python
 from k3im.convmixer_1d import ConvMixer1DModel
 model = ConvMixer1DModel(seq_len=500,
@@ -166,7 +167,7 @@ model = ConvMixer1DModel(seq_len=500,
     patch_size=4,
     num_classes=10,)
 ```
-2D
+#### 2D
 ```python
 from k3im.convmixer import ConvMixer # Check convmixer
 
@@ -174,7 +175,7 @@ model = ConvMixer(
     image_size=28, filters=64, depth=8, kernel_size=3, patch_size=2, num_classes=10, num_channels=1
 )
 ```
-3D
+#### 3D
 ```python
 from k3im.convmixer_3d import ConvMixer3DModel
 model = ConvMixer3DModel(image_size=28,
@@ -188,13 +189,56 @@ model = ConvMixer3DModel(image_size=28,
     num_classes=10,
     num_channels=1)
 ```
-### Cross ViT :white_check_mark: Image/2D
+### Cross ViT
+```python
+from k3im.cross_vit import CrossViT # jax ✅, tensorflow ✅, torch ✅
+model = CrossViT(
+    image_size=28,
+    num_classes=10,
+    sm_dim=32,
+    lg_dim=42,
+    channels=1,
+    sm_patch_size=4,
+    sm_enc_depth=1,
+    sm_enc_heads=8,
+    sm_enc_mlp_dim=48,
+    sm_enc_dim_head=56,
+    lg_patch_size=7,
+    lg_enc_depth=2,
+    lg_enc_heads=8,
+    lg_enc_mlp_dim=84,
+    lg_enc_dim_head=72,
+    cross_attn_depth=2,
+    cross_attn_heads=8,
+    cross_attn_dim_head=64,
+    depth=3,
+    dropout=0.1,
+    emb_dropout=0.1
+)
+```
+### Deep ViT
 
-### Deep ViT :white_check_mark: Image/2D
+```python
+from k3im.deepvit import DeepViT
+model = DeepViT(image_size=28,
+    patch_size=7,
+    num_classes=10,
+    dim=64,
+    depth=2,
+    heads=8,
+    mlp_dim=84,
+    pool="cls",
+    channels=1,
+    dim_head=64,
+    dropout=0.0,
+    emb_dropout=0.0)
+```
 
 ### External Attention Network :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
 
 Based on two external, small, learnable, and shared memories, which can be implemented easily by simply using two cascaded linear layers and two normalization layers. It conveniently replaces self-attention as used in existing architectures. External attention has linear complexity, as it only implicitly considers the correlations between all samples.
+
+#### 1D
 
 ```python
 from k3im.eanet_1d import EANet1DModel
@@ -211,7 +255,7 @@ model = EANet1DModel(
     channels=1,
 )
 ```
-2D
+#### 2D
 ```python
 from k3im.eanet import EANet
 model = EANet(
@@ -227,7 +271,7 @@ model = EANet(
     num_classes=10,
 )
 ```
-3D
+#### 3D
 ```python
 from k3im.eanet3d import EANet3DModel
 model = EANet3DModel(
@@ -246,11 +290,26 @@ model = EANet3DModel(
     attention_dropout=0,
 )
 ```
-### Fourier Net :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
+### Fourier Net
 
 The FNet uses a similar block to the Transformer block. However, FNet replaces the self-attention layer in the Transformer block with a parameter-free 2D Fourier transformation layer:
 One 1D Fourier Transform is applied along the patches.
 One 1D Fourier Transform is applied along the channels.
+
+```python
+from k3im.fnet import FNetModel 
+model = FNetModel(
+    image_size=28,
+    patch_size=7,
+    embedding_dim=64,
+    num_blocks=2,
+    dropout_rate=0.4,
+    num_classes=10,
+    positional_encoding=False,
+    num_channels=1,
+)
+
+```
 
 ### Focal Modulation Network :white_check_mark: Image/2D
 Released by Microsoft in 2022, FocalNet or Focal Modulation Network is an attention-free architecture achieving superior performance than SoTA self-attention (SA) methods across various vision benchmarks. 
@@ -425,9 +484,25 @@ model = SwinTModel(
 
 ```
 
-### Token Learner :white_check_mark: Image/2D
+### Token Learner
 
-### Vision Transformer :white_check_mark: 1D, :white_check_mark: Image/2D, :white_check_mark: 3D, :white_check_mark: space-time
+```python
+from k3im.token_learner import ViTokenLearner
+model = ViTokenLearner(image_size=28,
+    patch_size=7,
+    num_classes=10,
+    dim=64,
+    depth=4,
+    heads=4,
+    mlp_dim=32,
+    token_learner_units=2,
+    channels=1,
+    dim_head=64,
+    dropout_rate=0.,
+    pool="mean", use_token_learner=True)
+```
+
+### Vision Transformer
 ```python
 from k3im.vit_1d import ViT1DModel
 model = ViT1DModel(seq_len=500,
@@ -444,3 +519,20 @@ model = ViT1DModel(seq_len=500,
 
 
 ### Vision Transformer with Patch Dropout :white_check_mark: Image/2D
+
+```python
+from k3im.vit_with_patch_dropout import SimpleViTPD
+model = SimpleViTPD(
+    image_size=28,
+    patch_size=7,
+    num_classes=10,
+    dim=32,
+    depth=4,
+    heads=8,
+    mlp_dim=42,
+    patch_dropout=0.25,
+    channels=1,
+    dim_head=16,
+    pool="mean",
+)
+```
