@@ -65,7 +65,7 @@ Simply run `pip install k3im --upgrade` in your terminal to unleash the power of
 
 K3IM empowers you to:
 
-1) Leverage pre-built models: Import and fine-tune existing models for seamless adaptation to your specific classification tasks.
+1) Leverage pre-built models: Import and train existing models for seamless adaptation to your specific classification tasks.
 2) Craft custom models: Build unique architectures tailored to your needs by utilizing K3IM's versatile layers.
 
 Choose your preferred  backend:
