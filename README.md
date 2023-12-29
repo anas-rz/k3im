@@ -73,6 +73,9 @@ Choose your preferred  backend:
 import os
 os.environ['KERAS_BACKEND'] = 'jax' #or 'tensorflow' or 'torch' 
 ```
+> [!IMPORTANT]
+> Make sure to set the `KERAS_BACKEND` before import any K3IM/Keras, it
+> will be used to set up Keras when it is first imported.
 
 ### Explore 1D models interactively in Colab: 
 
