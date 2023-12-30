@@ -89,11 +89,15 @@ Explore various image models interactively: <a target="_blank" href="https://col
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
+> [!NOTE]  
+> All 2D Models contain `aug` keyword argument to include data augmentation in the model.
+
 ### Explore 3D/Video models interactively in Colab:
 
  Explore various 3D/space-time factorized models interactively:<a target="_blank" href="https://colab.research.google.com/github/anas-rz/k3im/blob/main/spinups/spin_up_the_simplest_3d_video.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
+
 
 ### Class-Attention in Image Transformers (CaiT)
 
