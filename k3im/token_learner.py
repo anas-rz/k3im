@@ -7,6 +7,7 @@ import keras
 from keras import layers
 from keras import ops
 import math
+from k3im.commons import FeedForward
 
 
 def pair(t):
@@ -33,17 +34,6 @@ class PatchEncoder(layers.Layer):
         config.update({"num_patches": self.num_patches})
         return config
 
-
-def FeedForward(dim, hidden_dim, dropout_rate):
-    return keras.Sequential(
-        [
-            layers.LayerNormalization(epsilon=1e-6),
-            layers.Dense(hidden_dim, activation=keras.activations.gelu),
-            layers.Dropout(dropout_rate),
-            layers.Dense(dim),
-            layers.Dropout(dropout_rate),
-        ]
-    )
 
 
 def TokenLearner(inputs, number_of_tokens):

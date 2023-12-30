@@ -11,6 +11,7 @@ https://arxiv.org/abs/2105.02358
 import keras
 from keras import layers
 from keras import ops
+from k3im.commons import FeedForward
 
 
 class ClassTokenSpatial(layers.Layer):
@@ -51,15 +52,6 @@ class ClassTokenTemporal(layers.Layer):
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
-
-def FeedForward(dim, hidden_dim):
-    return keras.Sequential(
-        [
-            layers.LayerNormalization(epsilon=1e-6),
-            layers.Dense(hidden_dim, activation=keras.activations.gelu),
-            layers.Dense(dim),
-        ]
-    )
 
 
 def ExternalAttention(

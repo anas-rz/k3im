@@ -8,22 +8,11 @@ https://arxiv.org/abs/2103.11886
 import keras
 from keras import ops
 from keras import layers
+from k3im.commons import FeedForward
 
 
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
-
-
-def FeedForward(dim, hidden_dim, dropout=0.0):
-    return keras.Sequential(
-        [
-            layers.LayerNormalization(),
-            layers.Dense(hidden_dim, activation="gelu"),
-            layers.Dropout(dropout),
-            layers.Dense(dim),
-            layers.Dropout(dropout),
-        ]
-    )
 
 
 def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout=0.0):

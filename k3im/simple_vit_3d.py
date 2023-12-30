@@ -6,20 +6,13 @@ https://arxiv.org/abs/2205.01580
 import keras
 from keras import layers
 from keras import ops
+from k3im.commons import FeedForward
 
 
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
 
-def FeedForward(dim, hidden_dim):
-    return keras.Sequential(
-        [
-            layers.LayerNormalization(epsilon=1e-6),
-            layers.Dense(hidden_dim, activation=keras.activations.gelu),
-            layers.Dense(dim),
-        ]
-    )
 
 
 def Transformer(dim, depth, heads, dim_head, mlp_dim):

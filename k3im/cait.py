@@ -9,6 +9,7 @@ Ported to Keras 3 by Muhammad Anas Raza Copyright 2023.
 import keras
 from keras import layers
 from keras import ops
+from k3im.commons import FeedForward
 
 
 def pair(t):
@@ -45,15 +46,6 @@ class CLS_Token(layers.Layer):
         cls_token = ops.repeat(self.cls_token, b, axis=0)
         return ops.concatenate([x, cls_token], axis=1), cls_token
 
-
-def FeedForward(dim, hidden_dim):
-    return keras.Sequential(
-        [
-            layers.LayerNormalization(epsilon=1e-6),
-            layers.Dense(hidden_dim, activation=keras.activations.gelu),
-            layers.Dense(dim),
-        ]
-    )
 
 
 def Transformer(dim, depth, heads, dim_head, mlp_dim):

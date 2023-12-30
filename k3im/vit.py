@@ -5,6 +5,7 @@ https://arxiv.org/abs/2010.11929
 import keras
 from keras import layers
 from keras import ops
+from k3im.commons import FeedForward
 
 
 def pair(t):
@@ -33,14 +34,6 @@ class ClassTokenPositionEmb(layers.Layer):
         return patches + embedded_positions
 
 
-def FeedForward(dim, hidden_dim):
-    return keras.Sequential(
-        [
-            layers.LayerNormalization(epsilon=1e-6),
-            layers.Dense(hidden_dim, activation=keras.activations.gelu),
-            layers.Dense(dim),
-        ]
-    )
 
 
 def Transformer(dim, depth, heads, dim_head, mlp_dim):

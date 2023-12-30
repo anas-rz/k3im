@@ -6,6 +6,7 @@ https://arxiv.org/abs/2205.01580
 import keras
 from keras import layers
 from keras import ops
+from k3im.commons import FeedForward
 
 
 class RegisterTokens(layers.Layer):
@@ -43,15 +44,6 @@ def posemb_sincos_2d(h, w, dim, temperature: int = 10000, dtype="float32"):
     pe = ops.concatenate((ops.sin(x), ops.cos(x), ops.sin(y), ops.cos(y)), 1)
     return ops.cast(pe, dtype)
 
-
-def FeedForward(dim, hidden_dim):
-    return keras.Sequential(
-        [
-            layers.LayerNormalization(epsilon=1e-6),
-            layers.Dense(hidden_dim, activation=keras.activations.gelu),
-            layers.Dense(dim),
-        ]
-    )
 
 
 def Transformer(dim, depth, heads, dim_head, mlp_dim):

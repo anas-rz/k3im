@@ -10,6 +10,7 @@ https://arxiv.org/abs/2105.02358
 import keras as keras
 from keras import layers
 from keras import ops
+from k3im.commons import FeedForward
 
 # https://keras.io/examples/vision/eanet/
 # Add class token and position embedding
@@ -77,13 +78,6 @@ def external_attention(
     return x
 
 
-def mlp(x, embedding_dim, mlp_dim, drop_rate=0.2):
-    x = layers.Dense(mlp_dim, activation=ops.gelu)(x)
-    x = layers.Dropout(drop_rate)(x)
-    x = layers.Dense(embedding_dim)(x)
-    x = layers.Dropout(drop_rate)(x)
-    return x
-
 
 def transformer_encoder(
     x,
@@ -93,6 +87,7 @@ def transformer_encoder(
     dim_coefficient,
     attention_dropout,
     projection_dropout,
+    mlp_dropout=0.
 ):
     residual_1 = x
     x = layers.LayerNormalization(epsilon=1e-5)(x)
@@ -107,7 +102,7 @@ def transformer_encoder(
     x = layers.add([x, residual_1])
     residual_2 = x
     x = layers.LayerNormalization(epsilon=1e-5)(x)
-    x = mlp(x, embedding_dim, mlp_dim)
+    x = FeedForward(embedding_dim, mlp_dim, dropout=mlp_dropout)(x)
     x = layers.add([x, residual_2])
     return x
 

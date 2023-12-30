@@ -12,6 +12,7 @@ import keras
 from keras import layers
 from keras import ops
 import numpy as np
+from k3im.commons import FeedForward
 
 
 def pair(t):
@@ -182,15 +183,7 @@ class SwinTransformer(layers.Layer):
         self.drop_path = layers.Dropout(dropout_rate)
         self.norm2 = layers.LayerNormalization(epsilon=1e-5)
 
-        self.mlp = keras.Sequential(
-            [
-                layers.Dense(num_mlp),
-                layers.Activation(keras.activations.gelu),
-                layers.Dropout(dropout_rate),
-                layers.Dense(dim),
-                layers.Dropout(dropout_rate),
-            ]
-        )
+        self.mlp = FeedForward(dim, num_mlp, dropout=dropout_rate)
 
         if min(self.num_patch) < self.window_size:
             self.shift_size = 0
