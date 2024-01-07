@@ -393,19 +393,14 @@ from k3im.mlp_mixer_1d import Mixer1DModel
 model = Mixer1DModel(seq_len=500, patch_size=20, num_classes=10, dim=64, depth=4, channels=1, dropout_rate=0.0)
 ```
 2D
-```python
-from k3im.mlp_mixer import MixerModel
-model = MixerModel(
-    image_size=28,
-    patch_size=7,
-    embedding_dim=32,
-    num_blocks=4,
-    dropout_rate=0.5,
-    num_classes=10,
-    positional_encoding=True,
-    num_channels=1,
-)
 
+Just In:  `mixer_b16_224`, `mixer_l16_224` come with pretrained weights
+```python
+import keras
+from k3im.mlp_mixer import mixer_b16_224, mixer_l16_224, mixer_s32_224, mixer_b32_224, mixer_b16_224
+model = mixer_b16_224(pretrained=True) # will automatically download weights and load it.
+inputs = keras.random.uniform((1, 224, 224, 3))
+out = model(inputs)
 ```
 3D
 ```python
