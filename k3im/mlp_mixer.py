@@ -167,7 +167,7 @@ def MlpMixer(num_classes=1000,
     return keras.Model(inputs=inputs, outputs=out)
 
 
-def mixer_l16_224_keras(pretrained=False, **kwargs):
+def mixer_l16_224(pretrained=False, **kwargs):
     model = MlpMixer(patch_size=16, num_blocks=24, embed_dim=1024)
     if pretrained:
         model_path = keras.utils.get_file(
@@ -176,12 +176,12 @@ def mixer_l16_224_keras(pretrained=False, **kwargs):
 
     return model
 
-def mixer_s32_224_keras(pretrained=False, **kwargs):
+def mixer_s32_224(pretrained=False, **kwargs):
     if pretrained:
         raise NotImplementedError
     return MlpMixer(patch_size=32, num_blocks=8, embed_dim=512)
 
-def mixer_s16_224_keras(pretrained=False, **kwargs) -> MlpMixer:
+def mixer_s16_224(pretrained=False, **kwargs) -> MlpMixer:
     """ Mixer-S/16 224x224
     Paper:  'MLP-Mixer: An all-MLP Architecture for Vision' - https://arxiv.org/abs/2105.01601
     """
@@ -190,7 +190,7 @@ def mixer_s16_224_keras(pretrained=False, **kwargs) -> MlpMixer:
     model_args = dict(patch_size=16, num_blocks=8, embed_dim=512, **kwargs)
     return MlpMixer(**model_args)
 
-def mixer_b32_224_keras(pretrained=False, **kwargs) -> MlpMixer:
+def mixer_b32_224(pretrained=False, **kwargs) -> MlpMixer:
     """ Mixer-B/32 224x224
     Paper:  'MLP-Mixer: An all-MLP Architecture for Vision' - https://arxiv.org/abs/2105.01601
     """
@@ -199,7 +199,7 @@ def mixer_b32_224_keras(pretrained=False, **kwargs) -> MlpMixer:
     model_args = dict(patch_size=32, num_blocks=12, embed_dim=768, **kwargs)
     return MlpMixer(**model_args)
 
-def mixer_b16_224_keras(pretrained=False, **kwargs) -> MlpMixer:
+def mixer_b16_224(pretrained=False, **kwargs) -> MlpMixer:
     """"""
     model_args = dict(patch_size=16, num_blocks=12, embed_dim=768, **kwargs)
     model = MlpMixer(**model_args)

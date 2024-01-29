@@ -62,6 +62,19 @@ class gMLPLayer(layers.Layer):
 def gMLP1DModel(
     seq_len, patch_size, num_classes, dim, depth, channels=3, dropout_rate=0.0
 ):
+    """Instantiate a gMLP model for 1D data.
+    
+    Args:
+        seq_len: An integer representing the number of steps in the input sequence.
+        patch_size: An integer representing the number of steps in a
+            patch (default=4).
+        num_classes: An integer representing the number of classes for classification.
+        dim: An integer representing the projection dimension.
+        depth: An integer representing the number of transformer layers.
+        channels: An integer representing the number of channels in the input.
+        dropout_rate: A float representing the dropout rate.
+        
+        """
     assert seq_len % patch_size == 0
     num_patches = seq_len // patch_size
     patch_dim = channels * patch_size

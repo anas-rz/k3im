@@ -42,8 +42,16 @@ def ConvMixer1DModel(
     patch_size=2,
     num_classes=10,
 ):
-    """ConvMixer-256/8: https://openreview.net/pdf?id=TVHS5Y4dNvM.
-    The hyperparameter values are taken from the paper.
+    """ ConvMixer model for 1D data.
+    Args:
+    `seq_len`: number of steps
+    `n_features`: number of features/channels in the input default `3`
+    `filters`: number of filters in the convolutional stem
+    `depth`: number of conv mixer blocks
+    `kernel_size`: kernel size for the depthwise convolution
+    `patch_size`: number steps in a patch
+    `num_classes`: output classes for classification
+
     """
     inputs = keras.Input((seq_len, n_features))
 

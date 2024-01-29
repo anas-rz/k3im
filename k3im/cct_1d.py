@@ -158,6 +158,23 @@ def CCT_1DModel(
     num_classes,
     positional_emb=False,
 ):
+    """Create a Convolutional Transformer for sequences.
+    Args:
+        input_shape: A tuple of (seq_len, num_channels).
+        num_heads: An integer.
+        projection_dim: An integer representing the projection dimension.
+        kernel_size: An integer representing the size of the convolution window.
+        stride: An integer representing the stride of the convolution.
+        padding: One of 'valid', 'same' or 'causal'. Causal is for decoding.
+        transformer_units: A list of integers representing the number of units
+            in each transformer layer.
+        stochastic_depth_rate: A float representing the drop probability for the
+            stochastic depth layer.
+        transformer_layers: An integer representing the number of transformer layers.
+        num_classes: An integer representing the number of classes for classification.
+        positional_emb: Boolean, whether to use positional embeddings.
+    
+    """
     inputs = layers.Input(input_shape)
 
     # Encode patches.

@@ -92,6 +92,20 @@ def EANet1DModel(
     attention_dropout=0.0,
     channels=3,
 ):
+    """ Create an External Attention Network for 1D data.
+    Args:
+    `seq_len`: number of steps
+    `patch_size`: number steps in a patch
+    `num_classes`: output classes for classification
+    `dim`: projection dim for patches,
+    `depth`: number of patch transformer units
+    `heads`: number of attention heads
+    `mlp_dim`: Projection Dim in transformer after each MultiHeadAttention layer
+    `dim_coefficient`: coefficient for increasing the number of heads
+    `attention_dropout`: dropout applied to MultiHeadAttention in class and patch transformers
+    `channels`: number of features/channels in the input default `3`
+    
+    """
     assert seq_len % patch_size == 0
     patch_dim = channels * patch_size
     i_p = layers.Input((seq_len, channels))
