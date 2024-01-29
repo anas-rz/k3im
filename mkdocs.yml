@@ -1,0 +1,16 @@
+site_name: K3IM
+
+docs_dir: _docs
+
+theme:
+  name: "material"
+
+plugins:
+  - mkdocstrings
+
+nav:
+  - k3im: index.md
+  - 1D Models: 1d_models.md
+  - 2D Models: 2d_models.md
+  - 3D Models: 3d_models.md
+  - Space-Time Models: space_time_models.md
