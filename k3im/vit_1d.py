@@ -58,16 +58,17 @@ def ViT1DModel(
     dim_head=64,
 ):
     """ Create a Vision Transformer for 1D data.
+    
     Args:
-    `seq_len`: number of steps
-    `patch_size`: number steps in a patch
-    `num_classes`: output classes for classification
-    `dim`: projection dim for patches,
-    `depth`: number of patch transformer units
-    `heads`: number of attention heads
-    `mlp_dim`: Projection Dim in transformer after each MultiHeadAttention layer
-    `channels`: number of features/channels in the input default `3`
-    `dim_head`: size of each attention head
+        `seq_len`: number of steps
+        `patch_size`: number steps in a patch
+        `num_classes`: output classes for classification
+        `dim`: projection dim for patches,
+        `depth`: number of patch transformer units
+        `heads`: number of attention heads
+        `mlp_dim`: Projection Dim in transformer after each MultiHeadAttention layer
+        `channels`: number of features/channels in the input default `3`
+        `dim_head`: size of each attention head
     """
     assert seq_len % patch_size == 0
     patch_dim = channels * patch_size

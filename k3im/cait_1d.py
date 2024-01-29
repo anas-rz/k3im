@@ -58,34 +58,22 @@ def CAiT_1DModel(
     channels=3,
     dropout_rate=0.0,
 ):
-    """
+    """ 
     An extention of Class Attention in Image Transformers (CAiT) reimplemented for 1D Data. 
     The model expects 1D data of shape `(batch, seq_len, channels)`
-
+    
     Args:
-
-    `seq_len`: number of steps
-
-    `patch_size`: number steps in a patch 
-
-    `num_classes`: output classes for classification
-
-    `dim`: projection dim for patches,
-
-    `dim_head`: size of each attention head
-
-    `mlp_dim`: Projection Dim in transformer after each MultiHeadAttention layer
-
-    `depth`: number of patch transformer units
-
-    `cls_depth`: number of transformer units applied to class attention transformer
-
-    `heads`: number of attention heads
-
-    `channels`: number of features/channels in the input default `3`
-
-    `dropout_rate`: dropout applied to MultiHeadAttention in class and patch transformers
-
+        `seq_len`: number of steps
+        `patch_size`: number steps in a patch 
+        `num_classes`: output classes for classification
+        `dim`: projection dim for patches,
+        `dim_head`: size of each attention head
+        `mlp_dim`: Projection Dim in transformer after each MultiHeadAttention layer
+        `depth`: number of patch transformer units
+        `cls_depth`: number of transformer units applied to class attention transformer
+        `heads`: number of attention heads
+        `channels`: number of features/channels in the input default `3`
+        `dropout_rate`: dropout applied to MultiHeadAttention in class and patch transformers
     """
     assert seq_len % patch_size == 0
     patch_dim = channels * patch_size

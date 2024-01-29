@@ -45,7 +45,9 @@ class FNetLayer(layers.Layer):
 def FNet1DModel(
     seq_len, patch_size, num_classes, dim, depth, channels=3, dropout_rate=0.0
 ):
-    """Instantiate a FNet model for 1D data.
+    """
+    Instantiate a FNet model for 1D data.
+    
     Args:
         seq_len: An integer representing the number of steps in the input sequence.
         patch_size: An integer representing the number of steps in a

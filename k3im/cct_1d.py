@@ -158,7 +158,9 @@ def CCT_1DModel(
     num_classes,
     positional_emb=False,
 ):
-    """Create a Convolutional Transformer for sequences.
+    """
+    Create a Convolutional Transformer for sequences.
+    
     Args:
         input_shape: A tuple of (seq_len, num_channels).
         num_heads: An integer.
