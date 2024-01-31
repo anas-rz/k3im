@@ -166,6 +166,23 @@ def CCT(
     positional_emb=False,
     aug=None
 ):
+    """ Instantiates the Compact Convolutional Transformer architecture.
+
+    Args:
+        input_shape: tuple of (height, width, channels)
+        num_heads: number of attention heads
+        projection_dim: projection dimension
+        kernel_size: kernel size for the first convolutional layer
+        stride: stride for the first convolutional layer
+        padding: padding for the first convolutional layer
+        transformer_units: list of units for the transformer blocks
+        stochastic_depth_rate: dropout rate for the stochastic depth
+        transformer_layers: number of transformer blocks
+        num_classes: number of output classes
+        positional_emb: boolean, whether to use positional embeddings
+        aug: data augmentation
+    
+    """
     inputs = layers.Input(input_shape)
     if aug is not None:
         img = aug(inputs)

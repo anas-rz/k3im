@@ -307,6 +307,22 @@ def SwinTModel(
     in_channels=3,
     aug=None,
 ):
+    """Instantiates the SwinT architecture.
+    
+    Args:
+        img_size: Image size.
+        patch_size: Patch size.
+        embed_dim: Embedding dimension.
+        num_heads: Number of attention heads.
+        window_size: Window size.
+        num_mlp: Number of MLP nodes.
+        qkv_bias: Whether to use bias in qkv projection.
+        dropout_rate: Dropout rate.
+        shift_size: Shift size.
+        num_classes: Number of classes.
+        in_channels: Number of input channels.
+        aug: Augmentation.
+    """
     img_size = pair(img_size)
     patch_size = pair(patch_size)
     assert img_size[0] % patch_size[0] == img_size[1] % patch_size[1] == 0

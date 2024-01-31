@@ -397,6 +397,28 @@ def FocalNet(
     use_postln_in_modulation=False,
     normalize_modulator=False,
 ):
+    """Instantiates the FocalNet architecture.
+    
+    Args:
+        img_size: Image size.
+        patch_size: Patch size.
+        num_classes: Number of classes.
+        embed_dim: Embedding dimension.
+        depths: Depths of each stage.
+        mlp_ratio: Ratio of mlp hidden dim to embedding dim.
+        drop_rate: Dropout rate.
+        drop_path_rate: Stochastic depth rate.
+        norm_layer: Normalization layer.
+        patch_norm: Whether to use patch norm.
+        focal_levels: Number of focal levels.
+        focal_windows: Focal window sizes.
+        use_conv_embed: Whether to use conv embed.
+        use_layerscale: Whether to use layer scale.
+        layerscale_value: Value for layer scale.
+        use_postln: Whether to use post layer norm.
+        use_postln_in_modulation: Whether to use post layer norm in modulation.
+        normalize_modulator: Whether to normalize modulator.
+    """
     num_layers = len(depths)
     embed_dim = [embed_dim * (2**i) for i in range(num_layers)]
     dpr = [
@@ -453,6 +475,15 @@ def FocalNet(
 
 
 def FocalNetModel(img_size, in_channels=3, aug=None, **kw) -> keras.Model:
+    """Instantiates the FocalNet architecture.
+
+    Args:
+        img_size: Image size.
+        in_channels: Number of input channels.
+        aug: Augmentation layer.
+        **kw: Other keyword arguments.
+    
+    """
     focalnet_model = FocalNet(img_size=img_size, **kw)
 
     inputs = keras.Input((img_size, img_size, in_channels))
@@ -467,21 +498,45 @@ def FocalNetModel(img_size, in_channels=3, aug=None, **kw) -> keras.Model:
 
 
 def focalnet_tiny_srf(img_size=224, **kwargs):
+    """FocalNet-Tiny-SRF model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(img_size, depths=[2, 2, 6, 2], embed_dim=96, **kwargs)
     return model
 
 
 def focalnet_small_srf(img_size=224, **kwargs):
+    """FocalNet-Small-SRF model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(img_size, depths=[2, 2, 18, 2], embed_dim=96, **kwargs)
     return model
 
 
 def focalnet_base_srf(img_size=224, **kwargs):
+    """FocalNet-Base-SRF model.
+
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(img_size, depths=[2, 2, 18, 2], embed_dim=128, **kwargs)
     return model
 
 
 def focalnet_tiny_lrf(img_size=224, **kwargs):
+    """FocalNet-Tiny-LRF model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(
         img_size, depths=[2, 2, 6, 2], embed_dim=96, focal_levels=[3, 3, 3, 3], **kwargs
     )
@@ -489,6 +544,13 @@ def focalnet_tiny_lrf(img_size=224, **kwargs):
 
 
 def focalnet_small_lrf(img_size=224, **kwargs):
+
+    """FocalNet-Small-LRF model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(
         img_size,
         depths=[2, 2, 18, 2],
@@ -501,6 +563,13 @@ def focalnet_small_lrf(img_size=224, **kwargs):
 
 
 def focalnet_base_lrf(img_size=224, **kwargs):
+    """FocalNet-Base-LRF model.
+
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
+
     model = FocalNetModel(
         img_size,
         depths=[2, 2, 18, 2],
@@ -512,6 +581,13 @@ def focalnet_base_lrf(img_size=224, **kwargs):
 
 
 def focalnet_tiny_iso_16(img_size=224, **kwargs):
+    """FocalNet-Tiny-ISO-16 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+        
+    """
     model = FocalNetModel(
         img_size,
         depths=[12],
@@ -525,6 +601,13 @@ def focalnet_tiny_iso_16(img_size=224, **kwargs):
 
 
 def focalnet_small_iso_16(img_size=224, **kwargs):
+    """FocalNet-Small-ISO-16 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+        
+    """
     model = FocalNetModel(
         img_size,
         depths=[12],
@@ -538,6 +621,13 @@ def focalnet_small_iso_16(img_size=224, **kwargs):
 
 
 def focalnet_base_iso_16(img_size=224, **kwargs):
+    """FocalNet-Base-ISO-16 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+        
+    """
     model = FocalNetModel(
         img_size,
         depths=[12],
@@ -552,8 +642,13 @@ def focalnet_base_iso_16(img_size=224, **kwargs):
     return model
 
 
-# FocalNet large+ models
 def focalnet_large_fl3(img_size=224, **kwargs):
+    """FocalNet-Large-FL3 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(
         img_size,
         depths=[2, 2, 18, 2],
@@ -565,6 +660,12 @@ def focalnet_large_fl3(img_size=224, **kwargs):
 
 
 def focalnet_large_fl4(img_size=224, **kwargs):
+    """FocalNet-Large-FL4 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(
         img_size,
         depths=[2, 2, 18, 2],
@@ -576,6 +677,12 @@ def focalnet_large_fl4(img_size=224, **kwargs):
 
 
 def focalnet_xlarge_fl3(img_size=224, **kwargs):
+    """FocalNet-XLarge-FL3 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(
         img_size,
         depths=[2, 2, 18, 2],
@@ -587,6 +694,12 @@ def focalnet_xlarge_fl3(img_size=224, **kwargs):
 
 
 def focalnet_xlarge_fl4(img_size=224, **kwargs):
+    """FocalNet-XLarge-FL4 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(
         img_size,
         depths=[2, 2, 18, 2],
@@ -598,6 +711,12 @@ def focalnet_xlarge_fl4(img_size=224, **kwargs):
 
 
 def focalnet_huge_fl3(img_size=224, **kwargs):
+    """FocalNet-Huge-FL3 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(
         img_size,
         depths=[2, 2, 18, 2],
@@ -609,6 +728,12 @@ def focalnet_huge_fl3(img_size=224, **kwargs):
 
 
 def focalnet_huge_fl4(img_size=224, **kwargs):
+    """FocalNet-Huge-FL4 model.
+    
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.
+    """
     model = FocalNetModel(
         img_size,
         depths=[2, 2, 18, 2],
@@ -620,5 +745,11 @@ def focalnet_huge_fl4(img_size=224, **kwargs):
 
 
 def focalnet_kid(img_size=28, **kwargs):
+    """FocalNet-KiD model was created myself for testing.
+
+    Args:
+        img_size: Image size.
+        **kwargs: Other keyword arguments.     
+    """
     model = FocalNetModel(img_size, depths=[1], embed_dim=96, **kwargs)
     return model

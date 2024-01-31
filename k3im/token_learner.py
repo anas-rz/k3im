@@ -139,6 +139,24 @@ def ViTokenLearner(
     use_token_learner=True,
     aug=None,
 ):
+    """ Create a Vision Transformer for with Token Learner data.
+
+    Args:
+        `image_size`: tuple of (height, width) of the image
+        `patch_size`: tuple of (height, width) of the patch
+        `num_classes`: output classes for classification
+        `dim`: dimension of the model
+        `depth`: depth of the model
+        `heads`: number of heads in the model
+        `mlp_dim`: dimension of the mlp
+        `token_learner_units`: number of units in the token learner
+        `channels`: number of channels in the image
+        `dim_head`: dimension of the head
+        `dropout_rate`: dropout rate
+        `pool`: pooling type
+        `use_token_learner`: boolean, whether to use token learner
+        `aug`: augmentation layer
+    """
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
 

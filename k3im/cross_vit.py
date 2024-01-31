@@ -214,6 +214,32 @@ def CrossViT(
     emb_dropout=0.1,
     aug=None
 ):
+    """ Create a Cross Vision Transformer model.
+    
+    Args:
+        `image_size`: tuple of (height, width) of the image
+        `num_classes`: output classes for classification
+        `sm_dim`: dimension of the small patch transformer
+        `lg_dim`: dimension of the large patch transformer
+        `channels`: number of channels in the image
+        `sm_patch_size`: tuple of (height, width) of the small patch
+        `sm_enc_depth`: depth of the small patch transformer
+        `sm_enc_heads`: number of heads in the small patch transformer
+        `sm_enc_mlp_dim`: dimension of the mlp in the small patch transformer
+        `sm_enc_dim_head`: dimension of the head in the small patch transformer
+        `lg_patch_size`: tuple of (height, width) of the large patch
+        `lg_enc_depth`: depth of the large patch transformer
+        `lg_enc_heads`: number of heads in the large patch transformer
+        `lg_enc_mlp_dim`: dimension of the mlp in the large patch transformer
+        `lg_enc_dim_head`: dimension of the head in the large patch transformer
+        `cross_attn_depth`: depth of the cross attention transformer
+        `cross_attn_heads`: number of heads in the cross attention transformer
+        `cross_attn_dim_head`: dimension of the head in the cross attention transformer
+        `depth`: depth of the cross vision transformer
+        `dropout`: dropout applied to the cross vision transformer
+        `emb_dropout`: dropout applied to the patch embeddings
+        `aug`: augmentation layer
+    """
     image_height, image_width = pair(image_size)
     i_p = layers.Input((image_height, image_width, channels))
     img = aug(i_p) if aug is not None else i_p

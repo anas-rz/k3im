@@ -133,7 +133,21 @@ def gMLPModel(
     positional_encoding=False,
     num_channels=3,
     aug=None,
-):
+):  
+    """Instantiates the gMLP architecture.
+    
+    Args:
+        image_size: Image size.
+        patch_size: Patch size.
+        embedding_dim: Size of the embedding dimension.
+        num_blocks: Number of blocks.
+        dropout_rate: Dropout rate.
+        num_classes: Number of classes to classify images into.
+        positional_encoding: Whether to include positional encoding.
+        num_channels: Number of image channels.
+        aug: Image augmentation.
+    
+    """
     image_size = pair(image_size)
     patch_size = pair(patch_size)
     input_shape = (image_size[0], image_size[1], num_channels)

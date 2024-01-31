@@ -58,6 +58,21 @@ def SimpleViTFFT(
     dim_head=64,
     aug=None
 ):
+    """ Create a Simple Vision Transformer with FFT for 2D data.
+    
+    Args:
+        `image_size`: tuple of (height, width) of the image
+        `patch_size`: tuple of (height, width) of the patch
+        `freq_patch_size`: tuple of (height, width) of the freq patch
+        `num_classes`: output classes for classification
+        `dim`: dimension of the model
+        `depth`: depth of the model
+        `heads`: number of heads in the model
+        `mlp_dim`: dimension of the mlp
+        `channels`: number of channels in the image
+        `dim_head`: dimension of the head
+        `aug`: augmentation layer
+    """
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
     freq_patch_height, freq_patch_width = pair(freq_patch_size)

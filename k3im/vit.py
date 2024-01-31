@@ -59,6 +59,21 @@ def ViT(
     pool="mean",
     aug=None,
 ):
+    """ Create a Vision Transformer for 2D data.
+    
+    Args:
+        `image_size`: tuple of ints (height, width) specifying the image dimensions
+        `patch_size`: tuple of ints (height, width) specifying the patch dimensions
+        `num_classes`: number of classes
+        `dim`: dimension of the transformer
+        `depth`: number of transformer layers
+        `heads`: number of attention heads
+        `mlp_dim`: dimension of the mlp
+        `channels`: number of channels in the input image
+        `dim_head`: dimension of the head
+        `pool`: type of pooling at the end of the network
+        `aug`: augmentation layer
+    """
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
 

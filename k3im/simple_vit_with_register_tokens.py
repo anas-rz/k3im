@@ -68,7 +68,22 @@ def SimpleViT_RT(
     channels=3,
     dim_head=64,
     aug=None,
-):
+):  
+    """ Create a Simple Vision Transformer with register tokens for 2D data.
+
+    Args:
+        `image_size`: tuple of (height, width) of the image
+        `patch_size`: tuple of (height, width) of the patch
+        `num_classes`: output classes for classification
+        `dim`: dimension of the model
+        `depth`: depth of the model
+        `heads`: number of heads in the model
+        `mlp_dim`: dimension of the mlp
+        `num_register_tokens`: number of register tokens
+        `channels`: number of channels in the image
+        `dim_head`: dimension of the head
+        `aug`: augmentation layer
+    """
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
 

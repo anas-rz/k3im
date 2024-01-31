@@ -42,8 +42,17 @@ def ConvMixer(
     num_channels=3,
     aug=None
 ):
-    """ConvMixer-256/8: https://openreview.net/pdf?id=TVHS5Y4dNvM.
-    The hyperparameter values are taken from the paper.
+    """Instantiates the ConvMixer architecture.
+
+    Args:
+        image_size: Input image size.
+        filters: Number of filters.
+        depth: Depth of the network.
+        kernel_size: Kernel size.
+        patch_size: Patch size.
+        num_classes: Number of classes.
+        num_channels: Number of input channels.
+        aug: Augmentation layer.
     """
     inputs = keras.Input((image_size, image_size, num_channels))
     if aug is not None:

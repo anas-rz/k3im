@@ -92,6 +92,24 @@ def DeepViT(
     emb_dropout=0.0,
     aug=None
 ):
+    """Instantiates the DeepViT architecture.
+
+    Args:
+        image_size: Image size.
+        patch_size: Patch size.
+        num_classes: Number of classes.
+        dim: Dimension of the model.
+        depth: Depth of the model.
+        heads: Number of heads.
+        mlp_dim: Dimension of the mlp.
+        pool: Type of pooling at the end of the model.
+        channels: Number of channels.
+        dim_head: Dimension of each head.
+        dropout: Dropout rate.
+        emb_dropout: Embedding dropout rate.
+        aug: Augmentation layer.
+    
+    """
     assert (
         image_size % patch_size == 0
     ), "Image dimensions must be divisible by the patch size."

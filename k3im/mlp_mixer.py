@@ -130,6 +130,26 @@ def MlpMixer(num_classes=1000,
             drop_path_rate=0.,
             stem_norm=False,
             global_pool='avg',):
+    """ MLP-Mixer
+    
+        Args:
+            num_classes: number of classes for classification head
+            img_size: input image size
+            in_chans: number of input channels
+            patch_size: patch size
+            num_blocks: number of blocks
+            embed_dim: embedding dimension
+            mlp_ratio: ratio of mlp hidden dim to embedding dim
+            block_layer: block layer type (e.g. MixerBlock, ResMLPBlock, ConvMLPBlock)
+            mlp_layer: mlp layer type (e.g. Mlp, ConvMlp)
+            norm_layer: normalization layer type (default: partial(layers.LayerNormalization, epsilon=1e-6))
+            act_layer: activation layer type (default: keras.activations.gelu)
+            drop_rate: dropout rate
+            proj_drop_rate: stochastic depth rate for projection
+            drop_path_rate: stochastic depth rate for block layers
+            stem_norm: whether to apply normalization to stem
+            global_pool: global pooling type, one of 'avg', 'max' or None
+    """
     img_size = pair(img_size)
     input_shape = (img_size[0], img_size[1], in_chans)
     inputs = layers.Input(input_shape)
@@ -168,6 +188,12 @@ def MlpMixer(num_classes=1000,
 
 
 def mixer_l16_224(pretrained=False, **kwargs):
+    """ Mixer-L/16 224x224
+
+    Args:
+        pretrained (bool, optional): load pretrained weights into model. Defaults to False.
+        **kwargs: keyword arguments for MlpMixer
+    """
     model = MlpMixer(patch_size=16, num_blocks=24, embed_dim=1024)
     if pretrained:
         model_path = keras.utils.get_file(
@@ -177,13 +203,22 @@ def mixer_l16_224(pretrained=False, **kwargs):
     return model
 
 def mixer_s32_224(pretrained=False, **kwargs):
+    """ Mixer-S/32 224x224
+
+    Args:
+        pretrained (bool, optional): load pretrained weights into model. Defaults to False.
+        **kwargs: keyword arguments for MlpMixer
+    """
     if pretrained:
         raise NotImplementedError
     return MlpMixer(patch_size=32, num_blocks=8, embed_dim=512)
 
 def mixer_s16_224(pretrained=False, **kwargs) -> MlpMixer:
     """ Mixer-S/16 224x224
-    Paper:  'MLP-Mixer: An all-MLP Architecture for Vision' - https://arxiv.org/abs/2105.01601
+
+    Args:
+        pretrained (bool, optional): load pretrained weights into model. Defaults to False. Has no pretrained weights.
+        **kwargs: keyword arguments for MlpMixer
     """
     if pretrained:
         raise NotImplementedError
@@ -192,7 +227,10 @@ def mixer_s16_224(pretrained=False, **kwargs) -> MlpMixer:
 
 def mixer_b32_224(pretrained=False, **kwargs) -> MlpMixer:
     """ Mixer-B/32 224x224
-    Paper:  'MLP-Mixer: An all-MLP Architecture for Vision' - https://arxiv.org/abs/2105.01601
+
+    Args:
+        pretrained (bool, optional): load pretrained weights into model. Defaults to False. Has no pretrained weights.
+        **kwargs: keyword arguments for MlpMixer
     """
     if pretrained:
         raise NotImplementedError
@@ -200,7 +238,13 @@ def mixer_b32_224(pretrained=False, **kwargs) -> MlpMixer:
     return MlpMixer(**model_args)
 
 def mixer_b16_224(pretrained=False, **kwargs) -> MlpMixer:
-    """"""
+    """Mixer-B/16 224x224
+
+    Args:
+        pretrained (bool, optional): load pretrained weights into model. Defaults to False. Has no pretrained weights.
+        **kwargs: keyword arguments for MlpMixer
+    
+    """
     model_args = dict(patch_size=16, num_blocks=12, embed_dim=768, **kwargs)
     model = MlpMixer(**model_args)
     if pretrained:

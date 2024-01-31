@@ -75,6 +75,21 @@ def CaiTModel(
     dim_head=64,
     aug=None,
 ):
+    """ Create a Class-Attention in Image Transformer (CaiT) model.
+    
+    Args:
+        `image_size`: tuple of (height, width) of the image
+        `patch_size`: tuple of (height, width) of the patch
+        `num_classes`: output classes for classification
+        `dim`: dimension of the model
+        `depth`: depth of the model
+        `heads`: number of heads in the model
+        `mlp_dim`: dimension of the mlp
+        `cls_depth`: depth of the cls token
+        `channels`: number of channels in the image
+        `dim_head`: dimension of the head
+        `aug`: augmentation layer
+    """
     image_height, image_width = pair(image_size)
     patch_height, patch_width = pair(patch_size)
 

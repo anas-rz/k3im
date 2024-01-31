@@ -120,6 +120,22 @@ def EANet(
     num_classes,
     aug=None,
 ):
+    """ Instantiates the EANet architecture.
+    
+    Args:
+        input_shape: tuple of (height, width, channels)
+        patch_size: size of the patch
+        embedding_dim: dimension of the embedding
+        num_transformer_blocks: number of transformer blocks
+        mlp_dim: dimension of the mlp
+        num_heads: number of heads
+        dim_coefficient: dimension coefficient
+        attention_dropout: dropout rate for attention
+        projection_dropout: dropout rate for projection
+        num_classes: number of classes
+        aug: augmentation layer
+        
+    """
     inputs = layers.Input(shape=input_shape)
     if aug is not None:
         img = aug(inputs)
