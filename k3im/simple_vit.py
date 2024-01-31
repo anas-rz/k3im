@@ -52,6 +52,7 @@ def SimpleViT(
     aug=None,
 ):
     """ Create a Simple Vision Transformer.
+    
     Args:
         `image_size`: tuple of (height, width) of the image
         `patch_size`: tuple of (height, width) of the patch
