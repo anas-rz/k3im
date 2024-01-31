@@ -1,7 +1,7 @@
 site_name: K3IM
 
 
-docs_dir: _docs
+docs_dir: docs
 
 # steals from Patrick Kidger
 
@@ -33,6 +33,10 @@ plugins:
   - search  # default search plugin; needs manually re-enabling when using any other plugins
   - autorefs  # Cross-links to headings
   - mknotebooks  # Jupyter notebooks
+
+repo_url: https://github.com/anas-rz/k3im
+repo_name: anas-rz/k3im
+edit_uri: ""  # No edit button, as some of our pages are in /docs and some in /examples via symlink, so it's impossible for them all to be accurate
 
 nav:
   - k3im: index.md
