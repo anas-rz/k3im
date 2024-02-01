@@ -33,10 +33,17 @@ theme:
         code: Ubuntu Mono
 
 plugins:
-  - mkdocstrings
   - search  # default search plugin; needs manually re-enabling when using any other plugins
   - autorefs  # Cross-links to headings
   - mknotebooks  # Jupyter notebooks
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            line_length: 60
+            show_bases: false
+            show_signature: true
+            
 
 repo_url: https://github.com/anas-rz/k3im
 repo_name: anas-rz/k3im

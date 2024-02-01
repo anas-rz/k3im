@@ -793,17 +793,17 @@ The model expects 1D data of shape <code>(batch, seq_len, channels)</code></p>
 <span class="normal">93</span>
 <span class="normal">94</span>
 <span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">CAiT_1DModel</span><span class="p">(</span>
-    <span class="n">seq_len</span><span class="p">,</span>
-    <span class="n">patch_size</span><span class="p">,</span>
-    <span class="n">num_classes</span><span class="p">,</span>
-    <span class="n">dim</span><span class="p">,</span>
-    <span class="n">dim_head</span><span class="p">,</span>
-    <span class="n">mlp_dim</span><span class="p">,</span>
-    <span class="n">depth</span><span class="p">,</span>
-    <span class="n">cls_depth</span><span class="p">,</span>
-    <span class="n">heads</span><span class="p">,</span>
-    <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-    <span class="n">dropout_rate</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">seq_len</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">patch_size</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">num_classes</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">dim</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">dim_head</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">mlp_dim</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">depth</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">cls_depth</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">heads</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+    <span class="n">channels</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">dropout_rate</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">    An extention of Class Attention in Image Transformers (CAiT) reimplemented for 1D Data. </span>
@@ -844,7 +844,9 @@ The model expects 1D data of shape <code>(batch, seq_len, channels)</code></p>
           </details>
   </div>
 
-</div><p><code>k3im.cct_1d.CCT_1DModel</code>
+</div><p>options:
+      show_signature: true</p>
+<p><code>k3im.cct_1d.CCT_1DModel</code>
 </p>
 
 

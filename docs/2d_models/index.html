@@ -397,6 +397,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#k3im.focalnet.FocalNetModel" class="md-nav__link">
+    <span class="md-ellipsis">
+      FocalNetModel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#k3im.focalnet.focalnet_tiny_srf" class="md-nav__link">
     <span class="md-ellipsis">
       focalnet_tiny_srf
@@ -2588,8 +2597,136 @@
   </div>
 
 </div><p><code>k3im.focalnet.FocalNetModel</code>
-`::: k3im.focalnet.FocalNetModel</p>
-<p><code>k3im.focalnet.focalnet_tiny_srf</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.FocalNetModel"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Instantiates the FocalNet architecture.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>in_channels</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of input channels.</p>
+            </div>
+          </td>
+          <td>
+                <code>3</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>aug</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Augmentation layer.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kw</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">FocalNetModel</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">aug</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiates the FocalNet architecture.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        in_channels: Number of input channels.</span>
+<span class="sd">        aug: Augmentation layer.</span>
+<span class="sd">        **kw: Other keyword arguments.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">focalnet_model</span> <span class="o">=</span> <span class="n">FocalNet</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="n">img_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">((</span><span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">aug</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">aug</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">inputs</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">focalnet_model</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">final_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">final_model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_tiny_srf</code>
 </p>
 
 

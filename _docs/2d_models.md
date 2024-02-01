@@ -10,6 +10,7 @@
 `k3im.eanet.EANet`
 ::: k3im.eanet.EANet
 
+
 `k3im.fnet.FNet` 
 ::: k3im.fnet.FNetModel
 
@@ -17,7 +18,7 @@
 ::: k3im.focalnet.FocalNet
 
 `k3im.focalnet.FocalNetModel`
-`::: k3im.focalnet.FocalNetModel
+::: k3im.focalnet.FocalNetModel
 
 `k3im.focalnet.focalnet_tiny_srf`
 ::: k3im.focalnet.focalnet_tiny_srf

@@ -1,5 +1,7 @@
 `k3im.cait_1d.CAiT_1DModel`
 ::: k3im.cait_1d.CAiT_1DModel
+options:
+      show_signature: true
 
 `k3im.cct_1d.CCT_1DModel`
 ::: k3im.cct_1d.CCT_1DModel
