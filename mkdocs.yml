@@ -28,6 +28,9 @@ theme:
           toggle:
             icon: material/weather-sunny
             name: Switch to light mode
+  font:
+        text: Montserrat
+        code: Ubuntu Mono
 
 plugins:
   - mkdocstrings
@@ -48,3 +51,4 @@ nav:
   - Examples 1D: examples/spin_up_the_simplest_1d.ipynb
   - Examples 2D: examples/spin_up_the_simplest.ipynb
   - Examples 3D/Space-Time: examples/spin_up_the_simplest_3d_video.ipynb
+  - Layers, Blocks, Tokenizers, etc.: layers.md

@@ -1,4 +1,4 @@
-# Layers, Blocks, Tokenizers, etc.: 
+# Layers, Blocks, Tokenizers, etc: 
 
 :::k3im.cct_1d.CCTTokenizer1D
 
