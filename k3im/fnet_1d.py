@@ -7,10 +7,12 @@ from keras import layers
 from keras import ops
 from k3im.commons import posemb_sincos_1d
 
+
 class FNetLayer(layers.Layer):
     """
     Ported from: https://keras.io/examples/vision/mlp_image_classification/
     """
+
     def __init__(self, embedding_dim, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -47,11 +49,11 @@ def FNet1DModel(
 ):
     """
     Instantiate a FNet model for 1D data.
-    
+
     Args:
         seq_len: An integer representing the number of steps in the input sequence.
         patch_size: An integer representing the number of steps in a
-            patch (default=4).  
+            patch (default=4).
         num_classes: An integer representing the number of classes for classification.
         dim: An integer representing the projection dimension.
         depth: An integer representing the number of transformer layers.

@@ -34,8 +34,6 @@ class ClassTokenPositionEmb(layers.Layer):
         return patches + embedded_positions
 
 
-
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x):
         for _ in range(depth):
@@ -59,8 +57,8 @@ def ViT(
     pool="mean",
     aug=None,
 ):
-    """ Create a Vision Transformer for 2D data.
-    
+    """Create a Vision Transformer for 2D data.
+
     Args:
         `image_size`: tuple of ints (height, width) specifying the image dimensions
         `patch_size`: tuple of ints (height, width) specifying the patch dimensions

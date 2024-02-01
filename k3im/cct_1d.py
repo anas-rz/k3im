@@ -160,7 +160,7 @@ def CCT_1DModel(
 ):
     """
     Create a Convolutional Transformer for sequences.
-    
+
     Args:
         input_shape: A tuple of (seq_len, num_channels).
         num_heads: An integer.
@@ -175,7 +175,7 @@ def CCT_1DModel(
         transformer_layers: An integer representing the number of transformer layers.
         num_classes: An integer representing the number of classes for classification.
         positional_emb: Boolean, whether to use positional embeddings.
-    
+
     """
     inputs = layers.Input(input_shape)
 

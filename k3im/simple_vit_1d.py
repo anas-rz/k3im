@@ -12,7 +12,6 @@ from keras import ops
 from k3im.commons import FeedForward, posemb_sincos_1d
 
 
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x):
         for _ in range(depth):
@@ -34,8 +33,8 @@ def SimpleViT1DModel(
     channels=3,
     dim_head=64,
 ):
-    """ Create a Simple Vision Transformer for 1D data.
-    
+    """Create a Simple Vision Transformer for 1D data.
+
     Args:
         `seq_len`: number of steps
         `patch_size`: number steps in a patch

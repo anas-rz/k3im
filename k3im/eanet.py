@@ -78,7 +78,6 @@ def external_attention(
     return x
 
 
-
 def transformer_encoder(
     x,
     embedding_dim,
@@ -87,7 +86,7 @@ def transformer_encoder(
     dim_coefficient,
     attention_dropout,
     projection_dropout,
-    mlp_dropout=0.
+    mlp_dropout=0.0,
 ):
     residual_1 = x
     x = layers.LayerNormalization(epsilon=1e-5)(x)
@@ -120,8 +119,8 @@ def EANet(
     num_classes,
     aug=None,
 ):
-    """ Instantiates the EANet architecture.
-    
+    """Instantiates the EANet architecture.
+
     Args:
         input_shape: tuple of (height, width, channels)
         patch_size: size of the patch
@@ -134,7 +133,7 @@ def EANet(
         projection_dropout: dropout rate for projection
         num_classes: number of classes
         aug: augmentation layer
-        
+
     """
     inputs = layers.Input(shape=input_shape)
     if aug is not None:

@@ -45,7 +45,6 @@ def posemb_sincos_2d(h, w, dim, temperature: int = 10000, dtype="float32"):
     return ops.cast(pe, dtype)
 
 
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x):
         for _ in range(depth):
@@ -68,8 +67,8 @@ def SimpleViT_RT(
     channels=3,
     dim_head=64,
     aug=None,
-):  
-    """ Create a Simple Vision Transformer with register tokens for 2D data.
+):
+    """Create a Simple Vision Transformer with register tokens for 2D data.
 
     Args:
         `image_size`: tuple of (height, width) of the image

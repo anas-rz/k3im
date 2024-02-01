@@ -13,8 +13,6 @@ def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
 
-
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x):
         for _ in range(depth):

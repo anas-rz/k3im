@@ -42,7 +42,7 @@ def ConvMixer1DModel(
     patch_size=2,
     num_classes=10,
 ):
-    """ 
+    """
     ConvMixer model for 1D data.
 
     Args:

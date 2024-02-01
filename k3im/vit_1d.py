@@ -34,8 +34,6 @@ class ClassTokenPositionEmb(layers.Layer):
         return patches + embedded_positions
 
 
-
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x):
         for _ in range(depth):
@@ -57,8 +55,8 @@ def ViT1DModel(
     channels=3,
     dim_head=64,
 ):
-    """ Create a Vision Transformer for 1D data.
-    
+    """Create a Vision Transformer for 1D data.
+
     Args:
         `seq_len`: number of steps
         `patch_size`: number steps in a patch

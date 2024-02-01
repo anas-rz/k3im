@@ -27,7 +27,6 @@ def posemb_sincos_2d(h, w, dim, temperature: int = 10000, dtype="float32"):
     return ops.cast(pe, dtype)
 
 
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x):
         for _ in range(depth):
@@ -51,8 +50,8 @@ def SimpleViT(
     pool="mean",
     aug=None,
 ):
-    """ Create a Simple Vision Transformer.
-    
+    """Create a Simple Vision Transformer.
+
     Args:
         `image_size`: tuple of (height, width) of the image
         `patch_size`: tuple of (height, width) of the patch

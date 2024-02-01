@@ -2,6 +2,7 @@ import keras
 from keras import layers
 from keras import ops
 
+
 def FeedForward(dim, hidden_dim, dropout=0.0):
     return keras.Sequential(
         [

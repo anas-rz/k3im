@@ -15,11 +15,11 @@ from keras import ops
 from k3im.commons import posemb_sincos_1d, pair
 
 
-
 class MLPMixerLayer(layers.Layer):
     """
     https://keras.io/examples/vision/mlp_image_classification/
     """
+
     def __init__(self, num_patches, hidden_units, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -73,7 +73,7 @@ def Mixer1DModel(
     dropout_rate=0.0,
 ):
     """Instantiate a Mixer model for 1D data.
-    
+
     Args:
         seq_len: An integer representing the number of steps in the input sequence.
         patch_size: An integer representing the number of steps in a

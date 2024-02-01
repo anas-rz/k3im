@@ -60,7 +60,7 @@ def SimpleViTPD(
     pool="mean",
     aug=None,
 ):
-    """ Create a Simple Vision Transformer with patch dropout.
+    """Create a Simple Vision Transformer with patch dropout.
 
     Args:
         `image_size`: tuple of (height, width) of the image

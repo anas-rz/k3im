@@ -164,9 +164,9 @@ def CCT(
     transformer_layers,
     num_classes,
     positional_emb=False,
-    aug=None
+    aug=None,
 ):
-    """ Instantiates the Compact Convolutional Transformer architecture.
+    """Instantiates the Compact Convolutional Transformer architecture.
 
     Args:
         input_shape: tuple of (height, width, channels)
@@ -181,7 +181,7 @@ def CCT(
         num_classes: number of output classes
         positional_emb: boolean, whether to use positional embeddings
         aug: data augmentation
-    
+
     """
     inputs = layers.Input(input_shape)
     if aug is not None:

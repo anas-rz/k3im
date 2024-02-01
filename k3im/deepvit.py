@@ -108,7 +108,7 @@ def DeepViT(
         dropout: Dropout rate.
         emb_dropout: Embedding dropout rate.
         aug: Augmentation layer.
-    
+
     """
     assert (
         image_size % patch_size == 0

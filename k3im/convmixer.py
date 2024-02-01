@@ -40,7 +40,7 @@ def ConvMixer(
     patch_size=2,
     num_classes=10,
     num_channels=3,
-    aug=None
+    aug=None,
 ):
     """Instantiates the ConvMixer architecture.
 
@@ -67,11 +67,10 @@ def ConvMixer(
     # ConvMixer blocks.
     for _ in range(depth):
         x = conv_mixer_block(x, filters, kernel_size)
-    
+
     if num_classes is None:
         model = keras.Model(inputs=inputs, outputs=x)
         return model
-    
 
     # Classification block.
     x = layers.GlobalAvgPool2D()(x)

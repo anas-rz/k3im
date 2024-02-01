@@ -47,7 +47,6 @@ class CLS_Token(layers.Layer):
         return ops.concatenate([x, cls_token], axis=1), cls_token
 
 
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x, context=None):
         for _ in range(depth):
@@ -75,8 +74,8 @@ def CaiTModel(
     dim_head=64,
     aug=None,
 ):
-    """ Create a Class-Attention in Image Transformer (CaiT) model.
-    
+    """Create a Class-Attention in Image Transformer (CaiT) model.
+
     Args:
         `image_size`: tuple of (height, width) of the image
         `patch_size`: tuple of (height, width) of the patch

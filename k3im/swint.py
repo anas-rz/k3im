@@ -308,7 +308,7 @@ def SwinTModel(
     aug=None,
 ):
     """Instantiates the SwinT architecture.
-    
+
     Args:
         img_size: Image size.
         patch_size: Patch size.

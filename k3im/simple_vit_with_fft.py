@@ -28,7 +28,6 @@ def posemb_sincos_2d(h, w, dim, temperature: int = 10000, dtype="float32"):
     return ops.cast(pe, dtype)
 
 
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x):
         for _ in range(depth):
@@ -56,10 +55,10 @@ def SimpleViTFFT(
     mlp_dim,
     channels=3,
     dim_head=64,
-    aug=None
+    aug=None,
 ):
-    """ Create a Simple Vision Transformer with FFT for 2D data.
-    
+    """Create a Simple Vision Transformer with FFT for 2D data.
+
     Args:
         `image_size`: tuple of (height, width) of the image
         `patch_size`: tuple of (height, width) of the patch
@@ -122,7 +121,7 @@ def SimpleViTFFT(
 
     patches = ops.concatenate((patches, patches_f), axis=-2)
     patches = Transformer(dim, depth, heads, dim_head, mlp_dim)(patches)
-    # if num_classes is None return model without classification head       
+    # if num_classes is None return model without classification head
     if num_classes is None:
         return keras.Model(inputs=i_p, outputs=patches)
 

@@ -35,7 +35,6 @@ class CLS_Token(layers.Layer):
         return ops.concatenate([x, cls_token], axis=1), cls_token
 
 
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim):
     def _apply(x, context=None):
         for _ in range(depth):

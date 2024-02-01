@@ -15,6 +15,7 @@ class FNetLayer(layers.Layer):
     """
     https://keras.io/examples/vision/mlp_image_classification/
     """
+
     def __init__(self, embedding_dim, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

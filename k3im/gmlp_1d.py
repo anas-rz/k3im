@@ -9,11 +9,11 @@ from keras import ops
 from k3im.commons import posemb_sincos_1d
 
 
-
 class gMLPLayer(layers.Layer):
     """
     https://keras.io/examples/vision/mlp_image_classification/
     """
+
     def __init__(self, num_patches, embedding_dim, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -63,7 +63,7 @@ def gMLP1DModel(
     seq_len, patch_size, num_classes, dim, depth, channels=3, dropout_rate=0.0
 ):
     """Instantiate a gMLP model for 1D data.
-    
+
     Args:
         seq_len: An integer representing the number of steps in the input sequence.
         patch_size: An integer representing the number of steps in a
@@ -73,8 +73,8 @@ def gMLP1DModel(
         depth: An integer representing the number of transformer layers.
         channels: An integer representing the number of channels in the input.
         dropout_rate: A float representing the dropout rate.
-        
-        """
+
+    """
     assert seq_len % patch_size == 0
     num_patches = seq_len // patch_size
     patch_dim = channels * patch_size

@@ -35,7 +35,6 @@ class PatchEncoder(layers.Layer):
         return config
 
 
-
 def TokenLearner(inputs, number_of_tokens):
     # Layer normalize the inputs.
     x = layers.LayerNormalization()(inputs)  # (B, H, W, C)
@@ -139,7 +138,7 @@ def ViTokenLearner(
     use_token_learner=True,
     aug=None,
 ):
-    """ Create a Vision Transformer for with Token Learner data.
+    """Create a Vision Transformer for with Token Learner data.
 
     Args:
         `image_size`: tuple of (height, width) of the image

@@ -53,7 +53,6 @@ def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
 
-
 def ExternalAttention(
     dim,
     num_heads,

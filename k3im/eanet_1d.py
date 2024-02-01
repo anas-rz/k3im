@@ -12,7 +12,6 @@ from keras import ops
 from k3im.commons import FeedForward, pair, posemb_sincos_1d
 
 
-
 def ExternalAttention(
     dim,
     num_heads,
@@ -106,7 +105,7 @@ def EANet1DModel(
         `dim_coefficient`: coefficient for increasing the number of heads
         `attention_dropout`: dropout applied to MultiHeadAttention in class and patch transformers
         `channels`: number of features/channels in the input default `3`
-    
+
     """
     assert seq_len % patch_size == 0
     patch_dim = channels * patch_size

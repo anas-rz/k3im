@@ -46,7 +46,6 @@ class CLS_Token(layers.Layer):
         return ops.concatenate([x, cls_token], axis=1), cls_token
 
 
-
 def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout, cross=False):
     def _apply(x, context=None, kv_include_self=False):
         for _ in range(depth):
@@ -214,8 +213,8 @@ def CrossViT(
     emb_dropout=0.1,
     aug=None
 ):
-    """ Create a Cross Vision Transformer model.
-    
+    """Create a Cross Vision Transformer model.
+
     Args:
         `image_size`: tuple of (height, width) of the image
         `num_classes`: output classes for classification

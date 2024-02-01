@@ -13,8 +13,6 @@ from keras import ops
 from k3im.commons import FeedForward, pair, posemb_sincos_1d
 
 
-
-
 def exists(val):
     return val is not None
 
@@ -30,8 +28,7 @@ class CLS_Token(layers.Layer):
         return ops.concatenate([x, cls_token], axis=1), cls_token
 
 
-
-def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout_rate=0.):
+def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout_rate=0.0):
     def _apply(x, context=None):
         for _ in range(depth):
             if not exists(context):
@@ -46,25 +43,25 @@ def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout_rate=0.):
 
 
 def CAiT_1DModel(
-    seq_len,
-    patch_size,
-    num_classes,
-    dim,
-    dim_head,
-    mlp_dim,
-    depth,
-    cls_depth,
-    heads,
-    channels=3,
-    dropout_rate=0.0,
+    seq_len: int,
+    patch_size: int,
+    num_classes: int,
+    dim: int,
+    dim_head: int,
+    mlp_dim: int,
+    depth: int,
+    cls_depth: int,
+    heads: int,
+    channels: int = 3,
+    dropout_rate: float = 0.0,
 ):
-    """ 
-    An extention of Class Attention in Image Transformers (CAiT) reimplemented for 1D Data. 
+    """
+    An extention of Class Attention in Image Transformers (CAiT) reimplemented for 1D Data.
     The model expects 1D data of shape `(batch, seq_len, channels)`
-    
+
     Args:
         `seq_len`: number of steps
-        `patch_size`: number steps in a patch 
+        `patch_size`: number steps in a patch
         `num_classes`: output classes for classification
         `dim`: projection dim for patches,
         `dim_head`: size of each attention head
@@ -85,11 +82,13 @@ def CAiT_1DModel(
     pos_embedding = posemb_sincos_1d(patches)
     patches += pos_embedding
     dim = ops.shape(patches)[-1]
-    patches = Transformer(dim, depth, heads, dim_head, mlp_dim, dropout_rate=dropout_rate)(patches)
+    patches = Transformer(
+        dim, depth, heads, dim_head, mlp_dim, dropout_rate=dropout_rate
+    )(patches)
     _, cls_token = CLS_Token(dim)(patches)
-    cls_token = Transformer(dim, cls_depth, heads, dim_head, mlp_dim, dropout_rate=dropout_rate)(
-        cls_token, patches
-    )
+    cls_token = Transformer(
+        dim, cls_depth, heads, dim_head, mlp_dim, dropout_rate=dropout_rate
+    )(cls_token, patches)
     cls_token = ops.squeeze(cls_token, axis=1)
     o_p = layers.Dense(num_classes)(cls_token)
     return keras.Model(inputs=i_p, outputs=o_p)

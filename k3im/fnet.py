@@ -80,6 +80,7 @@ class FNetLayer(layers.Layer):
     """
     https://keras.io/examples/vision/mlp_image_classification/
     """
+
     def __init__(self, embedding_dim, dropout_rate, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -134,7 +135,7 @@ def FNetModel(
         positional_encoding: Whether to include positional encoding.
         num_channels: Number of image channels.
         aug: Image augmentation.
-    
+
     """
     image_size = pair(image_size)
     patch_size = pair(patch_size)
