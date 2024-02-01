@@ -41,8 +41,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Montserrat";--md-code-font:"Ubuntu Mono"}</style>
       
     
     
@@ -388,6 +388,96 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#k3im.focalnet.FocalNet" class="md-nav__link">
+    <span class="md-ellipsis">
+      FocalNet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_tiny_srf" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_tiny_srf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_small_srf" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_small_srf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_base_srf" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_base_srf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_tiny_lrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_tiny_lrf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_small_lrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_small_lrf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_base_lrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_base_lrf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_tiny_iso_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_tiny_iso_16
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_small_iso_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_small_iso_16
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.focalnet.focalnet_base_iso_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      focalnet_base_iso_16
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#k3im.gmlp.gMLPModel" class="md-nav__link">
     <span class="md-ellipsis">
       gMLPModel
@@ -478,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/spin_up_the_simplest_1d/" class="md-nav__link">
+      <a href="../examples/spin_up_the_simplest_1d.ipynb" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -498,7 +588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/spin_up_the_simplest/" class="md-nav__link">
+      <a href="../examples/spin_up_the_simplest.ipynb" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -518,11 +608,31 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/spin_up_the_simplest_3d_video/" class="md-nav__link">
+      <a href="../examples/spin_up_the_simplest_3d_video.ipynb" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Examples 3D/Space-Time
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../layers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Layers, Blocks, Tokenizers, etc.
   </span>
   
 
@@ -2017,7 +2127,1281 @@
           </details>
   </div>
 
-</div><p><code>k3im.gmlp.gMLP</code> 
+</div><p><code>k3im.focalnet.FNet</code> 
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.FocalNet"></a>
+  <div class="doc doc-contents first">
+  
+      <p>Instantiates the FocalNet architecture.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>patch_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Patch size.</p>
+            </div>
+          </td>
+          <td>
+                <code>4</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>num_classes</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of classes.</p>
+            </div>
+          </td>
+          <td>
+                <code>1000</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>embed_dim</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Embedding dimension.</p>
+            </div>
+          </td>
+          <td>
+                <code>128</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>depths</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Depths of each stage.</p>
+            </div>
+          </td>
+          <td>
+                <code>[2, 2, 6, 2]</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mlp_ratio</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Ratio of mlp hidden dim to embedding dim.</p>
+            </div>
+          </td>
+          <td>
+                <code>4.0</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>drop_rate</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Dropout rate.</p>
+            </div>
+          </td>
+          <td>
+                <code>0.0</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>drop_path_rate</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Stochastic depth rate.</p>
+            </div>
+          </td>
+          <td>
+                <code>0.1</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>norm_layer</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Normalization layer.</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="keras.layers.LayerNormalization">LayerNormalization</span></code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>patch_norm</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to use patch norm.</p>
+            </div>
+          </td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>focal_levels</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of focal levels.</p>
+            </div>
+          </td>
+          <td>
+                <code>[2, 2, 3, 2]</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>focal_windows</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Focal window sizes.</p>
+            </div>
+          </td>
+          <td>
+                <code>[3, 2, 3, 2]</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>use_conv_embed</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to use conv embed.</p>
+            </div>
+          </td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>use_layerscale</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to use layer scale.</p>
+            </div>
+          </td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>layerscale_value</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Value for layer scale.</p>
+            </div>
+          </td>
+          <td>
+                <code>0.0001</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>use_postln</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to use post layer norm.</p>
+            </div>
+          </td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>use_postln_in_modulation</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to use post layer norm in modulation.</p>
+            </div>
+          </td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>normalize_modulator</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to normalize modulator.</p>
+            </div>
+          </td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">FocalNet</span><span class="p">(</span>
+    <span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span>
+    <span class="n">patch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">embed_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">mlp_ratio</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+    <span class="n">drop_rate</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">drop_path_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">norm_layer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">,</span>
+    <span class="n">patch_norm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">focal_levels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">focal_windows</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">use_conv_embed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">use_layerscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">layerscale_value</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+    <span class="n">use_postln</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">use_postln_in_modulation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">normalize_modulator</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiates the FocalNet architecture.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        patch_size: Patch size.</span>
+<span class="sd">        num_classes: Number of classes.</span>
+<span class="sd">        embed_dim: Embedding dimension.</span>
+<span class="sd">        depths: Depths of each stage.</span>
+<span class="sd">        mlp_ratio: Ratio of mlp hidden dim to embedding dim.</span>
+<span class="sd">        drop_rate: Dropout rate.</span>
+<span class="sd">        drop_path_rate: Stochastic depth rate.</span>
+<span class="sd">        norm_layer: Normalization layer.</span>
+<span class="sd">        patch_norm: Whether to use patch norm.</span>
+<span class="sd">        focal_levels: Number of focal levels.</span>
+<span class="sd">        focal_windows: Focal window sizes.</span>
+<span class="sd">        use_conv_embed: Whether to use conv embed.</span>
+<span class="sd">        use_layerscale: Whether to use layer scale.</span>
+<span class="sd">        layerscale_value: Value for layer scale.</span>
+<span class="sd">        use_postln: Whether to use post layer norm.</span>
+<span class="sd">        use_postln_in_modulation: Whether to use post layer norm in modulation.</span>
+<span class="sd">        normalize_modulator: Whether to normalize modulator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">depths</span><span class="p">)</span>
+    <span class="n">embed_dim</span> <span class="o">=</span> <span class="p">[</span><span class="n">embed_dim</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">)]</span>
+    <span class="n">dpr</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">ops</span><span class="o">.</span><span class="n">convert_to_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ops</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">drop_path_rate</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">depths</span><span class="p">))</span>
+    <span class="p">]</span>  <span class="c1"># stochastic depth decay rule</span>
+
+    <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">num_classes</span>
+        <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">patches_resolution</span> <span class="o">=</span> <span class="n">PatchEmbed</span><span class="p">(</span>
+            <span class="n">img_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">),</span>
+            <span class="n">patch_size</span><span class="o">=</span><span class="n">patch_size</span><span class="p">,</span>
+            <span class="c1"># in_chans=in_chans,</span>
+            <span class="n">embed_dim</span><span class="o">=</span><span class="n">embed_dim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">use_conv_embed</span><span class="o">=</span><span class="n">use_conv_embed</span><span class="p">,</span>
+            <span class="n">norm_layer</span><span class="o">=</span><span class="n">norm_layer</span> <span class="k">if</span> <span class="n">patch_norm</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">is_stem</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">)</span>
+        <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">patches_resolution</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">patches_resolution</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">drop_rate</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i_layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">BasicLayer</span><span class="p">(</span>
+                <span class="n">dim</span><span class="o">=</span><span class="n">embed_dim</span><span class="p">[</span><span class="n">i_layer</span><span class="p">],</span>
+                <span class="n">out_dim</span><span class="o">=</span><span class="n">embed_dim</span><span class="p">[</span><span class="n">i_layer</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">i_layer</span> <span class="o">&lt;</span> <span class="n">num_layers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">input_resolution</span><span class="o">=</span><span class="p">(</span>
+                    <span class="n">patches_resolution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i_layer</span><span class="p">),</span>
+                    <span class="n">patches_resolution</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i_layer</span><span class="p">),</span>
+                <span class="p">),</span>
+                <span class="n">depth</span><span class="o">=</span><span class="n">depths</span><span class="p">[</span><span class="n">i_layer</span><span class="p">],</span>
+                <span class="n">mlp_ratio</span><span class="o">=</span><span class="n">mlp_ratio</span><span class="p">,</span>
+                <span class="n">drop</span><span class="o">=</span><span class="n">drop_rate</span><span class="p">,</span>
+                <span class="n">drop_path</span><span class="o">=</span><span class="n">dpr</span><span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">depths</span><span class="p">[:</span><span class="n">i_layer</span><span class="p">])</span> <span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">depths</span><span class="p">[:</span> <span class="n">i_layer</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])],</span>
+                <span class="n">norm_layer</span><span class="o">=</span><span class="n">norm_layer</span><span class="p">,</span>
+                <span class="n">downsample</span><span class="o">=</span><span class="n">PatchEmbed</span> <span class="k">if</span> <span class="p">(</span><span class="n">i_layer</span> <span class="o">&lt;</span> <span class="n">num_layers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">focal_level</span><span class="o">=</span><span class="n">focal_levels</span><span class="p">[</span><span class="n">i_layer</span><span class="p">],</span>
+                <span class="n">focal_window</span><span class="o">=</span><span class="n">focal_windows</span><span class="p">[</span><span class="n">i_layer</span><span class="p">],</span>
+                <span class="n">use_conv_embed</span><span class="o">=</span><span class="n">use_conv_embed</span><span class="p">,</span>
+                <span class="n">use_layerscale</span><span class="o">=</span><span class="n">use_layerscale</span><span class="p">,</span>
+                <span class="n">layerscale_value</span><span class="o">=</span><span class="n">layerscale_value</span><span class="p">,</span>
+                <span class="n">use_postln</span><span class="o">=</span><span class="n">use_postln</span><span class="p">,</span>
+                <span class="n">use_postln_in_modulation</span><span class="o">=</span><span class="n">use_postln_in_modulation</span><span class="p">,</span>
+                <span class="n">normalize_modulator</span><span class="o">=</span><span class="n">normalize_modulator</span><span class="p">,</span>
+            <span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+        <span class="c1"># if num_classes is None return model without classification head   </span>
+        <span class="k">if</span> <span class="n">num_classes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">norm_layer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;norm&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># B L C</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GlobalAveragePooling1D</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>  <span class="c1">#</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">num_classes</span> <span class="o">=</span> <span class="n">num_classes</span> <span class="k">if</span> <span class="n">num_classes</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_classes</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;head&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">return</span> <span class="n">_apply</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.FocalNetModel</code>
+`::: k3im.focalnet.FocalNetModel</p>
+<p><code>k3im.focalnet.focalnet_tiny_srf</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_tiny_srf"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Tiny-SRF model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_tiny_srf</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Tiny-SRF model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">embed_dim</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_small_srf</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_small_srf"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Small-SRF model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span>
+<span class="normal">514</span>
+<span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_small_srf</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Small-SRF model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">embed_dim</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_base_srf</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_base_srf"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Base-SRF model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_base_srf</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Base-SRF model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">embed_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_tiny_lrf</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_tiny_lrf"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Tiny-LRF model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_tiny_lrf</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Tiny-LRF model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span>
+        <span class="n">img_size</span><span class="p">,</span> <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">embed_dim</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">focal_levels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_small_lrf</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_small_lrf"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Small-LRF model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_small_lrf</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Small-LRF model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span>
+        <span class="n">img_size</span><span class="p">,</span>
+        <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+        <span class="n">embed_dim</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span>
+        <span class="n">focal_levels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_base_lrf</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_base_lrf"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Base-LRF model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_base_lrf</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Base-LRF model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span>
+        <span class="n">img_size</span><span class="p">,</span>
+        <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+        <span class="n">embed_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">focal_levels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_tiny_iso_16</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_tiny_iso_16"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Tiny-ISO-16 model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span>
+<span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_tiny_iso_16</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Tiny-ISO-16 model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span>
+        <span class="n">img_size</span><span class="p">,</span>
+        <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+        <span class="n">patch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+        <span class="n">embed_dim</span><span class="o">=</span><span class="mi">192</span><span class="p">,</span>
+        <span class="n">focal_levels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="n">focal_windows</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_small_iso_16</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_small_iso_16"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Small-ISO-16 model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_small_iso_16</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Small-ISO-16 model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span>
+        <span class="n">img_size</span><span class="p">,</span>
+        <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+        <span class="n">patch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+        <span class="n">embed_dim</span><span class="o">=</span><span class="mi">384</span><span class="p">,</span>
+        <span class="n">focal_levels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="n">focal_windows</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.focalnet_base_iso_16</code>
+</p>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.focalnet.focalnet_base_iso_16"></a>
+  <div class="doc doc-contents first">
+  
+      <p>FocalNet-Base-ISO-16 model.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>img_size</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Image size.</p>
+            </div>
+          </td>
+          <td>
+                <code>224</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Other keyword arguments.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/focalnet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">focalnet_base_iso_16</span><span class="p">(</span><span class="n">img_size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FocalNet-Base-ISO-16 model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_size: Image size.</span>
+<span class="sd">        **kwargs: Other keyword arguments.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">FocalNetModel</span><span class="p">(</span>
+        <span class="n">img_size</span><span class="p">,</span>
+        <span class="n">depths</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span>
+        <span class="n">patch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+        <span class="n">embed_dim</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span>
+        <span class="n">focal_levels</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="n">focal_windows</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="n">use_layerscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">use_postln</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div><p><code>k3im.focalnet.gMLP</code> 
 </p>
 
 
@@ -2983,7 +4367,7 @@
           </details>
   </div>
 
-</div><p><code>k3im.vit_1d.ViT1DModel</code> 
+</div><p><code>k3im.vit.ViT</code> 
 </p>
 
 

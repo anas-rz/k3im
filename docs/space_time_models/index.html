@@ -12,7 +12,7 @@
         <link rel="prev" href="../3d_models/">
       
       
-        <link rel="next" href="../examples/spin_up_the_simplest_1d/">
+        <link rel="next" href="../layers/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -41,8 +41,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Montserrat";--md-code-font:"Ubuntu Mono"}</style>
       
     
     
@@ -78,6 +78,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#k3im.video_eanet.VideoEANet" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -343,6 +348,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Space-Time Models
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -352,6 +368,50 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.video_eanet.VideoEANet" class="md-nav__link">
+    <span class="md-ellipsis">
+      VideoEANet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.video_mixer.VideoMixerModel" class="md-nav__link">
+    <span class="md-ellipsis">
+      VideoMixerModel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3im.vivit.ViViT" class="md-nav__link">
+    <span class="md-ellipsis">
+      ViViT
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -364,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/spin_up_the_simplest_1d/" class="md-nav__link">
+      <a href="../examples/spin_up_the_simplest_1d.ipynb" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -384,7 +444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/spin_up_the_simplest/" class="md-nav__link">
+      <a href="../examples/spin_up_the_simplest.ipynb" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -404,11 +464,31 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/spin_up_the_simplest_3d_video/" class="md-nav__link">
+      <a href="../examples/spin_up_the_simplest_3d_video.ipynb" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Examples 3D/Space-Time
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../layers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Layers, Blocks, Tokenizers, etc.
   </span>
   
 
@@ -434,7 +514,466 @@
 
   <h1>Space-Time Models</h1>
 
+<div class="doc doc-object doc-function">
 
+
+
+
+<a id="k3im.video_eanet.VideoEANet"></a>
+  <div class="doc doc-contents first">
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/video_eanet.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">VideoEANet</span><span class="p">(</span>
+    <span class="n">image_size</span><span class="p">,</span>
+    <span class="n">image_patch_size</span><span class="p">,</span>
+    <span class="n">frames</span><span class="p">,</span>
+    <span class="n">frame_patch_size</span><span class="p">,</span>
+    <span class="n">num_classes</span><span class="p">,</span>
+    <span class="n">dim</span><span class="p">,</span>
+    <span class="n">spatial_depth</span><span class="p">,</span>
+    <span class="n">temporal_depth</span><span class="p">,</span>
+    <span class="n">heads</span><span class="p">,</span>
+    <span class="n">mlp_dim</span><span class="p">,</span>
+    <span class="n">pool</span><span class="o">=</span><span class="s2">&quot;cls&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">dim_coefficient</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">projection_dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">attention_dropout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">emb_dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span> <span class="o">=</span> <span class="n">pair</span><span class="p">(</span><span class="n">image_size</span><span class="p">)</span>
+    <span class="n">patch_height</span><span class="p">,</span> <span class="n">patch_width</span> <span class="o">=</span> <span class="n">pair</span><span class="p">(</span><span class="n">image_patch_size</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">image_height</span> <span class="o">%</span> <span class="n">patch_height</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">image_width</span> <span class="o">%</span> <span class="n">patch_width</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">),</span> <span class="s2">&quot;Image dimensions must be divisible by the patch size.&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">frames</span> <span class="o">%</span> <span class="n">frame_patch_size</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">),</span> <span class="s2">&quot;Frames must be divisible by the frame patch size&quot;</span>
+
+    <span class="n">nf</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">nw</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">frames</span> <span class="o">//</span> <span class="n">frame_patch_size</span><span class="p">,</span>
+        <span class="n">image_height</span> <span class="o">//</span> <span class="n">patch_height</span><span class="p">,</span>
+        <span class="n">image_width</span> <span class="o">//</span> <span class="n">patch_width</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">patch_dim</span> <span class="o">=</span> <span class="n">channels</span> <span class="o">*</span> <span class="n">patch_height</span> <span class="o">*</span> <span class="n">patch_width</span> <span class="o">*</span> <span class="n">frame_patch_size</span>
+
+    <span class="n">i_p</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">((</span><span class="n">frames</span><span class="p">,</span> <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span><span class="p">,</span> <span class="n">channels</span><span class="p">))</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">frame_patch_size</span><span class="p">,</span> <span class="n">nf</span><span class="p">,</span> <span class="n">patch_height</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">patch_width</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
+    <span class="p">)(</span><span class="n">i_p</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">nh</span> <span class="o">*</span> <span class="n">nw</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">()(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">dim</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">()(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">seq_len</span><span class="p">,</span> <span class="n">num_frames</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ClassTokenSpatial</span><span class="p">(</span>
+        <span class="n">sequence_length</span><span class="o">=</span><span class="n">seq_len</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span> <span class="n">num_frames</span><span class="o">=</span><span class="n">num_frames</span>
+    <span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">emb_dropout</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">seq_len</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>  <span class="c1">######### ERRRRRRR</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span>
+        <span class="n">dim</span><span class="p">,</span>
+        <span class="n">spatial_depth</span><span class="p">,</span>
+        <span class="n">heads</span><span class="p">,</span>
+        <span class="n">mlp_dim</span><span class="p">,</span>
+        <span class="n">dim_coefficient</span><span class="o">=</span><span class="n">dim_coefficient</span><span class="p">,</span>
+        <span class="n">projection_dropout</span><span class="o">=</span><span class="n">projection_dropout</span><span class="p">,</span>
+        <span class="n">attention_dropout</span><span class="o">=</span><span class="n">attention_dropout</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_frames</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>  <span class="c1">######### ERRRRRRR</span>
+    <span class="k">if</span> <span class="n">pool</span> <span class="o">==</span> <span class="s2">&quot;mean&quot;</span><span class="p">:</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">tubelets</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ClassTokenTemporal</span><span class="p">(</span><span class="n">dim</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span>
+        <span class="n">dim</span><span class="p">,</span>
+        <span class="n">temporal_depth</span><span class="p">,</span>
+        <span class="n">heads</span><span class="p">,</span>
+        <span class="n">mlp_dim</span><span class="p">,</span>
+        <span class="n">dim_coefficient</span><span class="o">=</span><span class="n">dim_coefficient</span><span class="p">,</span>
+        <span class="n">projection_dropout</span><span class="o">=</span><span class="n">projection_dropout</span><span class="p">,</span>
+        <span class="n">attention_dropout</span><span class="o">=</span><span class="n">attention_dropout</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pool</span> <span class="o">==</span> <span class="s2">&quot;mean&quot;</span><span class="p">:</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">tubelets</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">o_p</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">i_p</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">o_p</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.video_mixer.VideoMixerModel"></a>
+  <div class="doc doc-contents first">
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/video_mixer.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">VideoMixerModel</span><span class="p">(</span>
+    <span class="n">image_size</span><span class="p">,</span>
+    <span class="n">image_patch_size</span><span class="p">,</span>
+    <span class="n">frames</span><span class="p">,</span>
+    <span class="n">frame_patch_size</span><span class="p">,</span>
+    <span class="n">num_classes</span><span class="p">,</span>
+    <span class="n">dim</span><span class="p">,</span>
+    <span class="n">spatial_depth</span><span class="p">,</span>
+    <span class="n">temporal_depth</span><span class="p">,</span>
+    <span class="n">mlp_dim</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">spatial_dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">emb_dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span> <span class="o">=</span> <span class="n">pair</span><span class="p">(</span><span class="n">image_size</span><span class="p">)</span>
+    <span class="n">patch_height</span><span class="p">,</span> <span class="n">patch_width</span> <span class="o">=</span> <span class="n">pair</span><span class="p">(</span><span class="n">image_patch_size</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">image_height</span> <span class="o">%</span> <span class="n">patch_height</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">image_width</span> <span class="o">%</span> <span class="n">patch_width</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">),</span> <span class="s2">&quot;Image dimensions must be divisible by the patch size.&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">frames</span> <span class="o">%</span> <span class="n">frame_patch_size</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">),</span> <span class="s2">&quot;Frames must be divisible by the frame patch size&quot;</span>
+
+    <span class="n">nf</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">nw</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">frames</span> <span class="o">//</span> <span class="n">frame_patch_size</span><span class="p">,</span>
+        <span class="n">image_height</span> <span class="o">//</span> <span class="n">patch_height</span><span class="p">,</span>
+        <span class="n">image_width</span> <span class="o">//</span> <span class="n">patch_width</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">patch_dim</span> <span class="o">=</span> <span class="n">channels</span> <span class="o">*</span> <span class="n">patch_height</span> <span class="o">*</span> <span class="n">patch_width</span> <span class="o">*</span> <span class="n">frame_patch_size</span>
+
+    <span class="n">i_p</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">((</span><span class="n">frames</span><span class="p">,</span> <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span><span class="p">,</span> <span class="n">channels</span><span class="p">))</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">frame_patch_size</span><span class="p">,</span> <span class="n">nf</span><span class="p">,</span> <span class="n">patch_height</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">patch_width</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
+    <span class="p">)(</span><span class="n">i_p</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">nh</span> <span class="o">*</span> <span class="n">nw</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">()(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">dim</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">()(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">seq_len</span><span class="p">,</span> <span class="n">num_frames</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">emb_dropout</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">spatial_depth</span><span class="p">):</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">MLPMixerLayer</span><span class="p">(</span><span class="n">seq_len</span><span class="p">,</span> <span class="n">mlp_dim</span><span class="p">,</span> <span class="n">spatial_dropout</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_frames</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">seq_len</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">temporal_depth</span><span class="p">):</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">MLPMixerLayer</span><span class="p">(</span><span class="n">seq_len</span><span class="p">,</span> <span class="n">mlp_dim</span><span class="p">,</span> <span class="n">spatial_dropout</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">o_p</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">i_p</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">o_p</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<a id="k3im.vivit.ViViT"></a>
+  <div class="doc doc-contents first">
+
+          <details class="quote">
+            <summary>Source code in <code>k3im/vivit.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">ViViT</span><span class="p">(</span>
+    <span class="n">image_size</span><span class="p">,</span>
+    <span class="n">image_patch_size</span><span class="p">,</span>
+    <span class="n">frames</span><span class="p">,</span>
+    <span class="n">frame_patch_size</span><span class="p">,</span>
+    <span class="n">num_classes</span><span class="p">,</span>
+    <span class="n">dim</span><span class="p">,</span>
+    <span class="n">spatial_depth</span><span class="p">,</span>
+    <span class="n">temporal_depth</span><span class="p">,</span>
+    <span class="n">heads</span><span class="p">,</span>
+    <span class="n">mlp_dim</span><span class="p">,</span>
+    <span class="n">pool</span><span class="o">=</span><span class="s2">&quot;cls&quot;</span><span class="p">,</span>
+    <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">dim_head</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+    <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">emb_dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span> <span class="o">=</span> <span class="n">pair</span><span class="p">(</span><span class="n">image_size</span><span class="p">)</span>
+    <span class="n">patch_height</span><span class="p">,</span> <span class="n">patch_width</span> <span class="o">=</span> <span class="n">pair</span><span class="p">(</span><span class="n">image_patch_size</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">image_height</span> <span class="o">%</span> <span class="n">patch_height</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">image_width</span> <span class="o">%</span> <span class="n">patch_width</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">),</span> <span class="s2">&quot;Image dimensions must be divisible by the patch size.&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">frames</span> <span class="o">%</span> <span class="n">frame_patch_size</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">),</span> <span class="s2">&quot;Frames must be divisible by the frame patch size&quot;</span>
+
+    <span class="n">nf</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">nw</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">frames</span> <span class="o">//</span> <span class="n">frame_patch_size</span><span class="p">,</span>
+        <span class="n">image_height</span> <span class="o">//</span> <span class="n">patch_height</span><span class="p">,</span>
+        <span class="n">image_width</span> <span class="o">//</span> <span class="n">patch_width</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">patch_dim</span> <span class="o">=</span> <span class="n">channels</span> <span class="o">*</span> <span class="n">patch_height</span> <span class="o">*</span> <span class="n">patch_width</span> <span class="o">*</span> <span class="n">frame_patch_size</span>
+
+    <span class="n">i_p</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">((</span><span class="n">frames</span><span class="p">,</span> <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span><span class="p">,</span> <span class="n">channels</span><span class="p">))</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">frame_patch_size</span><span class="p">,</span> <span class="n">nf</span><span class="p">,</span> <span class="n">patch_height</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">patch_width</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
+    <span class="p">)(</span><span class="n">i_p</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">nh</span> <span class="o">*</span> <span class="n">nw</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">()(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">dim</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">LayerNormalization</span><span class="p">()(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">seq_len</span><span class="p">,</span> <span class="n">num_frames</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ClassTokenSpatial</span><span class="p">(</span>
+        <span class="n">sequence_length</span><span class="o">=</span><span class="n">seq_len</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span> <span class="n">num_frames</span><span class="o">=</span><span class="n">num_frames</span>
+    <span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">emb_dropout</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">seq_len</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>  <span class="c1">######### ERRRRRRR</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span>
+        <span class="n">dim</span><span class="p">,</span>
+        <span class="n">spatial_depth</span><span class="p">,</span>
+        <span class="n">heads</span><span class="p">,</span>
+        <span class="n">dim_head</span><span class="p">,</span>
+        <span class="n">mlp_dim</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_frames</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>  <span class="c1">######### ERRRRRRR</span>
+    <span class="k">if</span> <span class="n">pool</span> <span class="o">==</span> <span class="s2">&quot;mean&quot;</span><span class="p">:</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">tubelets</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ClassTokenTemporal</span><span class="p">(</span><span class="n">dim</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="n">tubelets</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">temporal_depth</span><span class="p">,</span> <span class="n">heads</span><span class="p">,</span> <span class="n">dim_head</span><span class="p">,</span> <span class="n">mlp_dim</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pool</span> <span class="o">==</span> <span class="s2">&quot;mean&quot;</span><span class="p">:</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tubelets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tubelets</span> <span class="o">=</span> <span class="n">tubelets</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">o_p</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)(</span><span class="n">tubelets</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">i_p</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">o_p</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
 
 
 
