@@ -48,7 +48,9 @@ def DeepViT2D(
         aug: Augmentation layer.
 
     """
-    inputs, patches = Inputs2D(image_size, patch_size, channels, embedding_dim=dim, position_embed=False)
+    inputs, patches = Inputs2D(
+        image_size, patch_size, channels, embedding_dim=dim, position_embed=False
+    )
     # print(patches.shape)
     patches, _ = CLS_Token(dim)(patches)
     num_patches = ops.shape(patches)[1]

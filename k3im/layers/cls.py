@@ -1,5 +1,6 @@
 from keras import layers, ops
 
+
 class CLS_Token(layers.Layer):
     def __init__(self, dim):
         super().__init__()
@@ -9,7 +10,7 @@ class CLS_Token(layers.Layer):
         b = ops.shape(x)[0]
         cls_token = ops.repeat(self.cls_token, b, axis=0)
         return ops.concatenate([x, cls_token], axis=1), cls_token
-    
+
 
 class ClassTokenSpatial(layers.Layer):
     def __init__(self, sequence_length, output_dim, num_frames, **kwargs):

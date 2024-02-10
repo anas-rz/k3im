@@ -1,6 +1,7 @@
 import keras
 from keras import layers
 
+
 def FeedForward(dim, hidden_dim, dropout=0.0):
     return keras.Sequential(
         [

@@ -15,6 +15,7 @@ from k3im.blocks.transformers import Transformer
 from k3im.layers import CLS_Token
 from k3im.utils.builders import Inputs1D
 
+
 def CAiT_1D(
     seq_len: int,
     patch_size: int,
@@ -46,11 +47,11 @@ def CAiT_1D(
         `dropout_rate`: dropout applied to MultiHeadAttention in class and patch transformers
     """
     i_p, patches = Inputs1D(
-    seq_len=seq_len,
-    patch_size=patch_size,
-    dim=dim,
-    channels=channels,
-)
+        seq_len=seq_len,
+        patch_size=patch_size,
+        dim=dim,
+        channels=channels,
+    )
     dim = ops.shape(patches)[-1]
     patches = Transformer(
         dim, depth, heads, dim_head, mlp_dim, dropout_rate=dropout_rate

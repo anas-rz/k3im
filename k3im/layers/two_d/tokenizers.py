@@ -1,5 +1,6 @@
 from keras import layers, Sequential, ops
 
+
 class CCTTokenizer2D(layers.Layer):
     def __init__(
         self,

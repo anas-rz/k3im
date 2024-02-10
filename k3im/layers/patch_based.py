@@ -35,7 +35,7 @@ class FNetLayer(layers.Layer):
         x = x + x_ffn
         # Apply layer normalization.
         return self.normalize2(x)
-    
+
 
 class gMLPLayer(layers.Layer):
     """

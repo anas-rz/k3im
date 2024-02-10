@@ -11,10 +11,9 @@ import keras as keras
 from keras import layers
 from k3im.blocks import ExternalTransformer
 from k3im.utils.builders import Inputs2D
+
 # https://keras.io/examples/vision/eanet/
 # Add class token and position embedding
-
-
 
 
 def EANet2D(

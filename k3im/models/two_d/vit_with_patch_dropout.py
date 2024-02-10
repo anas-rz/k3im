@@ -10,6 +10,7 @@ from k3im.layers import PatchDropout
 from k3im.blocks import Transformer
 from k3im.utils.builders import Inputs2D
 
+
 def ViTPatchDrop2D(
     image_size,
     patch_size,

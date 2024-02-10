@@ -12,8 +12,6 @@ from keras import layers
 from k3im.blocks import ConvMixer, ConvMixerStem
 
 
-
-
 def ConvMixer1D(
     seq_len=32,
     n_features=3,

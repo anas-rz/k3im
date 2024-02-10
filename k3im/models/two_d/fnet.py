@@ -9,7 +9,6 @@ from k3im.layers import FNetLayer
 from k3im.utils.builders import Inputs2D
 
 
-
 def FNet2D(
     image_size,
     patch_size,
@@ -35,8 +34,14 @@ def FNet2D(
         aug: Image augmentation.
 
     """
-    inputs, patches = Inputs2D(image_size, patch_size, num_channels, embedding_dim, 
-                               aug=aug, position_embed=position_embed)
+    inputs, patches = Inputs2D(
+        image_size,
+        patch_size,
+        num_channels,
+        embedding_dim,
+        aug=aug,
+        position_embed=position_embed,
+    )
     # Process x using the module blocks.
     for _ in range(num_blocks):
         patches = FNetLayer(embedding_dim, dropout_rate)(patches)
@@ -51,4 +56,3 @@ def FNet2D(
     logits = layers.Dense(num_classes)(representation)
     # Create the Keras model.
     return keras.Model(inputs=inputs, outputs=logits)
-

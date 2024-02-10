@@ -15,6 +15,7 @@ class PatchExtract(layers.Layer):
         print(x.shape)
         return x
 
+
 class PositionEmbedding(layers.Layer):
     def __init__(self, num_patch, embed_dim, **kwargs):
         super().__init__(**kwargs)
@@ -25,6 +26,7 @@ class PositionEmbedding(layers.Layer):
         pos = ops.arange(start=0, stop=self.num_patch, step=1)
         return patch + self.pos_embed(pos)
 
+
 def PatchDropout(prob, **kwargs):
     """
     SpatialDropout1D behaves the same way as PatchDropout in
@@ -32,6 +34,7 @@ def PatchDropout(prob, **kwargs):
     https://github.com/keras-team/keras-core/blob/main/keras_core/layers/regularization/spatial_dropout.py
     """
     return layers.SpatialDropout1D(prob, **kwargs)
+
 
 class SequencePooling(layers.Layer):
     def __init__(self):
@@ -43,7 +46,7 @@ class SequencePooling(layers.Layer):
         attention_weights = ops.transpose(attention_weights, axes=(0, 2, 1))
         weighted_representation = ops.matmul(attention_weights, x)
         return ops.squeeze(weighted_representation, -2)
-    
+
 
 class StochasticDepth(layers.Layer):
     def __init__(self, drop_prop, seed=42, **kwargs):
@@ -55,7 +58,9 @@ class StochasticDepth(layers.Layer):
         if training:
             keep_prob = 1 - self.drop_prob
             shape = (ops.shape(x)[0],) + (1,) * (len(x.shape) - 1)
-            random_tensor = keep_prob + keras.random.uniform(shape, 0, 1, seed=self.seed_gen)
+            random_tensor = keep_prob + keras.random.uniform(
+                shape, 0, 1, seed=self.seed_gen
+            )
             random_tensor = ops.floor(random_tensor)
             return (x / keep_prob) * random_tensor
         return x

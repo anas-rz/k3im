@@ -1,6 +1,7 @@
 import keras
 from keras import layers, ops
 
+
 class CCTTokenizer1D(layers.Layer):
     def __init__(
         self,

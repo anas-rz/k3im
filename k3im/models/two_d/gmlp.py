@@ -10,7 +10,6 @@ from k3im.utils.builders import Inputs2D
 from k3im.layers import gMLPLayer
 
 
-
 def gMLP2D(
     image_size,
     patch_size,
@@ -36,7 +35,14 @@ def gMLP2D(
         aug: Image augmentation.
 
     """
-    inputs, patches = Inputs2D(image_size, patch_size, num_channels, embedding_dim, aug=aug, position_embed=position_embed)
+    inputs, patches = Inputs2D(
+        image_size,
+        patch_size,
+        num_channels,
+        embedding_dim,
+        aug=aug,
+        position_embed=position_embed,
+    )
     # Process x using the module blocks.
     num_patches = ops.shape(patches)[1]
     for _ in range(num_blocks):

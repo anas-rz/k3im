@@ -11,6 +11,7 @@ import numpy as np
 from k3im.layers import CCTTokenizer2D, SequencePooling, PositionEmbedding
 from k3im.blocks import Transformer
 
+
 def CCT(
     input_shape,
     num_heads,
@@ -24,7 +25,7 @@ def CCT(
     num_classes,
     positional_emb=False,
     aug=None,
-    dropout=0.0
+    dropout=0.0,
 ):
     """Instantiates the Compact Convolutional Transformer architecture.
 
@@ -62,10 +63,9 @@ def CCT(
     # Apply positional embedding.
     if positional_emb:
         sequence_length = encoded_patches.shape[1]
-        encoded_patches += PositionEmbedding(num_patch=sequence_length,
-                                             embed_dim=projection_dim)(
-            encoded_patches
-        )
+        encoded_patches += PositionEmbedding(
+            num_patch=sequence_length, embed_dim=projection_dim
+        )(encoded_patches)
 
     # Calculate Stochastic Depth probabilities.
     dpr = [x for x in np.linspace(0, stochastic_depth_rate, depth)]
@@ -73,8 +73,14 @@ def CCT(
     encoded_patches = layers.LayerNormalization(epsilon=1e-5)(encoded_patches)
 
     # Create multiple layers of the Transformer block.
-    encoded_patches = Transformer(projection_dim, depth, num_heads, 
-                                  dim_head=projection_dim // num_heads, mlp_dim=mlp_dim, dropout_rate=dropout)(encoded_patches)
+    encoded_patches = Transformer(
+        projection_dim,
+        depth,
+        num_heads,
+        dim_head=projection_dim // num_heads,
+        mlp_dim=mlp_dim,
+        dropout_rate=dropout,
+    )(encoded_patches)
     if num_classes is None:
         model = keras.Model(inputs=inputs, outputs=encoded_patches)
         return model

@@ -11,8 +11,6 @@ from keras import layers
 from k3im.blocks import ConvStem2D, ConvMixer2DBlock
 
 
-
-
 def ConvMixer2D(
     image_size=32,
     filters=256,

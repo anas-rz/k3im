@@ -12,7 +12,6 @@ from k3im.blocks import ExternalTransformer
 from k3im.utils.builders import Inputs1D
 
 
-
 def EANet1D(
     seq_len,
     patch_size,
@@ -42,11 +41,11 @@ def EANet1D(
 
     """
     i_p, patches = Inputs1D(
-    seq_len=seq_len,
-    patch_size=patch_size,
-    dim=dim,
-    channels=channels,
-)
+        seq_len=seq_len,
+        patch_size=patch_size,
+        dim=dim,
+        channels=channels,
+    )
     patches = ExternalTransformer(
         dim=dim,
         depth=depth,

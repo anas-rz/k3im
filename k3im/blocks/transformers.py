@@ -3,6 +3,7 @@ from keras import layers, ops, Sequential
 from k3im.utils import exists
 from k3im.blocks.commons import FeedForward
 
+
 def ExternalAttention(
     dim,
     num_heads,
@@ -44,6 +45,7 @@ def ExternalAttention(
         return x
 
     return _apply
+
 
 def Transformer(dim, depth, heads, dim_head, mlp_dim, dropout_rate=0.0, cross=False):
     def _apply(x, context=None, kv_include_self=True):

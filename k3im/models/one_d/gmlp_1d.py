@@ -11,11 +11,7 @@ from k3im.utils.builders import Inputs1D
 from k3im.layers import gMLPLayer
 
 
-
-
-def gMLP1D(
-    seq_len, patch_size, num_classes, dim, depth, channels=3, dropout_rate=0.0
-):
+def gMLP1D(seq_len, patch_size, num_classes, dim, depth, channels=3, dropout_rate=0.0):
     """Instantiate a gMLP model for 1D data.
 
     Args:

@@ -9,9 +9,8 @@ from keras import ops
 from k3im.layers import FNetLayer
 from k3im.utils.builders import Inputs1D
 
-def FNet1D(
-    seq_len, patch_size, num_classes, dim, depth, channels=3, dropout_rate=0.0
-):
+
+def FNet1D(seq_len, patch_size, num_classes, dim, depth, channels=3, dropout_rate=0.0):
     """
     Instantiate a FNet model for 1D data.
 

@@ -13,7 +13,6 @@ from k3im.blocks import Transformer
 from k3im.utils.builders import Inputs2D
 
 
-
 def SimpleViT_RT2D(
     image_size,
     patch_size,

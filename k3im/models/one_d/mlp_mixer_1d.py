@@ -17,7 +17,6 @@ from k3im.layers import MLPMixerLayer
 from k3im.utils.builders import Inputs1D
 
 
-
 def Mixer1D(
     seq_len,
     patch_size,

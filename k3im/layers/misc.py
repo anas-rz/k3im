@@ -1,5 +1,6 @@
 from keras import layers, ops
 
+
 class PositionEmb(layers.Layer):
     def __init__(self, sequence_length, output_dim, **kwargs):
         super().__init__(**kwargs)
@@ -14,7 +15,7 @@ class PositionEmb(layers.Layer):
         positions = ops.arange(start=0, stop=(length), step=1)
         embedded_positions = self.position_embeddings(positions)
         return inputs + embedded_positions
-    
+
 
 class RegisterTokens(layers.Layer):
     def __init__(self, num_register_tokens, dim):

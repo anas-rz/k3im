@@ -1,5 +1,6 @@
 from keras import ops
 
+
 def posemb_sincos_1d(patches, temperature=10000, dtype="float32"):
     n, dim = ops.shape(patches)[1], ops.shape(patches)[2]
     n = ops.arange(n)
