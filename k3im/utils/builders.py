@@ -1,4 +1,3 @@
-
 from keras import ops, layers
 from k3im.funcs import posemb_sincos_1d
 from k3im.layers import PositionEmbedding, PatchExtract
@@ -11,8 +10,7 @@ def Inputs1D(
     dim: int,
     channels: int = 3,
 ):
-    """
-    """
+    """ """
     assert seq_len % patch_size == 0
     patch_dim = channels * patch_size
     i_p = layers.Input((seq_len, channels))
@@ -24,7 +22,10 @@ def Inputs1D(
     patches += pos_embedding
     return i_p, patches
 
-def Inputs2D(img_size, patch_size, num_channels, embedding_dim, aug=None, position_embed=True):
+
+def Inputs2D(
+    img_size, patch_size, num_channels, embedding_dim, aug=None, position_embed=True
+):
     img_size = pair(img_size)
     patch_size = pair(patch_size)
     inputs = layers.Input(shape=(img_size[0], img_size[1], num_channels))
@@ -32,7 +33,9 @@ def Inputs2D(img_size, patch_size, num_channels, embedding_dim, aug=None, positi
         img = aug(inputs)
     else:
         img = inputs
-    num_patches = (img_size[0] // patch_size[0]) * (img_size[1] // patch_size[1])  # Number of patch
+    num_patches = (img_size[0] // patch_size[0]) * (
+        img_size[1] // patch_size[1]
+    )  # Number of patch
     x = PatchExtract(patch_size)(img)
     print(x.shape)
     x = layers.Dense(embedding_dim)(x)
@@ -41,6 +44,7 @@ def Inputs2D(img_size, patch_size, num_channels, embedding_dim, aug=None, positi
         x = PositionEmbedding(num_patches, embedding_dim)(x)
 
     return inputs, x
+
 
 def Inputs3D(image_size, image_patch_size, frames, frame_patch_size, channels, dim):
     image_height, image_width = pair(image_size)

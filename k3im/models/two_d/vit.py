@@ -39,8 +39,9 @@ def ViT(
         `pool`: type of pooling at the end of the network
         `aug`: augmentation layer
     """
-    i_p, patches = Inputs2D(image_size, patch_size, channels, dim, aug=aug, 
-                            position_embed=False)
+    i_p, patches = Inputs2D(
+        image_size, patch_size, channels, dim, aug=aug, position_embed=False
+    )
     num_patches = ops.shape(patches)[1]
     patches, _ = CLS_Token(dim)(patches)
     patches = PositionEmbedding(num_patches, dim)(patches)
