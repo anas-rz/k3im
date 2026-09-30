@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "k3im"
-version = "0.1.1"
+dynamic = ["version"]
 description = "K3IM: Keras 3 Image Models for 1D, 2D, and 3D/Video Classification"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -62,3 +62,7 @@ Repository = "https://github.com/anas-rz/k3im"
 where = ["."]
 include = ["k3im*"]
 exclude = ["tests*", "docs*", "spinups*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "k3im.__version__"}
+
