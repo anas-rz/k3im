@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "k3im"
-version = "0.1.0"
+version = "0.1.1"
 description = "K3IM: Keras 3 Image Models for 1D, 2D, and 3D/Video Classification"
 readme = "README.md"
 requires-python = ">=3.9"
