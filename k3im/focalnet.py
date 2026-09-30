@@ -26,7 +26,7 @@ class FocalModulation(keras.layers.Layer):
         prefix=None,
     ):
         if prefix is not None:
-            prefix = prefix + ".modulation"
+            prefix = prefix + "_modulation"
             name = prefix  # + str(int(K.get_uid(prefix)) - 1)
         else:
             name = "focal_modulation"
@@ -37,23 +37,23 @@ class FocalModulation(keras.layers.Layer):
         self.normalize_modulator = normalize_modulator
 
         self.f = keras.layers.Dense(
-            2 * dim + (focal_level + 1), use_bias=bias, name=f"{name}.f"
+            2 * dim + (focal_level + 1), use_bias=bias, name=f"{name}_f"
         )
 
         self.h = keras.layers.Conv2D(
-            dim, kernel_size=1, strides=1, use_bias=bias, name=f"{name}.h"
+            dim, kernel_size=1, strides=1, use_bias=bias, name=f"{name}_h"
         )
 
         self.act = keras.activations.gelu
-        self.proj = keras.layers.Dense(dim, name=f"{name}.proj")
+        self.proj = keras.layers.Dense(dim, name=f"{name}_proj")
         self.proj_drop = keras.layers.Dropout(proj_drop)
-        self.map = {f"{name}.f": self.f, f"{name}.h": self.h, f"{name}.proj": self.proj}
+        self.map = {f"{name}_f": self.f, f"{name}_h": self.h, f"{name}_proj": self.proj}
 
         self.focal_layers = []
 
         self.kernel_sizes = []
         for k in range(self.focal_level):
-            _name = f"{prefix}.focal_layers."
+            _name = f"{prefix}_focal_layers_"
             _name = _name + str(K.get_uid(_name) - 1)
             # print(name)
             kernel_size = focal_factor * k + focal_window
@@ -71,7 +71,7 @@ class FocalModulation(keras.layers.Layer):
             self.focal_layers.append(_layer)
             self.kernel_sizes.append(kernel_size)
         if self.use_postln_in_modulation:
-            self.ln = keras.layers.LayerNormalization(name=f"{prefix}.norm")
+            self.ln = keras.layers.LayerNormalization(name=f"{prefix}_norm")
             self.map["norm"] = self.ln
 
     def call(self, x):
@@ -179,7 +179,7 @@ def Mlp(
     prefix=None,
 ):
     if prefix is not None:
-        prefix = prefix + ".mlp"
+        prefix = prefix + "_mlp"
         name = prefix  # + str(int(K.get_uid(prefix)) - 1)
     else:
         name = "mlp_block"
@@ -190,10 +190,10 @@ def Mlp(
         out_features = out_features or in_features
         hidden_features = hidden_features or in_features
         x = keras.layers.Dense(
-            hidden_features, activation=act_layer, name=f"{name}.fc1"
+            hidden_features, activation=act_layer, name=f"{name}_fc1"
         )(x)
         x = keras.layers.Dropout(dropout_rate)(x)
-        x = keras.layers.Dense(out_features, activation=act_layer, name=f"{name}.fc2")(
+        x = keras.layers.Dense(out_features, activation=act_layer, name=f"{name}_fc2")(
             x
         )
         x = keras.layers.Dropout(dropout_rate)(x)
@@ -214,7 +214,7 @@ def PatchEmbed(
     if prefix is None:
         name = "patch_embed"  # + #str(int(K.get_uid("patch_embed.")) - 1)
     else:
-        name = prefix + ".downsample"
+        name = prefix + "_downsample"
 
     def _apply(x, H, W):
         nonlocal patch_size
@@ -231,19 +231,19 @@ def PatchEmbed(
 
             x = keras.layers.ZeroPadding2D(padding=padding)(x)
             x = keras.layers.Conv2D(
-                embed_dim, kernel_size=kernel_size, strides=stride, name=f"{name}.proj"
+                embed_dim, kernel_size=kernel_size, strides=stride, name=f"{name}_proj"
             )(x)
         else:
             x = keras.layers.Conv2D(
                 embed_dim,
                 kernel_size=patch_size,
                 strides=patch_size,
-                name=f"{name}.proj",
+                name=f"{name}_proj",
             )(x)
         Ho, Wo, Co = x.shape[1], x.shape[2], x.shape[3]
         x = keras.layers.Reshape((-1, Co))(x)
         if norm_layer is not None:
-            x = norm_layer(name=f"{name}.norm")(x)
+            x = norm_layer(name=f"{name}_norm")(x)
         return x, Ho, Wo
 
     return _apply
@@ -267,7 +267,7 @@ def FocalNetBlock(
     **kwargs,
 ):
     if prefix is not None:
-        name = prefix + ".blocks." + str(K.get_uid(f"{prefix}.blocks.") - 1)
+        name = prefix + "_blocks_" + str(K.get_uid(f"{prefix}_blocks_") - 1)
     else:
         name = "focalnet_block"
 
@@ -275,7 +275,7 @@ def FocalNetBlock(
         C = x.shape[-1]
         shortcut = x
         if not use_postln:
-            x = norm_layer(name=f"{name}.norm1")(x)
+            x = norm_layer(name=f"{name}_norm1")(x)
         x = keras.layers.Reshape((H, W, C))(x)
         x = FocalModulation(
             dim,
@@ -288,7 +288,7 @@ def FocalNetBlock(
         )(x)
         x = keras.layers.Reshape((H * W, C))(x)
         if use_postln:
-            x = norm_layer(name=f"{name}.norm1")(x)
+            x = norm_layer(name=f"{name}_norm1")(x)
         if use_layerscale:
             x = LayerScale(layerscale_value, dim)(x)
         x = StochasticDepth(drop_path)(x)
@@ -298,13 +298,13 @@ def FocalNetBlock(
             x_alt = Mlp(
                 hidden_features=dim * mlp_ratio, dropout_rate=drop, prefix=name
             )(x)
-            x_alt = norm_layer(name=f"{name}.norm2")(x_alt)
+            x_alt = norm_layer(name=f"{name}_norm2")(x_alt)
             if use_layerscale:
                 x_alt = LayerScale(layerscale_value, dim)(x_alt)
             x_alt = StochasticDepth(drop_path)(x_alt)
             x = keras.layers.Add()([x_alt, x])
         else:
-            x_alt = norm_layer(name=f"{name}.norm2")(x)
+            x_alt = norm_layer(name=f"{name}_norm2")(x)
             x_alt = Mlp(
                 hidden_features=int(dim * mlp_ratio), dropout_rate=drop, prefix=name
             )(x_alt)
@@ -337,7 +337,7 @@ def BasicLayer(
     name=None,
 ):
     if name is None:
-        name = "layers." + str(K.get_uid("layers.") - 1)
+        name = "layers_" + str(K.get_uid("layers_") - 1)
 
     def _apply(x, H, W):
         for i in range(depth):

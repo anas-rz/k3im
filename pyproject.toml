@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "k3im"
+version = "0.1.0"
+description = "K3IM: Keras 3 Image Models for 1D, 2D, and 3D/Video Classification"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    { name = "Muhammad Anas Raza" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "keras>=3.0.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "build",
+    "twine",
+]
+tensorflow = [
+    "tensorflow-cpu",
+]
+torch = [
+    "torch",
+    "torchvision",
+]
+jax = [
+    "jax[cpu]",
+]
+
+[project.urls]
+Homepage = "https://github.com/anas-rz/k3im"
+Repository = "https://github.com/anas-rz/k3im"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["k3im*"]

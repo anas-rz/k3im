@@ -56,7 +56,7 @@ def Mlp(
     drop_probs = pair(drop)
     linear_layer = partial(layers.Conv2D, kernel_size=1) if use_conv else layers.Dense
     norm = (
-        norm_layer(name=f"{name}.norm") if norm_layer is not None else layers.Identity()
+        norm_layer(name=f"{name}_norm") if norm_layer is not None else layers.Identity()
     )
 
     def _apply(x):
@@ -64,11 +64,11 @@ def Mlp(
         in_features = ops.shape(x)[-1]
         out_features = out_features or in_features
         hidden_features = hidden_features or in_features
-        x = linear_layer(hidden_features, use_bias=bias[0], name=f"{name}.fc1")(x)
+        x = linear_layer(hidden_features, use_bias=bias[0], name=f"{name}_fc1")(x)
         x = act_layer(x)
         x = layers.Dropout(drop_probs[0])(x)
         x = norm(x)
-        x = linear_layer(out_features, use_bias=bias[1], name=f"{name}.fc2")(x)
+        x = linear_layer(out_features, use_bias=bias[1], name=f"{name}_fc2")(x)
         x = layers.Dropout(drop_probs[1])(x)
         return x
 
@@ -91,17 +91,17 @@ def MixerBlock(
 
     def _apply(x):
         x_skip = x
-        x = norm_layer(name=f"{name}.norm1")(x)
+        x = norm_layer(name=f"{name}_norm1")(x)
         x = layers.Permute((2, 1))(x)
         x = mlp_layer(
-            tokens_dim, act_layer=act_layer, drop=drop, name=f"{name}.mlp_tokens"
+            tokens_dim, act_layer=act_layer, drop=drop, name=f"{name}_mlp_tokens"
         )(x)
         x = layers.Permute((2, 1))(x)
         x = x_skip + drop_path(x)
         x_skip = x
-        x = norm_layer(name=f"{name}.norm2")(x)
+        x = norm_layer(name=f"{name}_norm2")(x)
         x = mlp_layer(
-            channels_dim, act_layer=act_layer, drop=drop, name=f"{name}.mlp_channels"
+            channels_dim, act_layer=act_layer, drop=drop, name=f"{name}_mlp_channels"
         )(x)
         x = x_skip + drop_path(x)
 
@@ -129,7 +129,7 @@ def PatchEmbed(
             kernel_size=patch_size,
             strides=patch_size,
             use_bias=bias,
-            name=f"{name}.proj",
+            name=f"{name}_proj",
         )(x)
         x = layers.Reshape((-1, embed_dim))(x)
         x = norm(x)
@@ -200,7 +200,7 @@ def MlpMixer(
             act_layer=act_layer,
             drop=proj_drop_rate,
             drop_path=drop_path_rate,
-            name=f"blocks.{i}",
+            name=f"blocks_{i}",
         )(x)
     x = norm_layer(name="norm")(x)  # norm
 
