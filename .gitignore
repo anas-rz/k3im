@@ -7,3 +7,6 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+site/
+.ipynb_checkpoints/
+.cache/

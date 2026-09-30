@@ -1,8 +1,7 @@
 site_name: K3IM
 
 
-docs_dir: _docs
-site_dir: docs
+docs_dir: docs
 
 # steals from Patrick Kidger
 
@@ -35,7 +34,7 @@ theme:
 plugins:
   - search  # default search plugin; needs manually re-enabling when using any other plugins
   - autorefs  # Cross-links to headings
-  - mknotebooks  # Jupyter notebooks
+  - mkdocs-jupyter  # Jupyter notebooks
   - mkdocstrings:
       handlers:
         python:
