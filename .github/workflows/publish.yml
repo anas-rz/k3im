@@ -1,16 +1,8 @@
 name: Publish to PyPI
 
 on:
-  workflow_run:
-    workflows: ["Tests"]
-    types:
-      - completed
-    branches:
-      - main
-      - master
   release:
     types: [published]
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -20,10 +12,7 @@ jobs:
   publish:
     name: Build & Publish to PyPI
     runs-on: ubuntu-latest
-    if: >-
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
-      github.event_name == 'release' ||
-      github.event_name == 'workflow_dispatch'
+    # environment: pypi   # uncomment if you set an environment name on PyPI
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -45,19 +34,5 @@ jobs:
       - name: Check distribution validity
         run: twine check dist/*
 
-      - name: Publish to PyPI via API token
-        if: env.PYPI_TOKEN != ''
+      - name: Publish to PyPI (Trusted Publishing)
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
-          skip-existing: true
-        env:
-          PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-
-      - name: Publish to PyPI via Trusted Publishing (OIDC)
-        if: env.PYPI_TOKEN == ''
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          skip-existing: true
-        env:
-          PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
