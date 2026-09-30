@@ -69,7 +69,7 @@ def Mixer1DModel(
     dim,
     depth,
     channels=3,
-    hidden_units=64,
+    hidden_units=None,
     dropout_rate=0.0,
 ):
     """Instantiate a Mixer model for 1D data.
@@ -86,6 +86,8 @@ def Mixer1DModel(
         dropout_rate: A float representing the dropout rate.
     """
     assert seq_len % patch_size == 0
+    if hidden_units is None:
+        hidden_units = dim
     num_patches = seq_len // patch_size
     patch_dim = channels * patch_size
     i_p = layers.Input((seq_len, channels))
