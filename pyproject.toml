@@ -61,3 +61,4 @@ Repository = "https://github.com/anas-rz/k3im"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["k3im*"]
+exclude = ["tests*", "docs*", "spinups*"]
